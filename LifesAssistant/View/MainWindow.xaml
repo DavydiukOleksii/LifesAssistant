@@ -1,0 +1,227 @@
+﻿<controls:MetroWindow x:Class="LifesAssistant.MainWindow"
+                      xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
+                      xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
+                      xmlns:controls="http://metro.mahapps.com/winfx/xaml/controls"
+                      xmlns:iconPacks="http://metro.mahapps.com/winfx/xaml/iconpacks"
+                      Title="MainWindow"
+                      Width="{Binding WindowWidth,
+                                      Mode=TwoWay}"
+                      Height="400"
+                      Left="{Binding WindowPosLeft,
+                                     Mode=TwoWay}"
+                      ShowCloseButton="False"
+                      ShowMaxRestoreButton="False"
+                      ShowMinButton="False"
+                      ShowTitleBar="False"
+                      Top="0"
+                      WindowState="{Binding WindowState,
+                                            Mode=TwoWay}">
+    <Grid>
+        <Grid.ColumnDefinitions>
+            <ColumnDefinition Name="MainCol" Width="{Binding MainWidth}" />
+            <ColumnDefinition Name="SideTap" Width="{Binding TabWidth}" />
+            <ColumnDefinition Name="Conprol" Width="40" />
+        </Grid.ColumnDefinitions>
+        <Grid.RowDefinitions>
+            <RowDefinition Name="Top" Height="0" />
+            <RowDefinition Name="MainRow" />
+            <RowDefinition Name="BottomTap" Height="{Binding TabHeight}" />
+            <RowDefinition Name="Add" Height="0" />
+        </Grid.RowDefinitions>
+
+        <!--  Header  -->
+        <DockPanel Name="Header"
+                   Grid.Row="0"
+                   Grid.Column="0"
+                   Grid.ColumnSpan="3"
+                   Background="Wheat" />
+
+        <!--  SideBar  -->
+        <DockPanel Name="SideBar"
+                   Grid.Row="1"
+                   Grid.Column="1"
+                   Background="SandyBrown">
+            <Grid>
+                <Grid.RowDefinitions>
+                    <RowDefinition Height="60" />
+                    <RowDefinition Height="60" />
+                    <RowDefinition Height="60" />
+                    <RowDefinition Height="60" />
+                    <RowDefinition Height="60" />
+                    <RowDefinition />
+                </Grid.RowDefinitions>
+
+                <controls:Tile Grid.Row="0"
+                               Width="50"
+                               Height="50"
+                               Margin="5"
+                               Command="{Binding OpenCalendar}">
+                    <iconPacks:PackIconMaterial Width="40"
+                                                Height="40"
+                                                Kind="CalendarQuestion" />
+                </controls:Tile>
+
+                <controls:Tile Grid.Row="1"
+                               Width="50"
+                               Height="50"
+                               Margin="5"
+                               Command="{Binding OpenCredit}">
+
+                    <iconPacks:PackIconEntypo Width="40"
+                                              Height="40"
+                                              Kind="Credit" />
+                </controls:Tile>
+
+                <controls:Tile Grid.Row="2"
+                               Width="50"
+                               Height="50"
+                               Margin="5"
+                               Command="{Binding OpenWater}">
+                    <iconPacks:PackIconModern Width="40"
+                                              Height="40"
+                                              Kind="WaterDropletReflection" />
+                </controls:Tile>
+
+                <controls:Tile Grid.Row="3"
+                               Width="50"
+                               Height="50"
+                               Margin="5"
+                               Command="{Binding OpenDream}">
+                    <iconPacks:PackIconModern Width="40"
+                                              Height="40"
+                                              Kind="MoonSleep" />
+                </controls:Tile>
+
+                <controls:Tile Grid.Row="4"
+                               Width="50"
+                               Height="50"
+                               Margin="5"
+                               Command="{Binding OpenProcess}">
+                    <iconPacks:PackIconFontAwesome Width="40"
+                                                   Height="40"
+                                                   Kind="Tasks" />
+                </controls:Tile>
+            </Grid>
+        </DockPanel>
+
+        <!--  Control Panel  -->
+        <DockPanel Name="ControlPanel"
+                   Grid.Row="1"
+                   Grid.Column="2"
+                   Background="Tan">
+            <Grid>
+                <Grid.RowDefinitions>
+                    <RowDefinition Height="40" />
+                    <RowDefinition Height="40" />
+                    <RowDefinition Height="40" />
+                    <RowDefinition />
+                    <RowDefinition Height="40" />
+                </Grid.RowDefinitions>
+
+                <controls:Tile Grid.Row="0"
+                               Width="30"
+                               Height="30"
+                               Margin="5"
+                               VerticalAlignment="Bottom"
+                               Command="{Binding CloseWindow}">
+                    <iconPacks:PackIconMaterial VerticalAlignment="Center" Kind="Close" />
+                </controls:Tile>
+
+                <controls:Tile Grid.Row="1"
+                               Width="30"
+                               Height="30"
+                               Margin="5"
+                               VerticalAlignment="Bottom"
+                               Command="{Binding MinimizeWindow}">
+                    <iconPacks:PackIconMaterial VerticalAlignment="Bottom" Kind="WindowMinimize" />
+                </controls:Tile>
+
+                <controls:Tile Grid.Row="2"
+                               Width="30"
+                               Height="30"
+                               Margin="5"
+                               VerticalAlignment="Bottom"
+                               Command="{Binding ChangeWindowSize}">
+                    <iconPacks:PackIconMaterial VerticalAlignment="Center" Kind="MoveResizeVariant" />
+                </controls:Tile>
+
+                <controls:Tile Grid.Row="4"
+                               Width="30"
+                               Height="30"
+                               Margin="5"
+                               VerticalAlignment="Bottom"
+                               Command="{Binding OpenOptions}">
+                    <iconPacks:PackIconModern VerticalAlignment="Center" Kind="Settings" />
+                </controls:Tile>
+            </Grid>
+        </DockPanel>
+
+        <!--  SideBar  -->
+        <DockPanel Name="BottomBar"
+                   Grid.Row="2"
+                   Grid.Column="0"
+                   Background="SandyBrown">
+            <Grid>
+                <Grid.ColumnDefinitions>
+                    <ColumnDefinition Width="60" />
+                    <ColumnDefinition Width="60" />
+                    <ColumnDefinition Width="60" />
+                    <ColumnDefinition Width="60" />
+                    <ColumnDefinition Width="60" />
+                    <ColumnDefinition />
+                </Grid.ColumnDefinitions>
+
+                <controls:Tile Grid.Column="0"
+                               Width="50"
+                               Height="50"
+                               Margin="5"
+                               Command="{Binding OpenCalendar}">
+                    <iconPacks:PackIconMaterial Width="40"
+                                                Height="40"
+                                                Kind="CalendarQuestion" />
+                </controls:Tile>
+
+                <controls:Tile Grid.Column="1"
+                               Width="50"
+                               Height="50"
+                               Margin="5"
+                               Command="{Binding OpenCredit}">
+                    <iconPacks:PackIconEntypo Width="40"
+                                              Height="40"
+                                              Kind="Credit" />
+                </controls:Tile>
+
+                <controls:Tile Grid.Column="2"
+                               Width="50"
+                               Height="50"
+                               Margin="5"
+                               Command="{Binding OpenWater}">
+                    <iconPacks:PackIconModern Width="40"
+                                              Height="40"
+                                              Kind="WaterDropletReflection" />
+                </controls:Tile>
+
+                <controls:Tile Grid.Column="3"
+                               Width="50"
+                               Height="50"
+                               Margin="5"
+                               Command="{Binding OpenDream}">
+                    <iconPacks:PackIconModern Width="40"
+                                              Height="40"
+                                              Kind="MoonSleep" />
+                </controls:Tile>
+
+                <controls:Tile Grid.Column="4"
+                               Width="50"
+                               Height="50"
+                               Margin="5"
+                               Command="{Binding OpenProcess}">
+                    <iconPacks:PackIconFontAwesome Width="40"
+                                                   Height="40"
+                                                   Kind="Tasks" />
+                </controls:Tile>
+            </Grid>
+        </DockPanel>
+
+    </Grid>
+</controls:MetroWindow>
