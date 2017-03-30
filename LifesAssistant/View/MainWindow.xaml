@@ -6,10 +6,13 @@
                       Title="MainWindow"
                       Width="{Binding WindowWidth,
                                       Mode=TwoWay}"
-                      Height="400"
+                      Height="350"
                       Left="{Binding WindowPosLeft,
                                      Mode=TwoWay}"
+                      ResizeMode="NoResize"
                       ShowCloseButton="False"
+                      ShowDialogsOverTitleBar="True"
+                      ShowInTaskbar="True"
                       ShowMaxRestoreButton="False"
                       ShowMinButton="False"
                       ShowTitleBar="False"
@@ -20,7 +23,7 @@
         <Grid.ColumnDefinitions>
             <ColumnDefinition Name="MainCol" Width="{Binding MainWidth}" />
             <ColumnDefinition Name="SideTap" Width="{Binding TabWidth}" />
-            <ColumnDefinition Name="Conprol" Width="40" />
+            <ColumnDefinition Name="Conprol" Width="30" />
         </Grid.ColumnDefinitions>
         <Grid.RowDefinitions>
             <RowDefinition Name="Top" Height="0" />
@@ -43,62 +46,62 @@
                    Background="SandyBrown">
             <Grid>
                 <Grid.RowDefinitions>
-                    <RowDefinition Height="60" />
-                    <RowDefinition Height="60" />
-                    <RowDefinition Height="60" />
-                    <RowDefinition Height="60" />
-                    <RowDefinition Height="60" />
+                    <RowDefinition Height="40" />
+                    <RowDefinition Height="40" />
+                    <RowDefinition Height="40" />
+                    <RowDefinition Height="40" />
+                    <RowDefinition Height="40" />
                     <RowDefinition />
                 </Grid.RowDefinitions>
 
                 <controls:Tile Grid.Row="0"
-                               Width="50"
-                               Height="50"
-                               Margin="5"
+                               Width="34"
+                               Height="34"
+                               Margin="3"
                                Command="{Binding OpenCalendar}">
-                    <iconPacks:PackIconMaterial Width="40"
-                                                Height="40"
+                    <iconPacks:PackIconMaterial Width="30"
+                                                Height="30"
                                                 Kind="CalendarQuestion" />
                 </controls:Tile>
 
                 <controls:Tile Grid.Row="1"
-                               Width="50"
-                               Height="50"
-                               Margin="5"
+                               Width="34"
+                               Height="34"
+                               Margin="3"
                                Command="{Binding OpenCredit}">
 
-                    <iconPacks:PackIconEntypo Width="40"
-                                              Height="40"
+                    <iconPacks:PackIconEntypo Width="30"
+                                              Height="30"
                                               Kind="Credit" />
                 </controls:Tile>
 
                 <controls:Tile Grid.Row="2"
-                               Width="50"
-                               Height="50"
-                               Margin="5"
+                               Width="34"
+                               Height="34"
+                               Margin="3"
                                Command="{Binding OpenWater}">
-                    <iconPacks:PackIconModern Width="40"
-                                              Height="40"
+                    <iconPacks:PackIconModern Width="30"
+                                              Height="30"
                                               Kind="WaterDropletReflection" />
                 </controls:Tile>
 
                 <controls:Tile Grid.Row="3"
-                               Width="50"
-                               Height="50"
-                               Margin="5"
+                               Width="34"
+                               Height="34"
+                               Margin="3"
                                Command="{Binding OpenDream}">
-                    <iconPacks:PackIconModern Width="40"
-                                              Height="40"
+                    <iconPacks:PackIconModern Width="30"
+                                              Height="30"
                                               Kind="MoonSleep" />
                 </controls:Tile>
 
                 <controls:Tile Grid.Row="4"
-                               Width="50"
-                               Height="50"
-                               Margin="5"
+                               Width="34"
+                               Height="34"
+                               Margin="3"
                                Command="{Binding OpenProcess}">
-                    <iconPacks:PackIconFontAwesome Width="40"
-                                                   Height="40"
+                    <iconPacks:PackIconFontAwesome Width="30"
+                                                   Height="30"
                                                    Kind="Tasks" />
                 </controls:Tile>
             </Grid>
@@ -111,47 +114,59 @@
                    Background="Tan">
             <Grid>
                 <Grid.RowDefinitions>
-                    <RowDefinition Height="40" />
-                    <RowDefinition Height="40" />
-                    <RowDefinition Height="40" />
+                    <RowDefinition Height="30" />
+                    <RowDefinition Height="30" />
+                    <RowDefinition Height="30" />
                     <RowDefinition />
-                    <RowDefinition Height="40" />
+                    <RowDefinition Height="30" />
                 </Grid.RowDefinitions>
 
                 <controls:Tile Grid.Row="0"
-                               Width="30"
-                               Height="30"
+                               Width="20"
+                               Height="20"
                                Margin="5"
                                VerticalAlignment="Bottom"
                                Command="{Binding CloseWindow}">
-                    <iconPacks:PackIconMaterial VerticalAlignment="Center" Kind="Close" />
+                    <iconPacks:PackIconMaterial Width="12"
+                                                Height="12"
+                                                VerticalAlignment="Center"
+                                                Kind="Close" />
                 </controls:Tile>
 
                 <controls:Tile Grid.Row="1"
-                               Width="30"
-                               Height="30"
+                               Width="20"
+                               Height="20"
                                Margin="5"
                                VerticalAlignment="Bottom"
                                Command="{Binding MinimizeWindow}">
-                    <iconPacks:PackIconMaterial VerticalAlignment="Bottom" Kind="WindowMinimize" />
+                    <iconPacks:PackIconMaterial Width="12"
+                                                Height="12"
+                                                VerticalAlignment="Bottom"
+                                                Kind="WindowMinimize" />
                 </controls:Tile>
 
                 <controls:Tile Grid.Row="2"
-                               Width="30"
-                               Height="30"
+                               Width="20"
+                               Height="20"
                                Margin="5"
                                VerticalAlignment="Bottom"
                                Command="{Binding ChangeWindowSize}">
-                    <iconPacks:PackIconMaterial VerticalAlignment="Center" Kind="MoveResizeVariant" />
+                    <iconPacks:PackIconMaterial Width="12"
+                                                Height="12"
+                                                VerticalAlignment="Center"
+                                                Kind="MoveResizeVariant" />
                 </controls:Tile>
 
                 <controls:Tile Grid.Row="4"
-                               Width="30"
-                               Height="30"
+                               Width="20"
+                               Height="20"
                                Margin="5"
                                VerticalAlignment="Bottom"
                                Command="{Binding OpenOptions}">
-                    <iconPacks:PackIconModern VerticalAlignment="Center" Kind="Settings" />
+                    <iconPacks:PackIconModern Width="12"
+                                              Height="12"
+                                              VerticalAlignment="Center"
+                                              Kind="Settings" />
                 </controls:Tile>
             </Grid>
         </DockPanel>

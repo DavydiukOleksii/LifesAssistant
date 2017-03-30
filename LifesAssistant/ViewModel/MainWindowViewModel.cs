@@ -1,8 +1,4 @@
-﻿using System;
-using System.Collections.Generic;
-using System.Linq;
-using System.Threading.Tasks;
-using System.Windows;
+﻿using System.Windows;
 using System.Windows.Input;
 using LifesAssistant.Infrastructure;
 
@@ -15,13 +11,16 @@ namespace LifesAssistant.ViewModel
         {
             TabWidth = 0;
             TabHeight = 60;
-            WindowWidth = 450;
-            MainWidth = 410;
-            WindowPosLeft = System.Windows.SystemParameters.WorkArea.Right - WindowWidth;
+            WindowWidth = _defaultWindowWidth;
+            MainWidth = 400;
+            WindowPosLeft = SystemParameters.WorkArea.Right - WindowWidth;
         }
         #endregion
 
         #region Data
+        //
+        protected int _defaultWindowWidth = 430;
+        protected int _minimizeWindowWidth = 72;
         //
         protected int _windowWidth;
         public int WindowWidth
@@ -139,17 +138,17 @@ namespace LifesAssistant.ViewModel
             {
                 TabWidth = 0;
                 TabHeight = 60;
-                WindowWidth = 450;
-                MainWidth = 410;
-                WindowPosLeft = System.Windows.SystemParameters.WorkArea.Right - WindowWidth;
+                WindowWidth = _defaultWindowWidth;
+                MainWidth = 400;
+                WindowPosLeft = SystemParameters.WorkArea.Right - WindowWidth;
             }
             else
             {
-                TabWidth = 60;
+                TabWidth = 42;
                 TabHeight = 0;
-                WindowWidth = 100;
+                WindowWidth = _minimizeWindowWidth;
                 MainWidth = 0;
-                WindowPosLeft = System.Windows.SystemParameters.WorkArea.Right - WindowWidth;
+                WindowPosLeft = SystemParameters.WorkArea.Right - WindowWidth;
             }
         }
 
