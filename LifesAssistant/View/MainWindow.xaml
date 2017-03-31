@@ -12,13 +12,54 @@
                       ResizeMode="NoResize"
                       ShowCloseButton="False"
                       ShowDialogsOverTitleBar="True"
-                      ShowInTaskbar="True"
                       ShowMaxRestoreButton="False"
                       ShowMinButton="False"
                       ShowTitleBar="False"
-                      Top="0"
+                      Top="{Binding WindowPosTop,
+                                    Mode=TwoWay}"
                       WindowState="{Binding WindowState,
                                             Mode=TwoWay}">
+    <Window.Resources>
+        <Style TargetType="{x:Type controls:Tile}">
+            <Setter Property="Background" Value="#2EB7EC" />
+        </Style>
+
+        <!--<Style TargetType="{x:Type iconPacks:PackIconModern}">
+            <Setter Property="VerticalAlignment" Value="Center" />
+        </Style>
+
+        <Style TargetType="{x:Type iconPacks:PackIconEntypo}">
+            <Setter Property="VerticalAlignment" Value="Center" />
+        </Style>
+
+        <Style TargetType="{x:Type iconPacks:PackIconMaterial}">
+            <Setter Property="VerticalAlignment" Value="Center" />
+        </Style>
+
+        <Style TargetType="{x:Type iconPacks:PackIconFontAwesome}">
+            <Setter Property="VerticalAlignment" Value="Center" />
+        </Style>-->
+
+        <Style x:Key="side-tile" TargetType="{x:Type controls:Tile}">
+            <Setter Property="Height" Value="34" />
+            <Setter Property="Width" Value="34" />
+            <Setter Property="Margin" Value="3" />
+        </Style>
+
+        <Style x:Key="bot-tile" TargetType="{x:Type controls:Tile}">
+            <Setter Property="Height" Value="50" />
+            <Setter Property="Width" Value="50" />
+            <Setter Property="Margin" Value="5" />
+        </Style>
+
+        <Style x:Key="contr-tile" TargetType="{x:Type controls:Tile}">
+            <Setter Property="Height" Value="20" />
+            <Setter Property="Width" Value="20" />
+            <Setter Property="Margin" Value="5" />
+            <Setter Property="Background" Value="#00171F" />
+        </Style>
+    </Window.Resources>
+
     <Grid>
         <Grid.ColumnDefinitions>
             <ColumnDefinition Name="MainCol" Width="{Binding MainWidth}" />
@@ -43,7 +84,7 @@
         <DockPanel Name="SideBar"
                    Grid.Row="1"
                    Grid.Column="1"
-                   Background="SandyBrown">
+                   Background="#003459">
             <Grid>
                 <Grid.RowDefinitions>
                     <RowDefinition Height="40" />
@@ -55,20 +96,16 @@
                 </Grid.RowDefinitions>
 
                 <controls:Tile Grid.Row="0"
-                               Width="34"
-                               Height="34"
-                               Margin="3"
-                               Command="{Binding OpenCalendar}">
+                               Command="{Binding OpenCalendar}"
+                               Style="{StaticResource side-tile}">
                     <iconPacks:PackIconMaterial Width="30"
                                                 Height="30"
                                                 Kind="CalendarQuestion" />
                 </controls:Tile>
 
                 <controls:Tile Grid.Row="1"
-                               Width="34"
-                               Height="34"
-                               Margin="3"
-                               Command="{Binding OpenCredit}">
+                               Command="{Binding OpenCredit}"
+                               Style="{StaticResource side-tile}">
 
                     <iconPacks:PackIconEntypo Width="30"
                                               Height="30"
@@ -76,30 +113,24 @@
                 </controls:Tile>
 
                 <controls:Tile Grid.Row="2"
-                               Width="34"
-                               Height="34"
-                               Margin="3"
-                               Command="{Binding OpenWater}">
+                               Command="{Binding OpenWater}"
+                               Style="{StaticResource side-tile}">
                     <iconPacks:PackIconModern Width="30"
                                               Height="30"
                                               Kind="WaterDropletReflection" />
                 </controls:Tile>
 
                 <controls:Tile Grid.Row="3"
-                               Width="34"
-                               Height="34"
-                               Margin="3"
-                               Command="{Binding OpenDream}">
+                               Command="{Binding OpenDream}"
+                               Style="{StaticResource side-tile}">
                     <iconPacks:PackIconModern Width="30"
                                               Height="30"
                                               Kind="MoonSleep" />
                 </controls:Tile>
 
                 <controls:Tile Grid.Row="4"
-                               Width="34"
-                               Height="34"
-                               Margin="3"
-                               Command="{Binding OpenProcess}">
+                               Command="{Binding OpenProcess}"
+                               Style="{StaticResource side-tile}">
                     <iconPacks:PackIconFontAwesome Width="30"
                                                    Height="30"
                                                    Kind="Tasks" />
@@ -110,8 +141,9 @@
         <!--  Control Panel  -->
         <DockPanel Name="ControlPanel"
                    Grid.Row="1"
+                   Grid.RowSpan="2"
                    Grid.Column="2"
-                   Background="Tan">
+                   Background="#00171F">
             <Grid>
                 <Grid.RowDefinitions>
                     <RowDefinition Height="30" />
@@ -122,11 +154,8 @@
                 </Grid.RowDefinitions>
 
                 <controls:Tile Grid.Row="0"
-                               Width="20"
-                               Height="20"
-                               Margin="5"
-                               VerticalAlignment="Bottom"
-                               Command="{Binding CloseWindow}">
+                               Command="{Binding CloseWindow}"
+                               Style="{StaticResource contr-tile}">
                     <iconPacks:PackIconMaterial Width="12"
                                                 Height="12"
                                                 VerticalAlignment="Center"
@@ -134,11 +163,8 @@
                 </controls:Tile>
 
                 <controls:Tile Grid.Row="1"
-                               Width="20"
-                               Height="20"
-                               Margin="5"
-                               VerticalAlignment="Bottom"
-                               Command="{Binding MinimizeWindow}">
+                               Command="{Binding MinimizeWindow}"
+                               Style="{StaticResource contr-tile}">
                     <iconPacks:PackIconMaterial Width="12"
                                                 Height="12"
                                                 VerticalAlignment="Bottom"
@@ -146,11 +172,8 @@
                 </controls:Tile>
 
                 <controls:Tile Grid.Row="2"
-                               Width="20"
-                               Height="20"
-                               Margin="5"
-                               VerticalAlignment="Bottom"
-                               Command="{Binding ChangeWindowSize}">
+                               Command="{Binding ChangeWindowSize}"
+                               Style="{StaticResource contr-tile}">
                     <iconPacks:PackIconMaterial Width="12"
                                                 Height="12"
                                                 VerticalAlignment="Center"
@@ -158,11 +181,8 @@
                 </controls:Tile>
 
                 <controls:Tile Grid.Row="4"
-                               Width="20"
-                               Height="20"
-                               Margin="5"
-                               VerticalAlignment="Bottom"
-                               Command="{Binding OpenOptions}">
+                               Command="{Binding OpenOptions}"
+                               Style="{StaticResource contr-tile}">
                     <iconPacks:PackIconModern Width="12"
                                               Height="12"
                                               VerticalAlignment="Center"
@@ -175,7 +195,7 @@
         <DockPanel Name="BottomBar"
                    Grid.Row="2"
                    Grid.Column="0"
-                   Background="SandyBrown">
+                   Background="#003459">
             <Grid>
                 <Grid.ColumnDefinitions>
                     <ColumnDefinition Width="60" />
@@ -187,50 +207,40 @@
                 </Grid.ColumnDefinitions>
 
                 <controls:Tile Grid.Column="0"
-                               Width="50"
-                               Height="50"
-                               Margin="5"
-                               Command="{Binding OpenCalendar}">
+                               Command="{Binding OpenCalendar}"
+                               Style="{StaticResource bot-tile}">
                     <iconPacks:PackIconMaterial Width="40"
                                                 Height="40"
                                                 Kind="CalendarQuestion" />
                 </controls:Tile>
 
                 <controls:Tile Grid.Column="1"
-                               Width="50"
-                               Height="50"
-                               Margin="5"
-                               Command="{Binding OpenCredit}">
+                               Command="{Binding OpenCredit}"
+                               Style="{StaticResource bot-tile}">
                     <iconPacks:PackIconEntypo Width="40"
                                               Height="40"
                                               Kind="Credit" />
                 </controls:Tile>
 
                 <controls:Tile Grid.Column="2"
-                               Width="50"
-                               Height="50"
-                               Margin="5"
-                               Command="{Binding OpenWater}">
+                               Command="{Binding OpenWater}"
+                               Style="{StaticResource bot-tile}">
                     <iconPacks:PackIconModern Width="40"
                                               Height="40"
                                               Kind="WaterDropletReflection" />
                 </controls:Tile>
 
                 <controls:Tile Grid.Column="3"
-                               Width="50"
-                               Height="50"
-                               Margin="5"
-                               Command="{Binding OpenDream}">
+                               Command="{Binding OpenDream}"
+                               Style="{StaticResource bot-tile}">
                     <iconPacks:PackIconModern Width="40"
                                               Height="40"
                                               Kind="MoonSleep" />
                 </controls:Tile>
 
                 <controls:Tile Grid.Column="4"
-                               Width="50"
-                               Height="50"
-                               Margin="5"
-                               Command="{Binding OpenProcess}">
+                               Command="{Binding OpenProcess}"
+                               Style="{StaticResource bot-tile}">
                     <iconPacks:PackIconFontAwesome Width="40"
                                                    Height="40"
                                                    Kind="Tasks" />

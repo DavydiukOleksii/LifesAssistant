@@ -18,10 +18,15 @@ namespace LifesAssistant.ViewModel
         #endregion
 
         #region Data
-        //
+
+        #region Data for controle Windows size, position and state
+        //default windows width in diferent states
         protected int _defaultWindowWidth = 430;
         protected int _minimizeWindowWidth = 72;
-        //
+        //current windows position
+        protected int _currentWinTopPos;
+        protected int _currentWinLeftPos;
+        //property
         protected int _windowWidth;
         public int WindowWidth
         {
@@ -100,19 +105,20 @@ namespace LifesAssistant.ViewModel
             }
         }
 
-        //protected double _windowPosTop;
-        //public double WindowPosTop
-        //{
-        //    get
-        //    {
-        //        return _windowPosTop;
-        //    }
-        //    set
-        //    {
-        //        _windowPosTop = value;
-        //        OnPropertyChanged("WindowPosTop");
-        //    }
-        //}
+        protected double _windowPosTop;
+        public double WindowPosTop
+        {
+            get
+            {
+                return _windowPosTop;
+            }
+            set
+            {
+                _windowPosTop = value;
+                OnPropertyChanged("WindowPosTop");
+            }
+        }
+        #endregion
 
         #endregion
 
@@ -140,7 +146,8 @@ namespace LifesAssistant.ViewModel
                 TabHeight = 60;
                 WindowWidth = _defaultWindowWidth;
                 MainWidth = 400;
-                WindowPosLeft = SystemParameters.WorkArea.Right - WindowWidth;
+                WindowPosLeft = _currentWinLeftPos;
+                WindowPosTop = _currentWinTopPos;
             }
             else
             {
@@ -148,7 +155,10 @@ namespace LifesAssistant.ViewModel
                 TabHeight = 0;
                 WindowWidth = _minimizeWindowWidth;
                 MainWidth = 0;
+                _currentWinLeftPos = (int)WindowPosLeft;
                 WindowPosLeft = SystemParameters.WorkArea.Right - WindowWidth;
+                _currentWinTopPos = (int)WindowPosTop;
+                WindowPosTop = 0;
             }
         }
 
