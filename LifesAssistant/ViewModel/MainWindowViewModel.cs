@@ -269,6 +269,7 @@ namespace LifesAssistant.ViewModel
                 case "Credit":
                 {
                     MainPanel = new CreditTab();
+                    MainPanel.DataContext = new CreditTabViewModel();
                     break;
                 }
                 case "Water":

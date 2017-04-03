@@ -5,22 +5,28 @@
              xmlns:d="http://schemas.microsoft.com/expression/blend/2008"
              xmlns:iconPacks="http://metro.mahapps.com/winfx/xaml/iconpacks"
              xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
+             xmlns:sys="clr-namespace:System;assembly=mscorlib"
              d:DesignHeight="300"
-             d:DesignWidth="350"
+             d:DesignWidth="360"
              mc:Ignorable="d">
     <Grid Background="White">
-
+        <Grid.ColumnDefinitions>
+            <ColumnDefinition Width="120" />
+            <ColumnDefinition />
+        </Grid.ColumnDefinitions>
         <Grid.RowDefinitions>
-            <RowDefinition Height="50"/>
-            <RowDefinition/>
+            <RowDefinition Height="30" />
+            <RowDefinition />
             <RowDefinition Height="50" />
         </Grid.RowDefinitions>
-        
-        <TextBlock Text="Credits" Margin="10"></TextBlock>
-        
-        <DatePicker Grid.Row="1"
-                    Grid.Column="0"
-                    Width="150"
-                    Height="30" />
+
+        <TextBlock Name="CurrentDate" Width="110"
+                   Margin="10 7 0 0"
+                   HorizontalAlignment="Left"
+                   Text="{Binding CurrentDate}" />
+
+        <DataGrid Grid.Column="0" Grid.Row="1">
+            
+        </DataGrid>
     </Grid>
 </UserControl>

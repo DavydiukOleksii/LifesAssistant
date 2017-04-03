@@ -67,6 +67,7 @@
     </ApplicationDefinition>
     <Compile Include="ViewModel\MainWindowViewModel.cs" />
     <Compile Include="ViewModel\ViewModelBase.cs" />
+    <Compile Include="ViewModel\ViewModelElements\CreditTabViewModel.cs" />
     <Compile Include="ViewModel\ViewModelElements\CalendarTabViewModel.cs" />
     <Compile Include="View\ViewElements\DreamTab.xaml.cs">
       <DependentUpon>DreamTab.xaml</DependentUpon>
