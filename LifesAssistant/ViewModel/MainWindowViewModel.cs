@@ -1,6 +1,13 @@
-﻿using System.Windows;
+﻿using System;
+using System.Windows;
+using System.Windows.Controls;
 using System.Windows.Input;
+using System.Windows.Media;
 using LifesAssistant.Infrastructure;
+using LifesAssistant.View.ViewElements;
+using LifesAssistant.ViewModel.ViewModelElements;
+using MahApps.Metro.Controls;
+using MahApps.Metro.Controls.Dialogs;
 
 namespace LifesAssistant.ViewModel
 {
@@ -120,6 +127,21 @@ namespace LifesAssistant.ViewModel
         }
         #endregion
 
+        #region Data for tabControle
+
+        protected UserControl _mainPanel;
+        public UserControl MainPanel
+        {
+            get { return _mainPanel; }
+            set
+            {
+                _mainPanel = value;
+                OnPropertyChanged("MainPanel");
+            }
+        }
+
+        #endregion
+
         #endregion
 
         #region Command
@@ -194,7 +216,7 @@ namespace LifesAssistant.ViewModel
         }
         #endregion
 
-        #region CloseWindow
+        #region MinimizeWindow
         RelayCommand _minimizeWindowComand;
         public ICommand MinimizeWindow
         {
@@ -217,6 +239,66 @@ namespace LifesAssistant.ViewModel
         {
             return true;
         }
+        #endregion
+
+        #region TabChanged
+        private ICommand _tabChangedCommand;
+        public ICommand TabChanged
+            {
+            get
+            {
+                if (_tabChangedCommand == null)
+                {
+                    _tabChangedCommand = new RelayCommand(ExecuteTabChangedCommand, CanExecuteTabChangedCommand);
+                }
+                return _tabChangedCommand;
+            }
+        }
+
+        public void ExecuteTabChangedCommand(object parameter)
+        {
+            string tabName = parameter.ToString();
+            switch (tabName)
+            {
+                case "Calendar":
+                {
+                    MainPanel = new CalendarTab();
+                    MainPanel.DataContext = new CalendarTabViewModel();
+                    break;
+                }
+                case "Credit":
+                {
+                    MainPanel = new CreditTab();
+                    break;
+                }
+                case "Water":
+                {
+                    MainPanel = new WaterTab();
+                    break;
+                }
+                case "Dream":
+                {
+                    MainPanel = new DreamTab();
+                    break;
+                }
+                case "Process":
+                {
+                    MainPanel = new ProcessTab();
+                    break;
+                }
+            }
+        }
+
+        public bool CanExecuteTabChangedCommand(object parameter)
+        {
+            if(parameter != null && parameter.ToString().Length > 0)
+                return true;
+            else
+            {
+                return false;
+            }
+        }
+      
         #endregion
 
         #endregion

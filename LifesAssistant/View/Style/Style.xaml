@@ -3,24 +3,43 @@
                     xmlns:controls="http://metro.mahapps.com/winfx/xaml/controls"
                     xmlns:iconPacks="http://metro.mahapps.com/winfx/xaml/iconpacks">
 
-    <Style x:Key="side-icon" TargetType="{x:Type Control}">
-        <Setter Property="Height" Value="30" />
-        <Setter Property="Width" Value="30" />
+    <Style TargetType="{x:Type controls:Tile}">
+        <Setter Property="Background" Value="#2EB7EC" />
     </Style>
 
-    <Style x:Key="bottom-icon" TargetType="{x:Type Control}">
-        <Setter Property="Height" Value="40" />
-        <Setter Property="Width" Value="40" />
-    </Style>
+    <!--<Style TargetType="{x:Type iconPacks:PackIconModern}">
+            <Setter Property="VerticalAlignment" Value="Center" />
+        </Style>
+
+        <Style TargetType="{x:Type iconPacks:PackIconEntypo}">
+            <Setter Property="VerticalAlignment" Value="Center" />
+        </Style>
+
+        <Style TargetType="{x:Type iconPacks:PackIconMaterial}">
+            <Setter Property="VerticalAlignment" Value="Center" />
+        </Style>
+
+        <Style TargetType="{x:Type iconPacks:PackIconFontAwesome}">
+            <Setter Property="VerticalAlignment" Value="Center" />
+        </Style>-->
 
     <Style x:Key="side-tile" TargetType="{x:Type controls:Tile}">
-        <Setter Property="Height" Value="40" />
-        <Setter Property="Width" Value="40" />
+        <Setter Property="Height" Value="34" />
+        <Setter Property="Width" Value="34" />
+        <Setter Property="Margin" Value="3" />
     </Style>
 
-    <Style x:Key="bottom-tile" TargetType="{x:Type controls:Tile}">
+    <Style x:Key="bot-tile" TargetType="{x:Type controls:Tile}">
         <Setter Property="Height" Value="50" />
         <Setter Property="Width" Value="50" />
+        <Setter Property="Margin" Value="5" />
+    </Style>
+
+    <Style x:Key="contr-tile" TargetType="{x:Type controls:Tile}">
+        <Setter Property="Height" Value="20" />
+        <Setter Property="Width" Value="20" />
+        <Setter Property="Margin" Value="5" />
+        <Setter Property="Background" Value="#00171F" />
     </Style>
 
 </ResourceDictionary>

@@ -67,6 +67,22 @@
     </ApplicationDefinition>
     <Compile Include="ViewModel\MainWindowViewModel.cs" />
     <Compile Include="ViewModel\ViewModelBase.cs" />
+    <Compile Include="ViewModel\ViewModelElements\CalendarTabViewModel.cs" />
+    <Compile Include="View\ViewElements\DreamTab.xaml.cs">
+      <DependentUpon>DreamTab.xaml</DependentUpon>
+    </Compile>
+    <Compile Include="View\ViewElements\ProcessTab.xaml.cs">
+      <DependentUpon>ProcessTab.xaml</DependentUpon>
+    </Compile>
+    <Compile Include="View\ViewElements\WaterTab.xaml.cs">
+      <DependentUpon>WaterTab.xaml</DependentUpon>
+    </Compile>
+    <Compile Include="View\ViewElements\CreditTab.xaml.cs">
+      <DependentUpon>CreditTab.xaml</DependentUpon>
+    </Compile>
+    <Compile Include="View\ViewElements\CalendarTab.xaml.cs">
+      <DependentUpon>CalendarTab.xaml</DependentUpon>
+    </Compile>
     <Page Include="View\MainWindow.xaml">
       <Generator>MSBuild:Compile</Generator>
       <SubType>Designer</SubType>
@@ -81,6 +97,26 @@
       <SubType>Code</SubType>
     </Compile>
     <Page Include="View\Style\Style.xaml">
+      <SubType>Designer</SubType>
+      <Generator>MSBuild:Compile</Generator>
+    </Page>
+    <Page Include="View\ViewElements\DreamTab.xaml">
+      <Generator>MSBuild:Compile</Generator>
+      <SubType>Designer</SubType>
+    </Page>
+    <Page Include="View\ViewElements\ProcessTab.xaml">
+      <Generator>MSBuild:Compile</Generator>
+      <SubType>Designer</SubType>
+    </Page>
+    <Page Include="View\ViewElements\WaterTab.xaml">
+      <Generator>MSBuild:Compile</Generator>
+      <SubType>Designer</SubType>
+    </Page>
+    <Page Include="View\ViewElements\CreditTab.xaml">
+      <Generator>MSBuild:Compile</Generator>
+      <SubType>Designer</SubType>
+    </Page>
+    <Page Include="View\ViewElements\CalendarTab.xaml">
       <SubType>Designer</SubType>
       <Generator>MSBuild:Compile</Generator>
     </Page>
