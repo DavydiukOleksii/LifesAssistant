@@ -5,6 +5,7 @@
              xmlns:d="http://schemas.microsoft.com/expression/blend/2008"
              xmlns:iconPacks="http://metro.mahapps.com/winfx/xaml/iconpacks"
              xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
+             xmlns:res="clr-namespace:LifesAssistant.Properties.Language"
              xmlns:sys="clr-namespace:System;assembly=mscorlib"
              d:DesignHeight="300"
              d:DesignWidth="360"
@@ -20,13 +21,39 @@
             <RowDefinition Height="50" />
         </Grid.RowDefinitions>
 
-        <TextBlock Name="CurrentDate" Width="110"
+        <TextBlock Name="CurrentDate"
+                   Width="110"
                    Margin="10 7 0 0"
                    HorizontalAlignment="Left"
                    Text="{Binding CurrentDate}" />
 
-        <DataGrid Grid.Column="0" Grid.Row="1">
-            
-        </DataGrid>
+        <DataGrid Grid.Row="1"
+                  Grid.Column="0"
+                  IsReadOnly="True"
+                  ItemsSource="{Binding DayCosts}" />
+
+        <Grid Grid.Row="2" Grid.Column="0">
+            <Grid.ColumnDefinitions>
+                <ColumnDefinition />
+                <ColumnDefinition />
+            </Grid.ColumnDefinitions>
+
+            <controls:Tile Grid.Column="0"
+                           Width="50"
+                           Height="30"
+                           Margin="5">
+                <TextBlock Margin="3"
+                           VerticalAlignment="Center"
+                           Text="{x:Static res:Resources.addLabel}" />
+            </controls:Tile>
+            <controls:Tile Grid.Column="1"
+                           Width="50"
+                           Height="30"
+                           Margin="5">
+                <TextBlock Margin="3"
+                           VerticalAlignment="Center"
+                           Text="{x:Static res:Resources.dellLabel}" />
+            </controls:Tile>
+        </Grid>
     </Grid>
 </UserControl>

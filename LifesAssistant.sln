@@ -5,6 +5,8 @@ VisualStudioVersion = 12.0.40629.0
 MinimumVisualStudioVersion = 10.0.40219.1
 Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "LifesAssistant", "LifesAssistant\LifesAssistant.csproj", "{3CE58206-2F15-4374-9E0F-E62D1BA0D1C3}"
 EndProject
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "DataModel", "DataModel\DataModel.csproj", "{B47576E6-6B86-4541-8AA8-25FD387B8315}"
+EndProject
 Global
 	GlobalSection(SolutionConfigurationPlatforms) = preSolution
 		Debug|Any CPU = Debug|Any CPU
@@ -15,6 +17,10 @@ Global
 		{3CE58206-2F15-4374-9E0F-E62D1BA0D1C3}.Debug|Any CPU.Build.0 = Debug|Any CPU
 		{3CE58206-2F15-4374-9E0F-E62D1BA0D1C3}.Release|Any CPU.ActiveCfg = Release|Any CPU
 		{3CE58206-2F15-4374-9E0F-E62D1BA0D1C3}.Release|Any CPU.Build.0 = Release|Any CPU
+		{B47576E6-6B86-4541-8AA8-25FD387B8315}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{B47576E6-6B86-4541-8AA8-25FD387B8315}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{B47576E6-6B86-4541-8AA8-25FD387B8315}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{B47576E6-6B86-4541-8AA8-25FD387B8315}.Release|Any CPU.Build.0 = Release|Any CPU
 	EndGlobalSection
 	GlobalSection(SolutionProperties) = preSolution
 		HideSolutionNode = FALSE

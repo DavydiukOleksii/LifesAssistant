@@ -1,6 +1,10 @@
 ﻿using System;
+using System.Collections.ObjectModel;
+using System.Windows.Documents;
 using System.Windows.Input;
+using DataModel.Credit;
 using LifesAssistant.Infrastructure;
+using LifesAssistant.Properties.Language;
 
 namespace LifesAssistant.ViewModel.ViewModelElements
 {
@@ -9,7 +13,27 @@ namespace LifesAssistant.ViewModel.ViewModelElements
         #region Constructor
         public CreditTabViewModel()
         {
-            CurrentDate = "Today: " + DateTime.Today.ToString("d");
+            CurrentDate = Resources.todayLabel + DateTime.Today.ToString("d");
+            DayCosts = new ObservableCollection<OneCashTransaction>();
+            DayCosts.Add(new OneCashTransaction(){Article = "tea", Money = 1});
+            DayCosts.Add(new OneCashTransaction(){Article = "coffee", Money = 2});
+            DayCosts.Add(new OneCashTransaction(){Article = "coffee", Money = 2});
+            DayCosts.Add(new OneCashTransaction(){Article = "coffee", Money = 2});
+            DayCosts.Add(new OneCashTransaction(){Article = "coffee", Money = 2});
+            DayCosts.Add(new OneCashTransaction(){Article = "coffee", Money = 2});
+            DayCosts.Add(new OneCashTransaction(){Article = "coffee", Money = 2});
+            DayCosts.Add(new OneCashTransaction(){Article = "coffee", Money = 2});
+            DayCosts.Add(new OneCashTransaction(){Article = "coffee", Money = 2});
+            DayCosts.Add(new OneCashTransaction(){Article = "coffee", Money = 2});
+            DayCosts.Add(new OneCashTransaction(){Article = "coffee", Money = 2});
+            DayCosts.Add(new OneCashTransaction(){Article = "coffee", Money = 2});
+            DayCosts.Add(new OneCashTransaction(){Article = "coffee", Money = 2});
+            DayCosts.Add(new OneCashTransaction(){Article = "coffee", Money = 2});
+            DayCosts.Add(new OneCashTransaction(){Article = "coffee", Money = 2});
+            DayCosts.Add(new OneCashTransaction(){Article = "coffee", Money = 2});
+            DayCosts.Add(new OneCashTransaction(){Article = "coffee", Money = 2});
+            DayCosts.Add(new OneCashTransaction(){Article = "coffee", Money = 2});
+            DayCosts.Add(new OneCashTransaction(){Article = "nesquike", Money = 3});
         }
         #endregion
 
@@ -23,6 +47,17 @@ namespace LifesAssistant.ViewModel.ViewModelElements
             {
                 _currentDate = value;
                 OnPropertyChanged("CurrentDate");
+            }
+        }
+
+        protected ObservableCollection<OneCashTransaction> _dayCosts;
+        public ObservableCollection<OneCashTransaction> DayCosts
+        {
+            get { return _dayCosts; }
+            set
+            {
+                _dayCosts = value;
+                OnPropertyChanged("DayCosts");
             }
         }
 

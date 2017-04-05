@@ -1,4 +1,5 @@
-﻿using MahApps.Metro.Controls;
+﻿using System.Windows;
+using MahApps.Metro.Controls;
 
 namespace LifesAssistant
 {
@@ -10,6 +11,11 @@ namespace LifesAssistant
         public MainWindow()
         {
             InitializeComponent();
+        }
+
+        private void ControlPanel_MouseDown(object sender, System.Windows.Input.MouseButtonEventArgs e)
+        {
+            this.DragMove();
         }
     }
 }

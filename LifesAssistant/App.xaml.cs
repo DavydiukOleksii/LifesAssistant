@@ -1,4 +1,6 @@
-﻿using System.Windows;
+﻿using System.Globalization;
+using System.Threading;
+using System.Windows;
 using LifesAssistant.ViewModel;
 
 namespace LifesAssistant
@@ -8,6 +10,13 @@ namespace LifesAssistant
     /// </summary>
     public partial class App : Application
     {
+        App()
+        {
+            //Thread.CurrentThread.CurrentUICulture = new CultureInfo("uk-UA");
+            //Thread.CurrentThread.CurrentUICulture = new CultureInfo("en-US");
+            //Thread.CurrentThread.CurrentUICulture = new CultureInfo("ru-RU");
+        }
+
         protected override void OnStartup(StartupEventArgs e)
         {
             // base.OnStartup(e);
