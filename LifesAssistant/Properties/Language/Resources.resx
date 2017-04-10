@@ -120,10 +120,25 @@
   <data name="addLabel" xml:space="preserve">
     <value>Add</value>
   </data>
+  <data name="creditTabName" xml:space="preserve">
+    <value>Daily costs</value>
+  </data>
   <data name="dellLabel" xml:space="preserve">
     <value>Dell</value>
   </data>
+  <data name="graphicsLabel" xml:space="preserve">
+    <value>Graphics</value>
+  </data>
+  <data name="moneyLabel" xml:space="preserve">
+    <value>Money:</value>
+  </data>
+  <data name="purchaseLabel" xml:space="preserve">
+    <value>Purchase:</value>
+  </data>
   <data name="todayLabel" xml:space="preserve">
     <value>Today: </value>
+  </data>
+  <data name="totalCostsLable" xml:space="preserve">
+    <value>Total costs today: </value>
   </data>
 </root>

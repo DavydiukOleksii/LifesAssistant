@@ -1,5 +1,6 @@
 ﻿using System;
 using System.Collections.ObjectModel;
+using System.Linq;
 using System.Windows.Documents;
 using System.Windows.Input;
 using DataModel.Credit;
@@ -14,26 +15,14 @@ namespace LifesAssistant.ViewModel.ViewModelElements
         public CreditTabViewModel()
         {
             CurrentDate = Resources.todayLabel + DateTime.Today.ToString("d");
-            DayCosts = new ObservableCollection<OneCashTransaction>();
-            DayCosts.Add(new OneCashTransaction(){Article = "tea", Money = 1});
-            DayCosts.Add(new OneCashTransaction(){Article = "coffee", Money = 2});
-            DayCosts.Add(new OneCashTransaction(){Article = "coffee", Money = 2});
-            DayCosts.Add(new OneCashTransaction(){Article = "coffee", Money = 2});
-            DayCosts.Add(new OneCashTransaction(){Article = "coffee", Money = 2});
-            DayCosts.Add(new OneCashTransaction(){Article = "coffee", Money = 2});
-            DayCosts.Add(new OneCashTransaction(){Article = "coffee", Money = 2});
-            DayCosts.Add(new OneCashTransaction(){Article = "coffee", Money = 2});
-            DayCosts.Add(new OneCashTransaction(){Article = "coffee", Money = 2});
-            DayCosts.Add(new OneCashTransaction(){Article = "coffee", Money = 2});
-            DayCosts.Add(new OneCashTransaction(){Article = "coffee", Money = 2});
-            DayCosts.Add(new OneCashTransaction(){Article = "coffee", Money = 2});
-            DayCosts.Add(new OneCashTransaction(){Article = "coffee", Money = 2});
-            DayCosts.Add(new OneCashTransaction(){Article = "coffee", Money = 2});
-            DayCosts.Add(new OneCashTransaction(){Article = "coffee", Money = 2});
-            DayCosts.Add(new OneCashTransaction(){Article = "coffee", Money = 2});
-            DayCosts.Add(new OneCashTransaction(){Article = "coffee", Money = 2});
-            DayCosts.Add(new OneCashTransaction(){Article = "coffee", Money = 2});
-            DayCosts.Add(new OneCashTransaction(){Article = "nesquike", Money = 3});
+
+            if(CostsDayReport.Instance.DailyCosts == null)
+                CostsDayReport.Instance.DailyCosts = new ObservableCollection<OneCashTransaction>();
+
+            DayCosts = CostsDayReport.Instance.DailyCosts;
+
+            DailyTotalCosts = CostsDayReport.Instance.TotalCosts;
+            NewCashTransaction = new OneCashTransaction();
         }
         #endregion
 
@@ -47,6 +36,39 @@ namespace LifesAssistant.ViewModel.ViewModelElements
             {
                 _currentDate = value;
                 OnPropertyChanged("CurrentDate");
+            }
+        }
+
+        protected OneCashTransaction _currentCashTransaction;
+        public OneCashTransaction CurrentCashTransaction
+        {
+            get { return _currentCashTransaction; }
+            set
+            {
+                _currentCashTransaction = value;
+                OnPropertyChanged("CurrentCashTransaction");
+            }
+        }
+
+        protected OneCashTransaction _newCashTransaction;
+        public OneCashTransaction NewCashTransaction
+        {
+            get { return _newCashTransaction; }
+            set
+            {
+                _newCashTransaction = value;
+                OnPropertyChanged("NewCashTransaction");
+            }
+        }
+
+        protected int _dailyTotalCosts;
+        public int DailyTotalCosts
+        {
+            get { return _dailyTotalCosts; }
+            set
+            {
+                _dailyTotalCosts = value;
+                OnPropertyChanged("DailyTotalCosts");
             }
         }
 
@@ -64,30 +86,77 @@ namespace LifesAssistant.ViewModel.ViewModelElements
         #endregion
 
         #region Commands
+        
+        #region Delete curent cash transaction
+        private ICommand _dellCurrentCashTransactionCommand;
+        public ICommand DellCurrentCashTransaction
+        {
+            get
+            {
+                if (_dellCurrentCashTransactionCommand == null)
+                {
+                    _dellCurrentCashTransactionCommand = new RelayCommand(ExecuteDellCurrentCashTransactionCommand, CanExecuteDellCurrentCashTransactionCommand);
+                }
+                return _dellCurrentCashTransactionCommand;
+            }
+        }
 
-        //private ICommand _viewTasksCommand;
-        //public ICommand ViewTasks
-        //{
-        //    get
-        //    {
-        //        if (_viewTasksCommand == null)
-        //        {
-        //            _viewTasksCommand = new RelayCommand(ExecuteViewTasksCommand, CanExecuteViewTasksCommand);
-        //        }
-        //        return _viewTasksCommand;
-        //    }
-        //}
+        public bool CanExecuteDellCurrentCashTransactionCommand(object parametr)
+        {
+            if (CurrentCashTransaction != null)
+            {
+                return true;
+            }
+            else
+            {
+                return false;
+            }
+        }
 
-        //public bool CanExecuteViewTasksCommand(object parametr)
-        //{
-        //    return true;
-        //}
+        public void ExecuteDellCurrentCashTransactionCommand(object parametr)
+        {
+            DailyTotalCosts -= CurrentCashTransaction.Money;
+            DayCosts.Remove(CurrentCashTransaction);
+            if(DayCosts.Count > 0)
+                CurrentCashTransaction = DayCosts.First();
+            
+        }
+        #endregion
 
+        #region Add new cash transaction
+        private ICommand _addCashTransactionCommand;
+        public ICommand AddCashTransaction
+        {
+            get
+            {
+                if (_addCashTransactionCommand == null)
+                {
+                    _addCashTransactionCommand = new RelayCommand(ExecuteAddCashTransactionCommand, CanExecuteAddCashTransactionCommand);
+                }
+                return _addCashTransactionCommand;
+            }
+        }
 
-        //public void ExecuteViewTasksCommand(object parametr)
-        //{
-        //    TextBox = "Click";
-        //}
+        public bool CanExecuteAddCashTransactionCommand(object parametr)
+        {
+            if (NewCashTransaction.Money > 0 && NewCashTransaction.Article != null && NewCashTransaction.Article.Length <= 20)
+            {
+                return true;
+            }
+            else
+            {
+                return false;
+            }
+        }
+
+        public void ExecuteAddCashTransactionCommand(object parametr)
+        {
+            DayCosts.Add(new OneCashTransaction(){Article = NewCashTransaction.Article, Money = NewCashTransaction.Money});
+            DailyTotalCosts += NewCashTransaction.Money;
+            NewCashTransaction = new OneCashTransaction();
+        }
+        #endregion
+
         #endregion
 
         #region FreeData

@@ -70,6 +70,15 @@ namespace LifesAssistant.Properties.Language {
         }
         
         /// <summary>
+        ///   Looks up a localized string similar to Daily costs.
+        /// </summary>
+        public static string creditTabName {
+            get {
+                return ResourceManager.GetString("creditTabName", resourceCulture);
+            }
+        }
+        
+        /// <summary>
         ///   Looks up a localized string similar to Dell.
         /// </summary>
         public static string dellLabel {
@@ -79,11 +88,47 @@ namespace LifesAssistant.Properties.Language {
         }
         
         /// <summary>
+        ///   Looks up a localized string similar to Graphics.
+        /// </summary>
+        public static string graphicsLabel {
+            get {
+                return ResourceManager.GetString("graphicsLabel", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized string similar to Money:.
+        /// </summary>
+        public static string moneyLabel {
+            get {
+                return ResourceManager.GetString("moneyLabel", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized string similar to Purchase:.
+        /// </summary>
+        public static string purchaseLabel {
+            get {
+                return ResourceManager.GetString("purchaseLabel", resourceCulture);
+            }
+        }
+        
+        /// <summary>
         ///   Looks up a localized string similar to Today: .
         /// </summary>
         public static string todayLabel {
             get {
                 return ResourceManager.GetString("todayLabel", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized string similar to Total costs today: .
+        /// </summary>
+        public static string totalCostsLable {
+            get {
+                return ResourceManager.GetString("totalCostsLable", resourceCulture);
             }
         }
     }

@@ -1,13 +1,9 @@
-﻿using System;
-using System.Windows;
+﻿using System.Windows;
 using System.Windows.Controls;
 using System.Windows.Input;
-using System.Windows.Media;
 using LifesAssistant.Infrastructure;
 using LifesAssistant.View.ViewElements;
 using LifesAssistant.ViewModel.ViewModelElements;
-using MahApps.Metro.Controls;
-using MahApps.Metro.Controls.Dialogs;
 
 namespace LifesAssistant.ViewModel
 {
@@ -21,6 +17,9 @@ namespace LifesAssistant.ViewModel
             WindowWidth = _defaultWindowWidth;
             MainWidth = 400;
             WindowPosLeft = SystemParameters.WorkArea.Right - WindowWidth;
+
+            MainPanel = new CalendarTab();
+            MainPanel.DataContext = new CalendarTabViewModel();
         }
         #endregion
 

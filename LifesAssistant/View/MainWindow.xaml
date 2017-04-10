@@ -4,6 +4,9 @@
                       xmlns:controls="http://metro.mahapps.com/winfx/xaml/controls"
                       xmlns:iconPacks="http://metro.mahapps.com/winfx/xaml/iconpacks"
                       Title="MainWindow"
+                      BorderThickness="3 3 0 0"
+                      BorderBrush="#00171F"
+                      
                       Width="{Binding WindowWidth,
                                       Mode=TwoWay}"
                       Height="350"
