@@ -88,11 +88,11 @@ namespace LifesAssistant.Properties.Language {
         }
         
         /// <summary>
-        ///   Looks up a localized string similar to Graphics.
+        ///   Looks up a localized string similar to Hide Charts  ▲.
         /// </summary>
-        public static string graphicsLabel {
+        public static string hideChartsLabel {
             get {
-                return ResourceManager.GetString("graphicsLabel", resourceCulture);
+                return ResourceManager.GetString("hideChartsLabel", resourceCulture);
             }
         }
         
@@ -111,6 +111,15 @@ namespace LifesAssistant.Properties.Language {
         public static string purchaseLabel {
             get {
                 return ResourceManager.GetString("purchaseLabel", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized string similar to Charts  ▼.
+        /// </summary>
+        public static string showChartsLabel {
+            get {
+                return ResourceManager.GetString("showChartsLabel", resourceCulture);
             }
         }
         

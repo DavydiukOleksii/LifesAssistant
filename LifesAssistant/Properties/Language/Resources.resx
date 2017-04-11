@@ -126,14 +126,17 @@
   <data name="dellLabel" xml:space="preserve">
     <value>Dell</value>
   </data>
-  <data name="graphicsLabel" xml:space="preserve">
-    <value>Graphics</value>
+  <data name="hideChartsLabel" xml:space="preserve">
+    <value>Hide Charts  ▲</value>
   </data>
   <data name="moneyLabel" xml:space="preserve">
     <value>Money:</value>
   </data>
   <data name="purchaseLabel" xml:space="preserve">
     <value>Purchase:</value>
+  </data>
+  <data name="showChartsLabel" xml:space="preserve">
+    <value>Charts  ▼</value>
   </data>
   <data name="todayLabel" xml:space="preserve">
     <value>Today: </value>

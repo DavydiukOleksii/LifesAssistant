@@ -2,6 +2,7 @@
 using System.Windows.Controls;
 using System.Windows.Input;
 using LifesAssistant.Infrastructure;
+using LifesAssistant.Properties.Language;
 using LifesAssistant.View.ViewElements;
 using LifesAssistant.ViewModel.ViewModelElements;
 
@@ -14,9 +15,12 @@ namespace LifesAssistant.ViewModel
         {
             TabWidth = 0;
             TabHeight = 60;
+            ChartsButtonHeight = 25;
+            WindowHeight = 360;
             WindowWidth = _defaultWindowWidth;
             MainWidth = 400;
             WindowPosLeft = SystemParameters.WorkArea.Right - WindowWidth;
+            ChartsLabel = Resources.showChartsLabel;
 
             MainPanel = new CalendarTab();
             MainPanel.DataContext = new CalendarTabViewModel();
@@ -47,6 +51,20 @@ namespace LifesAssistant.ViewModel
             }
         }
 
+        protected int _windowHeight;
+        public int WindowHeight
+        {
+            get
+            {
+                return _windowHeight;
+            }
+            set
+            {
+                _windowHeight = value;
+                OnPropertyChanged("WindowHeight");
+            }
+        }
+
         protected int _tabHeight;
         public int TabHeight
         {
@@ -58,6 +76,34 @@ namespace LifesAssistant.ViewModel
             {
                 _tabHeight = value;
                 OnPropertyChanged("TabHeight");
+            }
+        }
+
+        protected int _chartsButtonHeight;
+        public int ChartsButtonHeight
+        {
+            get
+            {
+                return _chartsButtonHeight;
+            }
+            set
+            {
+                _chartsButtonHeight = value;
+                OnPropertyChanged("ChartsButtonHeight");
+            }
+        }
+
+        protected int _chartsHeight;
+        public int ChartsHeight
+        {
+            get
+            {
+                return _chartsHeight;
+            }
+            set
+            {
+                _chartsHeight = value;
+                OnPropertyChanged("ChartsHeight");
             }
         }
 
@@ -124,6 +170,20 @@ namespace LifesAssistant.ViewModel
                 OnPropertyChanged("WindowPosTop");
             }
         }
+
+        protected string _chartsLabel;
+        public string ChartsLabel
+        {
+            get
+            {
+                return _chartsLabel;
+            }
+            set
+            {
+                _chartsLabel = value;
+                OnPropertyChanged("ChartsLabel");
+            }
+        }
         #endregion
 
         #region Data for tabControle
@@ -138,6 +198,8 @@ namespace LifesAssistant.ViewModel
                 OnPropertyChanged("MainPanel");
             }
         }
+
+
 
         #endregion
 
@@ -167,6 +229,7 @@ namespace LifesAssistant.ViewModel
                 TabHeight = 60;
                 WindowWidth = _defaultWindowWidth;
                 MainWidth = 400;
+                ChartsButtonHeight = 25;
                 WindowPosLeft = _currentWinLeftPos;
                 WindowPosTop = _currentWinTopPos;
             }
@@ -176,6 +239,7 @@ namespace LifesAssistant.ViewModel
                 TabHeight = 0;
                 WindowWidth = _minimizeWindowWidth;
                 MainWidth = 0;
+                ChartsButtonHeight = 0;
                 _currentWinLeftPos = (int)WindowPosLeft;
                 WindowPosLeft = SystemParameters.WorkArea.Right - WindowWidth;
                 _currentWinTopPos = (int)WindowPosTop;
@@ -184,6 +248,42 @@ namespace LifesAssistant.ViewModel
         }
 
         public bool CanExecuteChangeWSCommand(object parameter)
+        {
+            return true;
+        }
+        #endregion
+
+        #region ShowCharts
+        RelayCommand _showChartsCommand;
+        public ICommand ShowCharts
+        {
+            get
+            {
+                if (_showChartsCommand == null)
+                {
+                    _showChartsCommand = new RelayCommand(ExecuteShowChartsCommand, CanExecuteShowChartsCommand);
+                }
+                return _showChartsCommand;
+            }
+        }
+
+        public void ExecuteShowChartsCommand(object parameter)
+        {
+            if (ChartsHeight > 0)
+            {
+                WindowHeight = 360;
+                ChartsHeight = 0;
+                ChartsLabel = Resources.showChartsLabel;
+            }
+            else
+            {
+                ChartsHeight = 275;
+                WindowHeight = 360 + 275;
+                ChartsLabel = Resources.hideChartsLabel;
+            }
+        }
+
+        public bool CanExecuteShowChartsCommand(object parameter)
         {
             return true;
         }

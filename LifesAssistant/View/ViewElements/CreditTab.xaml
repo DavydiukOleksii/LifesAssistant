@@ -19,8 +19,8 @@
         <Grid.RowDefinitions>
             <RowDefinition Height="40" />
             <RowDefinition Height="1*" />
-            <RowDefinition Height="1*" />
-            <RowDefinition Height="30" />
+            <RowDefinition Height="80" />
+            <RowDefinition Height="0" />
         </Grid.RowDefinitions>
 
         <TextBlock Height="24"
@@ -44,15 +44,42 @@
                   Grid.RowSpan="2"
                   Grid.Column="0"
                   Margin="10 5 5 5"
+                  AutoGenerateColumns="False"
                   BorderBrush="#003459"
                   BorderThickness="1"
                   IsReadOnly="True"
                   ItemsSource="{Binding DayCosts}"
-                  SelectedItem="{Binding CurrentCashTransaction}" AutoGenerateColumns="False" >
+                  SelectedItem="{Binding CurrentCashTransaction}">
             <DataGrid.Columns>
-                <DataGridTextColumn Header="$" Width="auto" Binding="{Binding Path=Money}"></DataGridTextColumn>
-                <DataGridTextColumn Header="Purchase" Width="auto" Binding="{Binding Path=Article}"></DataGridTextColumn>
+                <DataGridTextColumn Width="auto"
+                                    MinWidth="50"
+                                    Binding="{Binding Path=Money}"
+                                    Header="$" />
+                <DataGridTextColumn Width="auto"
+                                    MinWidth="96"
+                                    Binding="{Binding Path=Article}"
+                                    Header="Purchase" />
             </DataGrid.Columns>
+
+            <DataGrid.Resources>
+                <ContextMenu x:Key="itemContextMenu">
+                    <ContextMenu.Items>
+                        <MenuItem Command="{Binding DataContext.DellCurrentCashTransaction, RelativeSource={RelativeSource AncestorType=UserControl}}" Header="Delete" />
+                    </ContextMenu.Items>
+                </ContextMenu>
+            </DataGrid.Resources>
+
+            <DataGrid.RowStyle>
+                <Style BasedOn="{StaticResource MetroDataGridRow}" TargetType="DataGridRow">
+                    <Setter Property="ContextMenu" Value="{StaticResource itemContextMenu}" />
+                </Style>
+            </DataGrid.RowStyle>
+
+            <!--<DataGrid.ContextMenu>
+                <ContextMenu>
+                    <MenuItem Command="{Binding DellCurrentCashTransaction}" Header="Delete" />
+                </ContextMenu>
+            </DataGrid.ContextMenu>-->
         </DataGrid>
 
         <Grid Grid.Row="1" Grid.Column="1">
@@ -72,14 +99,15 @@
 
                     <TextBlock Grid.Row="0"
                                Height="16"
+                               Margin="5 0 0 0"
                                VerticalAlignment="Center"
                                Text="{x:Static res:Resources.moneyLabel}" />
 
                     <TextBox Name="AddMoneyText"
                              Grid.Row="0"
                              Grid.Column="1"
-                             Height="25"
-                             Margin="5 2"
+                             Height="20"
+                             Margin="5"
                              VerticalAlignment="Center">
                         <TextBox.Text>
                             <Binding Mode="TwoWay"
@@ -94,6 +122,7 @@
 
                     <TextBlock Grid.Row="1"
                                Height="16"
+                               Margin="5 0 0 0"
                                VerticalAlignment="Center"
                                Text="{x:Static res:Resources.purchaseLabel}" />
                     <TextBox Name="AddPurchaseText"
@@ -115,9 +144,11 @@
 
                     <controls:Tile Grid.Row="2"
                                    Grid.Column="1"
-                                   Width="60"
-                                   Height="25"
-                                   HorizontalAlignment="Right"
+                                   Width="94"
+                                   Height="26"
+                                   Margin="5,10"
+                                   HorizontalAlignment="Center"
+                                   VerticalAlignment="Center"
                                    Command="{Binding AddCashTransaction}">
 
                         <TextBlock Margin="3"
@@ -128,65 +159,10 @@
             </Border>
         </Grid>
 
-        <Grid Grid.Row="2"
-              Grid.Column="1"
-              Margin="0">
-            <Border Margin="10 5"
-                    BorderBrush="Black"
-                    BorderThickness="1">
-                <Grid Margin="5 0">
-                    <Grid.RowDefinitions>
-                        <RowDefinition />
-                        <RowDefinition />
-                        <RowDefinition />
-                    </Grid.RowDefinitions>
-                    <Grid.ColumnDefinitions>
-                        <ColumnDefinition Width="30*" />
-                        <ColumnDefinition Width="53*" />
-                    </Grid.ColumnDefinitions>
-
-                    <TextBlock Grid.Row="0"
-                               Height="16"
-                               VerticalAlignment="Center"
-                               Text="{x:Static res:Resources.moneyLabel}" />
-
-                    <TextBlock Grid.Row="0"
-                               Grid.Column="1"
-                               VerticalAlignment="Center"
-                               Text="{Binding CurrentCashTransaction.Money}" />
-
-                    <TextBlock Grid.Row="1"
-                               Height="16"
-                               VerticalAlignment="Center"
-                               Text="{x:Static res:Resources.purchaseLabel}" />
-                    <TextBlock Grid.Row="1"
-                               Grid.Column="1"
-                               VerticalAlignment="Center"
-                               Text="{Binding CurrentCashTransaction.Article}" />
-
-                    <controls:Tile Grid.Row="2"
-                                   Grid.Column="1"
-                                   Width="60"
-                                   Height="25"
-                                   HorizontalAlignment="Right"
-                                   Command="{Binding DellCurrentCashTransaction}">
-
-                        <TextBlock Margin="3"
-                                   VerticalAlignment="Center"
-                                   Text="{x:Static res:Resources.dellLabel}" />
-                    </controls:Tile>
-
-                </Grid>
-            </Border>
-        </Grid>
-
-        <Grid Grid.Row="3"
-              Grid.Column="0"
-              Grid.ColumnSpan="2">
+        <Grid Grid.Row="2" Grid.Column="1">
             <Grid.ColumnDefinitions>
-                <ColumnDefinition />
-                <ColumnDefinition />
-                <ColumnDefinition />
+                <ColumnDefinition Width="2*" />
+                <ColumnDefinition Width="*" />
             </Grid.ColumnDefinitions>
 
             <TextBlock Margin="3"
@@ -201,19 +177,21 @@
                        VerticalAlignment="Center"
                        FontSize="14"
                        Text="{Binding DailyTotalCosts}" />
-
-            <controls:Tile Grid.Column="2"
-                           Width="60"
-                           Height="25"
-                           Margin="13 3"
-                           HorizontalAlignment="Center"
-                           Background="SlateGray">
-
-                <TextBlock Margin="3"
-                           VerticalAlignment="Center"
-                           Text="{x:Static res:Resources.graphicsLabel}" />
-            </controls:Tile>
         </Grid>
+
+        <!--<controls:Tile Grid.Row="3"
+                       Grid.Column="0"
+                       Grid.ColumnSpan="2"
+                       Width="Auto"
+                       Height="25"
+                       Margin="3,4,0,0"
+                       Background="#00171F">
+
+            <TextBlock Margin="3"
+                       VerticalAlignment="Center"
+                       Text="{x:Static res:Resources.graphicsLabel}" />
+        </controls:Tile>-->
+
 
     </Grid>
 </UserControl>
