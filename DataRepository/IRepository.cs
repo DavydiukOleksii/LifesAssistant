@@ -1,11 +1,13 @@
-﻿using System.Data;
+﻿using System;
+using System.Collections.Generic;
+using System.Data;
 
 namespace DataRepository
 {
-    public interface IRepository<T, U>
+    public interface IRepository<T>
     {
-        T GetAll();
-        U GetByDay(DataSetDateTime day);
-        void UpdateToday(U newData);
+        List<T> GetAll();
+        T GetByDay(DateTime day);
+        //void UpdateDay(U newData);
     }
 }

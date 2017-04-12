@@ -129,6 +129,9 @@
   <data name="hideChartsLabel" xml:space="preserve">
     <value>Hide Charts  ▲</value>
   </data>
+  <data name="lastWaterDrinkingLabel" xml:space="preserve">
+    <value>Time from latest water drink</value>
+  </data>
   <data name="moneyLabel" xml:space="preserve">
     <value>Money:</value>
   </data>
@@ -143,5 +146,8 @@
   </data>
   <data name="totalCostsLable" xml:space="preserve">
     <value>Total costs today: </value>
+  </data>
+  <data name="waterTabName" xml:space="preserve">
+    <value>Daily water balance</value>
   </data>
 </root>

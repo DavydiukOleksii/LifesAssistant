@@ -5,9 +5,9 @@ namespace LifesAssistant.View.ViewElements
     /// <summary>
     /// Interaction logic for CalendarTab.xaml
     /// </summary>
-    public partial class CreditTab : UserControl
+    public partial class CostsTab : UserControl
     {
-        public CreditTab()
+        public CostsTab()
         {
             InitializeComponent();
         }

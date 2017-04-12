@@ -1,9 +1,11 @@
-﻿namespace DataModel.Credit
+﻿using System;
+
+namespace DataModel.Water
 {
-    public class OneCashTransaction
+    public class OnceDrink
     {
-        public int Money { get; set; }
-        public string Article { get; set; }
+        public double Capasity { get; set; }
+        public DateTime time { get; set; }
 
         public override bool Equals(object obj)
         {
@@ -14,14 +16,14 @@
             }
 
             // If parameter cannot be cast to Point return false.
-            OneCashTransaction t = obj as OneCashTransaction;
-            if ((System.Object)t == null)
+            OnceDrink t = obj as OnceDrink;
+            if ((Object)t == null)
             {
                 return false;
             }
 
             // Return true if the fields match:
-            return (Money == t.Money) && (Article == t.Article);
+            return (Capasity == t.Capasity) && (time == t.time);
         }
     }
 }

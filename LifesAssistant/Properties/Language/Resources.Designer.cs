@@ -97,6 +97,15 @@ namespace LifesAssistant.Properties.Language {
         }
         
         /// <summary>
+        ///   Looks up a localized string similar to Time from latest water drink.
+        /// </summary>
+        public static string lastWaterDrinkingLabel {
+            get {
+                return ResourceManager.GetString("lastWaterDrinkingLabel", resourceCulture);
+            }
+        }
+        
+        /// <summary>
         ///   Looks up a localized string similar to Money:.
         /// </summary>
         public static string moneyLabel {
@@ -138,6 +147,15 @@ namespace LifesAssistant.Properties.Language {
         public static string totalCostsLable {
             get {
                 return ResourceManager.GetString("totalCostsLable", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized string similar to Daily water balance.
+        /// </summary>
+        public static string waterTabName {
+            get {
+                return ResourceManager.GetString("waterTabName", resourceCulture);
             }
         }
     }

@@ -5,6 +5,7 @@ using LifesAssistant.Infrastructure;
 using LifesAssistant.Properties.Language;
 using LifesAssistant.View.ViewElements;
 using LifesAssistant.ViewModel.ViewModelElements;
+using MahApps.Metro.Controls;
 
 namespace LifesAssistant.ViewModel
 {
@@ -223,6 +224,10 @@ namespace LifesAssistant.ViewModel
 
         public void ExecuteChangeWSCommand(object parameter)
         {
+            WindowHeight = 360;
+            ChartsHeight = 0;
+            ChartsLabel = Resources.showChartsLabel;
+
             if (TabWidth > 0 && TabHeight == 0)
             {
                 TabWidth = 0;
@@ -367,13 +372,14 @@ namespace LifesAssistant.ViewModel
                 }
                 case "Credit":
                 {
-                    MainPanel = new CreditTab();
-                    MainPanel.DataContext = new CreditTabViewModel();
+                    MainPanel = new CostsTab();
+                    MainPanel.DataContext = new CostsTabViewModel();
                     break;
                 }
                 case "Water":
                 {
                     MainPanel = new WaterTab();
+                    MainPanel.DataContext = new WaterTabViewModel();
                     break;
                 }
                 case "Dream":

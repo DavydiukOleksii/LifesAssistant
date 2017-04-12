@@ -4,24 +4,29 @@ using System.Linq;
 using System.Windows.Documents;
 using System.Windows.Input;
 using DataModel.Credit;
+using DataRepository;
 using LifesAssistant.Infrastructure;
 using LifesAssistant.Properties.Language;
 
 namespace LifesAssistant.ViewModel.ViewModelElements
 {
-    class CreditTabViewModel: ViewModelBase
+    class CostsTabViewModel: ViewModelBase
     {
         #region Constructor
-        public CreditTabViewModel()
+        public CostsTabViewModel()
         {
             CurrentDate = Resources.todayLabel + DateTime.Today.ToString("d");
 
-            if(CostsDayReport.Instance.DailyCosts == null)
-                CostsDayReport.Instance.DailyCosts = new ObservableCollection<OneCashTransaction>();
+            //if(CostsDayReport.Instance.DailyCosts == null)
+            //    CostsDayReport.Instance.DailyCosts = new ObservableCollection<OneCashTransaction>();
 
-            DayCosts = CostsDayReport.Instance.DailyCosts;
+            //DayCosts = CostsDayReport.Instance.DailyCosts;
 
-            DailyTotalCosts = CostsDayReport.Instance.TotalCosts;
+            //DailyTotalCosts = CostsDayReport.Instance.TotalCosts;
+
+            DayCosts = CostsRepository.Instance.GetByDay(DateTime.Today).DailyCosts;
+            DailyTotalCosts = CostsRepository.Instance.GetByDay(DateTime.Today).TotalCosts;
+
             NewCashTransaction = new OneCashTransaction();
         }
         #endregion
@@ -116,7 +121,9 @@ namespace LifesAssistant.ViewModel.ViewModelElements
         public void ExecuteDellCurrentCashTransactionCommand(object parametr)
         {
             DailyTotalCosts -= CurrentCashTransaction.Money;
+            CostsRepository.Instance.DeleteCashTransaction(CurrentCashTransaction);
             DayCosts.Remove(CurrentCashTransaction);
+            
             if(DayCosts.Count > 0)
                 CurrentCashTransaction = DayCosts.First();
             
@@ -153,6 +160,7 @@ namespace LifesAssistant.ViewModel.ViewModelElements
         {
             DayCosts.Add(new OneCashTransaction(){Article = NewCashTransaction.Article, Money = NewCashTransaction.Money});
             DailyTotalCosts += NewCashTransaction.Money;
+            CostsRepository.Instance.AddNewTransaction(NewCashTransaction);
             NewCashTransaction = new OneCashTransaction();
         }
         #endregion

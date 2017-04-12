@@ -34,8 +34,8 @@
     <WarningLevel>4</WarningLevel>
   </PropertyGroup>
   <ItemGroup>
-    <Reference Include="De.TorstenMandelkow.MetroChart, Version=1.0.0.0, Culture=neutral, processorArchitecture=MSIL">
-      <HintPath>..\packages\ModernUICharts.1.0.2\lib\De.TorstenMandelkow.MetroChart.dll</HintPath>
+    <Reference Include="De.TorstenMandelkow.MetroChart, Version=0.9.5818.20693, Culture=neutral, processorArchitecture=MSIL">
+      <HintPath>..\packages\ModernUICharts.WPF.Beta.0.9.1\lib\De.TorstenMandelkow.MetroChart.dll</HintPath>
       <Private>True</Private>
     </Reference>
     <Reference Include="MahApps.Metro, Version=1.5.0.0, Culture=neutral, processorArchitecture=MSIL">
@@ -76,8 +76,9 @@
     </Compile>
     <Compile Include="ViewModel\MainWindowViewModel.cs" />
     <Compile Include="ViewModel\ViewModelBase.cs" />
-    <Compile Include="ViewModel\ViewModelElements\CreditTabViewModel.cs" />
+    <Compile Include="ViewModel\ViewModelElements\CostsTabViewModel.cs" />
     <Compile Include="ViewModel\ViewModelElements\CalendarTabViewModel.cs" />
+    <Compile Include="ViewModel\ViewModelElements\WaterTabViewModel.cs" />
     <Compile Include="View\ViewElements\DreamTab.xaml.cs">
       <DependentUpon>DreamTab.xaml</DependentUpon>
     </Compile>
@@ -87,8 +88,8 @@
     <Compile Include="View\ViewElements\WaterTab.xaml.cs">
       <DependentUpon>WaterTab.xaml</DependentUpon>
     </Compile>
-    <Compile Include="View\ViewElements\CreditTab.xaml.cs">
-      <DependentUpon>CreditTab.xaml</DependentUpon>
+    <Compile Include="View\ViewElements\CostsTab.xaml.cs">
+      <DependentUpon>CostsTab.xaml</DependentUpon>
     </Compile>
     <Compile Include="View\ViewElements\CalendarTab.xaml.cs">
       <DependentUpon>CalendarTab.xaml</DependentUpon>
@@ -122,7 +123,7 @@
       <Generator>MSBuild:Compile</Generator>
       <SubType>Designer</SubType>
     </Page>
-    <Page Include="View\ViewElements\CreditTab.xaml">
+    <Page Include="View\ViewElements\CostsTab.xaml">
       <Generator>MSBuild:Compile</Generator>
       <SubType>Designer</SubType>
     </Page>
@@ -167,6 +168,10 @@
     <ProjectReference Include="..\DataModel\DataModel.csproj">
       <Project>{b47576e6-6b86-4541-8aa8-25fd387b8315}</Project>
       <Name>DataModel</Name>
+    </ProjectReference>
+    <ProjectReference Include="..\DataRepository\DataRepository.csproj">
+      <Project>{680ba66d-95bc-44b6-b649-4954529ec307}</Project>
+      <Name>DataRepository</Name>
     </ProjectReference>
   </ItemGroup>
   <Import Project="$(MSBuildToolsPath)\Microsoft.CSharp.targets" />

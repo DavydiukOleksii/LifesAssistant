@@ -1,10 +1,12 @@
 ﻿<UserControl x:Class="LifesAssistant.View.ViewElements.WaterTab"
              xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
              xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
+             xmlns:MetroChart="clr-namespace:De.TorstenMandelkow.MetroChart;assembly=De.TorstenMandelkow.MetroChart"
              xmlns:controls="http://metro.mahapps.com/winfx/xaml/controls"
              xmlns:d="http://schemas.microsoft.com/expression/blend/2008"
              xmlns:iconPacks="http://metro.mahapps.com/winfx/xaml/iconpacks"
              xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
+             xmlns:res="clr-namespace:LifesAssistant.Properties.Language"
              d:DesignHeight="300"
              d:DesignWidth="350"
              mc:Ignorable="d">
@@ -14,16 +16,68 @@
             <ColumnDefinition />
         </Grid.ColumnDefinitions>
         <Grid.RowDefinitions>
-            <RowDefinition Height="50" />
+            <RowDefinition Height="40" />
             <RowDefinition />
-            <RowDefinition Height="50" />
+            <RowDefinition Height="120" />
         </Grid.RowDefinitions>
 
-        <TextBlock Margin="10" Text="Water" />
+        <TextBlock Height="24"
+                   HorizontalAlignment="Center"
+                   VerticalAlignment="Center"
+                   FontSize="18"
+                   Text="{x:Static res:Resources.waterTabName}" />
 
-        <DatePicker Grid.Row="1"
-                    Grid.Column="0"
-                    Width="150"
-                    Height="30" />
+        <TextBlock Name="CurrentDate"
+                   Grid.Row="0"
+                   Grid.Column="1"
+                   Height="20"
+                   Margin="10 0"
+                   HorizontalAlignment="Right"
+                   VerticalAlignment="Center"
+                   FontSize="14"
+                   Text="{Binding CurrentDate}" />
+
+        <DockPanel Grid.Row="1"
+                   Grid.Column="1"
+                   Margin="10"
+                   Background="#2EB7EC">
+            <TextBlock Width="92"
+                       MinWidth="120"
+                       Margin="10"
+                       HorizontalAlignment="Center"
+                       DockPanel.Dock="Top"
+                       FontSize="15"
+                       Foreground="White"
+                       Text="{x:Static res:Resources.lastWaterDrinkingLabel}"
+                       TextAlignment="Center"
+                       TextWrapping="Wrap" />
+            <TextBlock HorizontalAlignment="Center"
+                       DockPanel.Dock="Top"
+                       FontSize="22"
+                       FontWeight="UltraBold"
+                       Foreground="white"
+                       Text="{Binding TimeFromLastDrink}" />
+        </DockPanel>
+
+        <DockPanel Grid.Row="2"
+                   Grid.Column="1"
+                   Margin="5">
+            <MetroChart:DoughnutChart Width="150"
+                                      Height="100"
+                                      ChartLegendVisibility="Collapsed"
+                                      ChartTitleVisibility="Collapsed"
+                                      InnerRadiusRatio="0.75"
+                                      IsHitTestVisible="False"
+                                      Padding="0">
+
+                <MetroChart:DoughnutChart.Series>
+                    <MetroChart:ChartSeries DisplayMember="name"
+                                            ItemsSource="{Binding DayWaterCapacityPercent}"
+                                            SeriesTitle="day"
+                                            ValueMember="capacity" />
+                </MetroChart:DoughnutChart.Series>
+            </MetroChart:DoughnutChart>
+
+        </DockPanel>
     </Grid>
 </UserControl>
