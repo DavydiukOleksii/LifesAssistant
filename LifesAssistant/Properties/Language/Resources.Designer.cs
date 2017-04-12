@@ -70,6 +70,15 @@ namespace LifesAssistant.Properties.Language {
         }
         
         /// <summary>
+        ///   Looks up a localized string similar to Capacity: .
+        /// </summary>
+        public static string capacityLabel {
+            get {
+                return ResourceManager.GetString("capacityLabel", resourceCulture);
+            }
+        }
+        
+        /// <summary>
         ///   Looks up a localized string similar to Daily costs.
         /// </summary>
         public static string creditTabName {

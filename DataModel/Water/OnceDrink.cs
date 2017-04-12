@@ -5,7 +5,7 @@ namespace DataModel.Water
     public class OnceDrink
     {
         public double Capasity { get; set; }
-        public DateTime time { get; set; }
+        public DateTime Time { get; set; }
 
         public override bool Equals(object obj)
         {
@@ -23,7 +23,7 @@ namespace DataModel.Water
             }
 
             // Return true if the fields match:
-            return (Capasity == t.Capasity) && (time == t.time);
+            return (Capasity == t.Capasity) && (Time == t.Time);
         }
     }
 }

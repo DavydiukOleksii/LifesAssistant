@@ -191,9 +191,9 @@
                    Background="Gray">
             <MetroChart:StackedBar100Chart ChartSubTitle="" ChartTitle="Costs charts">
                 <MetroChart:StackedBar100Chart.Series>
-                    <MetroChart:ChartSeries  DisplayMember="Name"
-                        ItemsSource="{Binding ExampleValues}"
-                        ValueMember="Count" />
+                    <MetroChart:ChartSeries DisplayMember="Name"
+                                            ItemsSource="{Binding ExampleValues}"
+                                            ValueMember="Count" />
                 </MetroChart:StackedBar100Chart.Series>
             </MetroChart:StackedBar100Chart>
         </DockPanel>

@@ -14,9 +14,9 @@ using LifesAssistant.Properties.Language;
 
 namespace LifesAssistant.ViewModel.ViewModelElements
 {
-    class data
+    public class data
     {
-        public int capacity { get; set; }
+        public double capacity { get; set; }
         public string name { get; set; }
     }
 
@@ -34,10 +34,13 @@ namespace LifesAssistant.ViewModel.ViewModelElements
 
             //DailyTotalCosts = CostsDayReport.Instance.TotalCosts;
 
-            //DayCosts = CostsRepository.Instance.GetByDay(DateTime.Today).DailyCosts;
-            //DailyTotalCosts = CostsRepository.Instance.GetByDay(DateTime.Today).TotalCosts;
+            
 
-            //NewCashTransaction = new OneCashTransaction();
+            DailyTotalWaterCapacity = WaterRepository.Instance.GetByDay(DateTime.Today).TotalCapacity;
+
+            DayWaterCapacity = WaterRepository.Instance.GetByDay(DateTime.Today).DailyWaterOperations;
+
+            NewWaterOperation = new OnceDrink();
 
             DispatcherTimer timer = new DispatcherTimer();
             timer.Interval = TimeSpan.FromSeconds(1);
@@ -45,19 +48,24 @@ namespace LifesAssistant.ViewModel.ViewModelElements
             timer.Start();
 
             DayWaterCapacityPercent = new ObservableCollection<data>();
-            DayWaterCapacityPercent.Add(new data(){capacity = 5, name = "nevoda"});
-            DayWaterCapacityPercent.Add(new data(){capacity = 5, name = "voda"});
+            DayWaterCapacityPercent.Add(new data(){capacity = DailyTotalWaterCapacity, name = "nevoda"});
+            DayWaterCapacityPercent.Add(new data(){capacity = _dayWaterNorm - DailyTotalWaterCapacity, name = "voda"});
         }
         #endregion
 
         protected void TimerTick(object sender, EventArgs e)
         {
-            TimeFromLastDrink = DateTime.Now.ToLongTimeString();
+            if (DayWaterCapacity.Count > 0)
+                TimeFromLastDrink = DateTime.Now.Subtract(DayWaterCapacity.Last().Time).ToString(@"hh\:mm\:ss");
+            else
+            {
+                TimeFromLastDrink = DateTime.Now.ToLongTimeString();
+            }
         }
 
         #region Data
 
-
+        protected double _dayWaterNorm = 5;
 
         protected string _currentDate;
         public string CurrentDate
@@ -73,7 +81,10 @@ namespace LifesAssistant.ViewModel.ViewModelElements
         protected string _timeFromLastDrink;
         public string TimeFromLastDrink
         {
-            get { return _timeFromLastDrink; }
+            get
+            {
+                return _timeFromLastDrink;
+            }
             set
             {
                 _timeFromLastDrink = value;
@@ -81,8 +92,8 @@ namespace LifesAssistant.ViewModel.ViewModelElements
             }
         }
 
-        protected int _dailyTotalWaterCapacity;
-        public int DailyTotalWaterCapacity
+        protected double _dailyTotalWaterCapacity;
+        public double DailyTotalWaterCapacity
         {
             get { return _dailyTotalWaterCapacity; }
             set
@@ -115,103 +126,111 @@ namespace LifesAssistant.ViewModel.ViewModelElements
         }
 
 
-        //protected OneCashTransaction _currentCashTransaction;
-        //public OneCashTransaction CurrentCashTransaction
-        //{
-        //    get { return _currentCashTransaction; }
-        //    set
-        //    {
-        //        _currentCashTransaction = value;
-        //        OnPropertyChanged("CurrentCashTransaction");
-        //    }
-        //}
+        protected OnceDrink _currentWaterDrink;
+        public OnceDrink CurrentWaterDrink
+        {
+            get { return _currentWaterDrink; }
+            set
+            {
+                _currentWaterDrink = value;
+                OnPropertyChanged("CurrentWaterDrink");
+            }
+        }
 
-        //protected OneCashTransaction _newCashTransaction;
-        //public OneCashTransaction NewCashTransaction
-        //{
-        //    get { return _newCashTransaction; }
-        //    set
-        //    {
-        //        _newCashTransaction = value;
-        //        OnPropertyChanged("NewCashTransaction");
-        //    }
-        //}
+        protected OnceDrink _newWaterOperation;
+        public OnceDrink NewWaterOperation
+        {
+            get { return _newWaterOperation; }
+            set
+            {
+                _newWaterOperation = value;
+                OnPropertyChanged("NewWaterOperation");
+            }
+        }
         #endregion
 
         #region Commands
-        
-        //#region Delete curent cash transaction
-        //private ICommand _dellCurrentCashTransactionCommand;
-        //public ICommand DellCurrentCashTransaction
-        //{
-        //    get
-        //    {
-        //        if (_dellCurrentCashTransactionCommand == null)
-        //        {
-        //            _dellCurrentCashTransactionCommand = new RelayCommand(ExecuteDellCurrentCashTransactionCommand, CanExecuteDellCurrentCashTransactionCommand);
-        //        }
-        //        return _dellCurrentCashTransactionCommand;
-        //    }
-        //}
 
-        //public bool CanExecuteDellCurrentCashTransactionCommand(object parametr)
-        //{
-        //    if (CurrentCashTransaction != null)
-        //    {
-        //        return true;
-        //    }
-        //    else
-        //    {
-        //        return false;
-        //    }
-        //}
+        #region Delete curent water operation
+        private ICommand _dellCurrentWaterOperationCommand;
+        public ICommand DellCurrentWaterOperation
+        {
+            get
+            {
+                if (_dellCurrentWaterOperationCommand == null)
+                {
+                    _dellCurrentWaterOperationCommand = new RelayCommand(ExecuteDellCurrentWaterOperationCommand, CanExecuteDellCurrentWaterOperationCommand);
+                }
+                return _dellCurrentWaterOperationCommand;
+            }
+        }
 
-        //public void ExecuteDellCurrentCashTransactionCommand(object parametr)
-        //{
-        //    DailyTotalCosts -= CurrentCashTransaction.Money;
-        //    CostsRepository.Instance.DeleteCashTransaction(CurrentCashTransaction);
-        //    DayCosts.Remove(CurrentCashTransaction);
-            
-        //    if(DayCosts.Count > 0)
-        //        CurrentCashTransaction = DayCosts.First();
-            
-        //}
-        //#endregion
+        public bool CanExecuteDellCurrentWaterOperationCommand(object parametr)
+        {
+            if (CurrentWaterDrink != null)
+            {
+                return true;
+            }
+            else
+            {
+                return false;
+            }
+        }
 
-        //#region Add new cash transaction
-        //private ICommand _addCashTransactionCommand;
-        //public ICommand AddCashTransaction
-        //{
-        //    get
-        //    {
-        //        if (_addCashTransactionCommand == null)
-        //        {
-        //            _addCashTransactionCommand = new RelayCommand(ExecuteAddCashTransactionCommand, CanExecuteAddCashTransactionCommand);
-        //        }
-        //        return _addCashTransactionCommand;
-        //    }
-        //}
+        public void ExecuteDellCurrentWaterOperationCommand(object parametr)
+        {
+            DailyTotalWaterCapacity -= CurrentWaterDrink.Capasity;
+            WaterRepository.Instance.DeleteWaterOperation(CurrentWaterDrink);
+            DayWaterCapacity.Remove(CurrentWaterDrink);
 
-        //public bool CanExecuteAddCashTransactionCommand(object parametr)
-        //{
-        //    if (NewCashTransaction.Money > 0 && NewCashTransaction.Article != null && NewCashTransaction.Article.Length <= 20)
-        //    {
-        //        return true;
-        //    }
-        //    else
-        //    {
-        //        return false;
-        //    }
-        //}
+            if (DayWaterCapacity.Count > 0)
+                CurrentWaterDrink = DayWaterCapacity.First();
 
-        //public void ExecuteAddCashTransactionCommand(object parametr)
-        //{
-        //    DayCosts.Add(new OneCashTransaction(){Article = NewCashTransaction.Article, Money = NewCashTransaction.Money});
-        //    DailyTotalCosts += NewCashTransaction.Money;
-        //    CostsRepository.Instance.AddNewTransaction(NewCashTransaction);
-        //    NewCashTransaction = new OneCashTransaction();
-        //}
-        //#endregion
+            DayWaterCapacityPercent[0].capacity = DailyTotalWaterCapacity;
+            DayWaterCapacityPercent[1].capacity = _dayWaterNorm - DailyTotalWaterCapacity;
+            OnPropertyChanged("DayWaterCapacityPercent");
+        }
+        #endregion
+
+        #region Add new water operation
+        private ICommand _addNewWaterOperationCommand;
+        public ICommand AddNewWaterOperation
+        {
+            get
+            {
+                if (_addNewWaterOperationCommand == null)
+                {
+                    _addNewWaterOperationCommand = new RelayCommand(ExecuteAddNewWaterOperationCommand, CanExecuteAddNewWaterOperationCommand);
+                }
+                return _addNewWaterOperationCommand;
+            }
+        }
+
+        public bool CanExecuteAddNewWaterOperationCommand(object parametr)
+        {
+            if (NewWaterOperation.Capasity > 0 )
+            {
+                return true;
+            }
+            else
+            {
+                return false;
+            }
+        }
+
+        public void ExecuteAddNewWaterOperationCommand(object parametr)
+        {
+            NewWaterOperation.Time = DateTime.Now;
+            DayWaterCapacity.Add(new OnceDrink() { Capasity = NewWaterOperation.Capasity, Time = NewWaterOperation.Time});
+            DailyTotalWaterCapacity += NewWaterOperation.Capasity;
+            WaterRepository.Instance.AddWaterOperation(NewWaterOperation);
+            NewWaterOperation = new OnceDrink();
+
+            DayWaterCapacityPercent[0].capacity = DailyTotalWaterCapacity;
+            DayWaterCapacityPercent[1].capacity = _dayWaterNorm - DailyTotalWaterCapacity;
+            OnPropertyChanged("DayWaterCapacityPercent");
+        }
+        #endregion
 
         #endregion
 

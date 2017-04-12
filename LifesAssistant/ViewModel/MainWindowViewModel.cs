@@ -17,7 +17,7 @@ namespace LifesAssistant.ViewModel
             TabWidth = 0;
             TabHeight = 60;
             ChartsButtonHeight = 25;
-            WindowHeight = 360;
+            WindowHeight = _defaultWindowsHeight;
             WindowWidth = _defaultWindowWidth;
             MainWidth = 400;
             WindowPosLeft = SystemParameters.WorkArea.Right - WindowWidth;
@@ -33,6 +33,7 @@ namespace LifesAssistant.ViewModel
         #region Data for controle Windows size, position and state
         //default windows width in diferent states
         protected int _defaultWindowWidth = 430;
+        protected int _defaultWindowsHeight = 385;
         protected int _minimizeWindowWidth = 72;
         //current windows position
         protected int _currentWinTopPos;
@@ -224,7 +225,7 @@ namespace LifesAssistant.ViewModel
 
         public void ExecuteChangeWSCommand(object parameter)
         {
-            WindowHeight = 360;
+            WindowHeight = _defaultWindowsHeight;
             ChartsHeight = 0;
             ChartsLabel = Resources.showChartsLabel;
 
@@ -276,14 +277,14 @@ namespace LifesAssistant.ViewModel
         {
             if (ChartsHeight > 0)
             {
-                WindowHeight = 360;
+                WindowHeight = _defaultWindowsHeight;
                 ChartsHeight = 0;
                 ChartsLabel = Resources.showChartsLabel;
             }
             else
             {
                 ChartsHeight = 275;
-                WindowHeight = 360 + 275;
+                WindowHeight = _defaultWindowsHeight + 275;
                 ChartsLabel = Resources.hideChartsLabel;
             }
         }
