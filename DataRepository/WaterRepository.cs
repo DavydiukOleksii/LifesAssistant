@@ -3,9 +3,6 @@ using System.Collections.Generic;
 using System.Collections.ObjectModel;
 using System.IO;
 using System.Linq;
-using System.Text;
-using System.Threading.Tasks;
-using DataModel.Credit;
 using DataModel.Water;
 using Newtonsoft.Json;
 
@@ -57,9 +54,10 @@ namespace DataRepository
                 {
                     string json = r.ReadToEnd();
                     List<WaterDayReport> today = JsonConvert.DeserializeObject<List<WaterDayReport>>(json);
-                    if (today != null)
+                    if (today != null && today.Where(x => x.Date == day)
+                            .FirstOrDefault() != null)
                     {
-                        today.Where(x => x.Date == day)
+                        resoult = today.Where(x => x.Date == day)
                             .FirstOrDefault();
                     }
                     else
@@ -70,8 +68,9 @@ namespace DataRepository
                             Date = DateTime.Today,
                             TotalCapacity = 0,
                             DailyWaterOperations = new ObservableCollection<OnceDrink>()});
+                        resoult = today.First();
                     }
-                    resoult = today.First();
+                    
                 }
                 return resoult;
             }
@@ -103,7 +102,8 @@ namespace DataRepository
                 {
                     string json = r.ReadToEnd();
                     List<WaterDayReport> today = JsonConvert.DeserializeObject<List<WaterDayReport>>(json);
-                    if (today != null)
+                    if (today != null && today.Where(x => x.Date == DateTime.Today)
+                            .FirstOrDefault() != null)
                     {
                         today.Where(x => x.Date == DateTime.Today)
                             .FirstOrDefault().DailyWaterOperations.Add(newOperation);
@@ -112,7 +112,10 @@ namespace DataRepository
                     }
                     else
                     {
-                        today = new List<WaterDayReport>();
+                        if (today == null)
+                        {
+                            today = new List<WaterDayReport>();
+                        }
                         today.Add(new WaterDayReport()
                         {
                             Date = DateTime.Today,
@@ -153,9 +156,9 @@ namespace DataRepository
                     else
                     {
                         today.Where(x => x.Date == DateTime.Today)
-                            .FirstOrDefault();
-                        today.First().DailyWaterOperations.Remove(delWaterOperation);
-                        today.First().TotalCapacity -= delWaterOperation.Capasity;
+                            .FirstOrDefault().DailyWaterOperations.Remove(delWaterOperation);
+                        today.Where(x => x.Date == DateTime.Today)
+                            .FirstOrDefault().TotalCapacity -= delWaterOperation.Capasity;
                     }
                     newJson = JsonConvert.SerializeObject(today);
                 }

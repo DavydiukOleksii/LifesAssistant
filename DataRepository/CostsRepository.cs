@@ -46,7 +46,7 @@ namespace DataRepository
         {
             try
             {
-                CostsDayReport resoult;
+                CostsDayReport result;
 
                 if (!File.Exists(filePath + fileName))
                 {
@@ -57,9 +57,10 @@ namespace DataRepository
                 {
                     string json = r.ReadToEnd();
                     List<CostsDayReport> today = JsonConvert.DeserializeObject<List<CostsDayReport>>(json);
-                    if (today != null)
+                    if (today != null && today.Where(x => x.Date == day)
+                            .FirstOrDefault() != null)
                     {
-                        today.Where(x => x.Date == day)
+                        result = today.Where(x => x.Date == day)
                             .FirstOrDefault();
                     }
                     else
@@ -70,10 +71,11 @@ namespace DataRepository
                             Date = DateTime.Today,
                             TotalCosts = 0,
                             DailyCosts = new ObservableCollection<OneCashTransaction>()});
+                        result = today.First();
                     }
-                    resoult = today.First();
+                    
                 }
-                return resoult;
+                return result;
             }
             catch
             {
@@ -123,7 +125,8 @@ namespace DataRepository
                 {
                     string json = r.ReadToEnd();
                     List<CostsDayReport> today = JsonConvert.DeserializeObject<List<CostsDayReport>>(json);
-                    if (today != null)
+                    if (today != null && today.Where(x => x.Date == DateTime.Today)
+                            .FirstOrDefault() != null)
                     {
                         today.Where(x => x.Date == DateTime.Today)
                             .FirstOrDefault().DailyCosts.Add(newTransaction);
@@ -132,7 +135,10 @@ namespace DataRepository
                     }
                     else
                     {
-                        today = new List<CostsDayReport>();
+                        if (today == null)
+                        {
+                            today = new List<CostsDayReport>();
+                        }
                         today.Add(new CostsDayReport()
                         {
                             Date = DateTime.Today, 
@@ -173,9 +179,9 @@ namespace DataRepository
                     else
                     {
                         today.Where(x => x.Date == DateTime.Today)
-                            .FirstOrDefault();
-                        today.First().DailyCosts.Remove(delCashTransaction);
-                        today.First().TotalCosts -= delCashTransaction.Money;
+                            .FirstOrDefault().DailyCosts.Remove(delCashTransaction);
+                        today.Where(x => x.Date == DateTime.Today)
+                            .FirstOrDefault().TotalCosts -= delCashTransaction.Money;
                     }
                     newJson = JsonConvert.SerializeObject(today);
                 }
