@@ -121,7 +121,7 @@ namespace LifesAssistant.ViewModel.ViewModelElements
         public void ExecuteDellCurrentCashTransactionCommand(object parametr)
         {
             DailyTotalCosts -= CurrentCashTransaction.Money;
-            CostsRepository.Instance.DeleteCashTransaction(CurrentCashTransaction);
+            CostsRepository.Instance.DeleteOperation(CurrentCashTransaction);
             DayCosts.Remove(CurrentCashTransaction);
             
             if(DayCosts.Count > 0)
@@ -160,7 +160,7 @@ namespace LifesAssistant.ViewModel.ViewModelElements
         {
             DayCosts.Add(new OneCashTransaction(){Article = NewCashTransaction.Article, Money = NewCashTransaction.Money});
             DailyTotalCosts += NewCashTransaction.Money;
-            CostsRepository.Instance.AddNewTransaction(NewCashTransaction);
+            CostsRepository.Instance.AddOperation(NewCashTransaction);
             NewCashTransaction = new OneCashTransaction();
         }
         #endregion

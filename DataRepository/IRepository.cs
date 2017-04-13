@@ -4,10 +4,10 @@ using System.Data;
 
 namespace DataRepository
 {
-    public interface IRepository<T>
+    public interface IRepository<T, U>
     {
-        List<T> GetAll();
         T GetByDay(DateTime day);
-        //void UpdateDay(U newData);
+        void AddOperation(U newOperation);
+        void DeleteOperation(U dellOperation);
     }
 }

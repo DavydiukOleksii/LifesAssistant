@@ -46,6 +46,7 @@
     <Compile Include="CostsRepository.cs" />
     <Compile Include="IRepository.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
+    <Compile Include="SleepRepository.cs" />
     <Compile Include="WaterRepository.cs" />
   </ItemGroup>
   <ItemGroup>

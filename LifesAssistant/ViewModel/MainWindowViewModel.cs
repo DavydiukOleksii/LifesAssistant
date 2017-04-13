@@ -23,8 +23,7 @@ namespace LifesAssistant.ViewModel
             WindowPosLeft = SystemParameters.WorkArea.Right - WindowWidth;
             ChartsLabel = Resources.showChartsLabel;
 
-            MainPanel = new CalendarTab();
-            MainPanel.DataContext = new CalendarTabViewModel();
+            ExecuteTabChangedCommand("Calendar");
         }
         #endregion
 
@@ -363,12 +362,17 @@ namespace LifesAssistant.ViewModel
         public void ExecuteTabChangedCommand(object parameter)
         {
             string tabName = parameter.ToString();
+            ChartsButtonHeight = 25;
+            if (ChartsHeight > 0)
+                ExecuteShowChartsCommand(this);
             switch (tabName)
             {
                 case "Calendar":
                 {
                     MainPanel = new CalendarTab();
                     MainPanel.DataContext = new CalendarTabViewModel();
+                    ChartsButtonHeight = 0;
+                    
                     break;
                 }
                 case "Credit":
@@ -386,6 +390,7 @@ namespace LifesAssistant.ViewModel
                 case "Dream":
                 {
                     MainPanel = new DreamTab();
+                    MainPanel.DataContext = new DreamTabViewModel();
                     break;
                 }
                 case "Process":

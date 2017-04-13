@@ -70,6 +70,15 @@ namespace LifesAssistant.Properties.Language {
         }
         
         /// <summary>
+        ///   Looks up a localized string similar to Capacity.
+        /// </summary>
+        public static string capacityHeader {
+            get {
+                return ResourceManager.GetString("capacityHeader", resourceCulture);
+            }
+        }
+        
+        /// <summary>
         ///   Looks up a localized string similar to Capacity: .
         /// </summary>
         public static string capacityLabel {
@@ -97,6 +106,42 @@ namespace LifesAssistant.Properties.Language {
         }
         
         /// <summary>
+        ///   Looks up a localized string similar to Dreams time.
+        /// </summary>
+        public static string dreamTabName {
+            get {
+                return ResourceManager.GetString("dreamTabName", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized string similar to Durations.
+        /// </summary>
+        public static string durationHeader {
+            get {
+                return ResourceManager.GetString("durationHeader", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized string similar to Finish.
+        /// </summary>
+        public static string finishHeader {
+            get {
+                return ResourceManager.GetString("finishHeader", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized string similar to Finish dream:.
+        /// </summary>
+        public static string finishSleepingLabel {
+            get {
+                return ResourceManager.GetString("finishSleepingLabel", resourceCulture);
+            }
+        }
+        
+        /// <summary>
         ///   Looks up a localized string similar to Hide Charts  ▲.
         /// </summary>
         public static string hideChartsLabel {
@@ -106,11 +151,29 @@ namespace LifesAssistant.Properties.Language {
         }
         
         /// <summary>
-        ///   Looks up a localized string similar to Time from latest water drink.
+        ///   Looks up a localized string similar to Time from the latest sleep.
+        /// </summary>
+        public static string lastSleepingLabel {
+            get {
+                return ResourceManager.GetString("lastSleepingLabel", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized string similar to Time from the latest water drink.
         /// </summary>
         public static string lastWaterDrinkingLabel {
             get {
                 return ResourceManager.GetString("lastWaterDrinkingLabel", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized string similar to $.
+        /// </summary>
+        public static string moneyHeader {
+            get {
+                return ResourceManager.GetString("moneyHeader", resourceCulture);
             }
         }
         
@@ -120,6 +183,15 @@ namespace LifesAssistant.Properties.Language {
         public static string moneyLabel {
             get {
                 return ResourceManager.GetString("moneyLabel", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized string similar to Purchase.
+        /// </summary>
+        public static string purchaseHeader {
+            get {
+                return ResourceManager.GetString("purchaseHeader", resourceCulture);
             }
         }
         
@@ -142,6 +214,42 @@ namespace LifesAssistant.Properties.Language {
         }
         
         /// <summary>
+        ///   Looks up a localized string similar to Sleep duration: .
+        /// </summary>
+        public static string sleepDurationLabel {
+            get {
+                return ResourceManager.GetString("sleepDurationLabel", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized string similar to Start.
+        /// </summary>
+        public static string startHeader {
+            get {
+                return ResourceManager.GetString("startHeader", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized string similar to Begin dream:.
+        /// </summary>
+        public static string startSleepingLabel {
+            get {
+                return ResourceManager.GetString("startSleepingLabel", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized string similar to Time.
+        /// </summary>
+        public static string timeHeader {
+            get {
+                return ResourceManager.GetString("timeHeader", resourceCulture);
+            }
+        }
+        
+        /// <summary>
         ///   Looks up a localized string similar to Today: .
         /// </summary>
         public static string todayLabel {
@@ -156,6 +264,15 @@ namespace LifesAssistant.Properties.Language {
         public static string totalCostsLable {
             get {
                 return ResourceManager.GetString("totalCostsLable", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized string similar to Total sleep time:.
+        /// </summary>
+        public static string totalSleepLabel {
+            get {
+                return ResourceManager.GetString("totalSleepLabel", resourceCulture);
             }
         }
         

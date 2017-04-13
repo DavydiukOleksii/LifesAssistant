@@ -3,42 +3,42 @@ using System.Collections.Generic;
 using System.Collections.ObjectModel;
 using System.IO;
 using System.Linq;
-using DataModel.Water;
+using DataModel.Dream;
 using Newtonsoft.Json;
 
 namespace DataRepository
 {
-    public class WaterRepository: IRepository<WaterDayReport, OnceDrink>
+    public class SleepRepository: IRepository<DaySleepReport, OneSleep>
     {
         #region Singleton
-        protected static WaterRepository instance = null;
-        public static WaterRepository Instance
+        protected static SleepRepository instance = null;
+        public static SleepRepository Instance
         {
             get
             {
                 if (instance == null)
-                    instance = new WaterRepository();
+                    instance = new SleepRepository();
                 return instance;
             }
         }
         #endregion
 
         #region Constructor
-        protected WaterRepository() { }
+        protected SleepRepository() { }
         #endregion
 
         #region Data
 
-        protected string fileName = "water.json";
+        protected string fileName = "sleep.json";
         protected string filePath = "Resource\\";
 
         #endregion
-        
-        public WaterDayReport GetByDay(DateTime day)
+
+        public DaySleepReport GetByDay(DateTime day)
         {
             try
             {
-                WaterDayReport resoult;
+                DaySleepReport resoult;
 
                 if (!File.Exists(filePath + fileName))
                 {
@@ -48,7 +48,7 @@ namespace DataRepository
                 using (StreamReader r = new StreamReader(filePath + fileName))
                 {
                     string json = r.ReadToEnd();
-                    List<WaterDayReport> today = JsonConvert.DeserializeObject<List<WaterDayReport>>(json);
+                    List<DaySleepReport> today = JsonConvert.DeserializeObject<List<DaySleepReport>>(json);
                     if (today != null && today.Where(x => x.Date == day)
                             .FirstOrDefault() != null)
                     {
@@ -57,31 +57,32 @@ namespace DataRepository
                     }
                     else
                     {
-                        today = new List<WaterDayReport>();
-                        today.Add(new WaterDayReport()
+                        today = new List<DaySleepReport>();
+                        today.Add(new DaySleepReport()
                         {
                             Date = DateTime.Today,
-                            TotalCapacity = 0,
-                            DailyWaterOperations = new ObservableCollection<OnceDrink>()});
+                            TotalSleepTimeInSecond = 0,
+                            DailySleepTimes = new ObservableCollection<OneSleep>()
+                        });
                         resoult = today.First();
                     }
-                    
+
                 }
                 return resoult;
             }
             catch
             {
-                return new WaterDayReport()
+                return new DaySleepReport()
                 {
-                            Date = DateTime.Today,
-                            TotalCapacity = 0,
-                            DailyWaterOperations = new ObservableCollection<OnceDrink>()
+                    Date = DateTime.Today,
+                    TotalSleepTimeInSecond = 0,
+                    DailySleepTimes = new ObservableCollection<OneSleep>()
                 };
-                    
+
             }
         }
 
-        public void AddOperation(OnceDrink newOperation)
+        public void AddOperation(OneSleep newOperation)
         {
             try
             {
@@ -96,26 +97,26 @@ namespace DataRepository
                 using (StreamReader r = new StreamReader(filePath + fileName))
                 {
                     string json = r.ReadToEnd();
-                    List<WaterDayReport> today = JsonConvert.DeserializeObject<List<WaterDayReport>>(json);
+                    List<DaySleepReport> today = JsonConvert.DeserializeObject<List<DaySleepReport>>(json);
                     if (today != null && today.Where(x => x.Date == DateTime.Today)
                             .FirstOrDefault() != null)
                     {
                         today.Where(x => x.Date == DateTime.Today)
-                            .FirstOrDefault().DailyWaterOperations.Add(newOperation);
+                            .FirstOrDefault().DailySleepTimes.Add(newOperation);
                         today.Where(x => x.Date == DateTime.Today)
-                            .FirstOrDefault().TotalCapacity += newOperation.Capasity;
+                            .FirstOrDefault().TotalSleepTimeInSecond += newOperation.GetDurationInSecond();
                     }
                     else
                     {
                         if (today == null)
                         {
-                            today = new List<WaterDayReport>();
+                            today = new List<DaySleepReport>();
                         }
-                        today.Add(new WaterDayReport()
+                        today.Add(new DaySleepReport()
                         {
                             Date = DateTime.Today,
-                            TotalCapacity = newOperation.Capasity,
-                            DailyWaterOperations = new ObservableCollection<OnceDrink>() { newOperation }
+                            TotalSleepTimeInSecond = newOperation.GetDurationInSecond(),
+                            DailySleepTimes = new ObservableCollection<OneSleep>() { newOperation }
                         });
                     }
                     newJson = JsonConvert.SerializeObject(today);
@@ -129,7 +130,7 @@ namespace DataRepository
             }
         }
 
-        public void DeleteOperation(OnceDrink delWaterOperation)
+        public void DeleteOperation(OneSleep dellOperation)
         {
             try
             {
@@ -143,7 +144,7 @@ namespace DataRepository
                 using (StreamReader r = new StreamReader(filePath + fileName))
                 {
                     string json = r.ReadToEnd();
-                    List<WaterDayReport> today = JsonConvert.DeserializeObject<List<WaterDayReport>>(json);
+                    List<DaySleepReport> today = JsonConvert.DeserializeObject<List<DaySleepReport>>(json);
                     if (today == null)
                     {
                         return;
@@ -151,9 +152,9 @@ namespace DataRepository
                     else
                     {
                         today.Where(x => x.Date == DateTime.Today)
-                            .FirstOrDefault().DailyWaterOperations.Remove(delWaterOperation);
+                            .FirstOrDefault().DailySleepTimes.Remove(dellOperation);
                         today.Where(x => x.Date == DateTime.Today)
-                            .FirstOrDefault().TotalCapacity -= delWaterOperation.Capasity;
+                            .FirstOrDefault().TotalSleepTimeInSecond -= dellOperation.GetDurationInSecond();
                     }
                     newJson = JsonConvert.SerializeObject(today);
                 }

@@ -110,7 +110,8 @@
                 <controls:Tile Grid.Row="4"
                                Command="{Binding TabChanged}"
                                CommandParameter="Process"
-                               Style="{StaticResource side-tile}">
+                               Style="{StaticResource side-tile}"
+                               Visibility="Hidden">
                     <iconPacks:PackIconFontAwesome Width="30"
                                                    Height="30"
                                                    Kind="Tasks" />
@@ -250,6 +251,7 @@
                 </controls:Tile>
 
                 <controls:Tile Grid.Column="4"
+                               Visibility="Hidden"
                                Command="{Binding TabChanged}"
                                CommandParameter="Process"
                                Style="{StaticResource bot-tile}">

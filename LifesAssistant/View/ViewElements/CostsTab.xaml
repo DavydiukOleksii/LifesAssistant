@@ -3,6 +3,7 @@
              xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
              xmlns:controls="http://metro.mahapps.com/winfx/xaml/controls"
              xmlns:d="http://schemas.microsoft.com/expression/blend/2008"
+             xmlns:glob="clr-namespace:System.Globalization;assembly=mscorlib"
              xmlns:iconPacks="http://metro.mahapps.com/winfx/xaml/iconpacks"
              xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
              xmlns:res="clr-namespace:LifesAssistant.Properties.Language"
@@ -19,7 +20,7 @@
         <Grid.RowDefinitions>
             <RowDefinition Height="40" />
             <RowDefinition Height="1*" />
-            <RowDefinition Height="80" />
+            <RowDefinition Height="110" />
             <RowDefinition Height="0" />
         </Grid.RowDefinitions>
 
@@ -54,11 +55,11 @@
                 <DataGridTextColumn Width="auto"
                                     MinWidth="50"
                                     Binding="{Binding Path=Money}"
-                                    Header="$" />
+                                    Header="{x:Static res:Resources.moneyHeader}" />
                 <DataGridTextColumn Width="auto"
                                     MinWidth="96"
                                     Binding="{Binding Path=Article}"
-                                    Header="Purchase" />
+                                    Header="{x:Static res:Resources.purchaseHeader}" />
             </DataGrid.Columns>
 
             <DataGrid.Resources>
@@ -74,12 +75,6 @@
                     <Setter Property="ContextMenu" Value="{StaticResource itemContextMenu}" />
                 </Style>
             </DataGrid.RowStyle>
-
-            <!--<DataGrid.ContextMenu>
-                <ContextMenu>
-                    <MenuItem Command="{Binding DellCurrentCashTransaction}" Header="Delete" />
-                </ContextMenu>
-            </DataGrid.ContextMenu>-->
         </DataGrid>
 
         <Grid Grid.Row="1" Grid.Column="1">
@@ -160,38 +155,26 @@
         </Grid>
 
         <Grid Grid.Row="2" Grid.Column="1">
-            <Grid.ColumnDefinitions>
-                <ColumnDefinition Width="2*" />
-                <ColumnDefinition Width="*" />
-            </Grid.ColumnDefinitions>
+            <Grid.RowDefinitions>
+                <RowDefinition />
+                <RowDefinition />
+            </Grid.RowDefinitions>
 
-            <TextBlock Margin="3"
-                       HorizontalAlignment="Right"
+            <TextBlock Margin="0 8 0 0"
+                       HorizontalAlignment="Center"
                        VerticalAlignment="Center"
-                       FontSize="14"
+                       FontSize="16"
+                       FontWeight="DemiBold"
                        Text="{x:Static res:Resources.totalCostsLable}" />
 
-            <TextBlock Grid.Column="1"
+            <TextBlock Grid.Row="1"
                        Margin="3"
-                       HorizontalAlignment="Left"
-                       VerticalAlignment="Center"
-                       FontSize="14"
-                       Text="{Binding DailyTotalCosts}" />
+                       HorizontalAlignment="Center"
+                       VerticalAlignment="top"
+                       FontSize="20"
+                       Text="{Binding DailyTotalCosts,
+                                      StringFormat={}{0:C}}" />
         </Grid>
-
-        <!--<controls:Tile Grid.Row="3"
-                       Grid.Column="0"
-                       Grid.ColumnSpan="2"
-                       Width="Auto"
-                       Height="25"
-                       Margin="3,4,0,0"
-                       Background="#00171F">
-
-            <TextBlock Margin="3"
-                       VerticalAlignment="Center"
-                       Text="{x:Static res:Resources.graphicsLabel}" />
-        </controls:Tile>-->
-
 
     </Grid>
 </UserControl>

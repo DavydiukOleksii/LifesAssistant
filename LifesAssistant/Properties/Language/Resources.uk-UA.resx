@@ -118,78 +118,51 @@
     <value>System.Resources.ResXResourceWriter, System.Windows.Forms, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089</value>
   </resheader>
   <data name="addLabel" xml:space="preserve">
-    <value>Add</value>
+    <value>Додати</value>
   </data>
   <data name="capacityHeader" xml:space="preserve">
-    <value>Capacity</value>
+    <value>Об'єм</value>
   </data>
   <data name="capacityLabel" xml:space="preserve">
-    <value>Capacity: </value>
+    <value>Об'єм:</value>
   </data>
   <data name="creditTabName" xml:space="preserve">
-    <value>Daily costs</value>
+    <value>Витрати за день</value>
   </data>
   <data name="dellLabel" xml:space="preserve">
-    <value>Dell</value>
-  </data>
-  <data name="dreamTabName" xml:space="preserve">
-    <value>Dreams time</value>
-  </data>
-  <data name="durationHeader" xml:space="preserve">
-    <value>Durations</value>
-  </data>
-  <data name="finishHeader" xml:space="preserve">
-    <value>Finish</value>
-  </data>
-  <data name="finishSleepingLabel" xml:space="preserve">
-    <value>Finish dream:</value>
+    <value>Видалити</value>
   </data>
   <data name="hideChartsLabel" xml:space="preserve">
-    <value>Hide Charts  ▲</value>
-  </data>
-  <data name="lastSleepingLabel" xml:space="preserve">
-    <value>Time from the latest sleep</value>
+    <value>Приховати графік  ▲</value>
   </data>
   <data name="lastWaterDrinkingLabel" xml:space="preserve">
-    <value>Time from the latest water drink</value>
+    <value>Час від останього прийому води</value>
   </data>
   <data name="moneyHeader" xml:space="preserve">
-    <value>$</value>
+    <value>₴</value>
   </data>
   <data name="moneyLabel" xml:space="preserve">
-    <value>Money:</value>
+    <value>Вартість:</value>
   </data>
   <data name="purchaseHeader" xml:space="preserve">
-    <value>Purchase</value>
+    <value>Покупка</value>
   </data>
   <data name="purchaseLabel" xml:space="preserve">
-    <value>Purchase:</value>
+    <value>Покупка:</value>
   </data>
   <data name="showChartsLabel" xml:space="preserve">
-    <value>Charts  ▼</value>
-  </data>
-  <data name="sleepDurationLabel" xml:space="preserve">
-    <value>Sleep duration: </value>
-  </data>
-  <data name="startHeader" xml:space="preserve">
-    <value>Start</value>
-  </data>
-  <data name="startSleepingLabel" xml:space="preserve">
-    <value>Begin dream:</value>
+    <value>Графік ▼</value>
   </data>
   <data name="timeHeader" xml:space="preserve">
-    <value>Time</value>
+    <value>Час</value>
   </data>
   <data name="todayLabel" xml:space="preserve">
-    <value>Today: </value>
+    <value>Сьогодні:</value>
   </data>
   <data name="totalCostsLable" xml:space="preserve">
-    <value>Total costs today: </value>
-  </data>
-  <data name="totalSleepLabel" xml:space="preserve">
-    <value>Total sleep time:</value>
+    <value>Витрати за день:</value>
   </data>
   <data name="waterTabName" xml:space="preserve">
-    <value>Daily water balance</value>
+    <value>Водний баланс</value>
   </data>
 </root>

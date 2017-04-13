@@ -11,7 +11,7 @@ using Newtonsoft.Json;
 
 namespace DataRepository
 {
-    public class CostsRepository: IRepository<CostsDayReport>
+    public class CostsRepository: IRepository<CostsDayReport, OneCashTransaction>
     {
         #region Singleton
         protected static CostsRepository instance = null;
@@ -36,11 +36,6 @@ namespace DataRepository
         protected string filePath = "Resource\\";
 
         #endregion
-
-        public List<CostsDayReport> GetAll()
-        {
-            throw new NotImplementedException();
-        }
 
         public CostsDayReport GetByDay(DateTime day)
         {
@@ -88,29 +83,7 @@ namespace DataRepository
             }
         }
 
-        //public void UpdateDay(CostsDayReport newData)
-        //{
-        //    try
-        //    {
-        //        string path = Environment.GetFolderPath(Environment.SpecialFolder.MyDocuments) + "\\Project\\";
-        //        string newJson = "";
-
-        //        using (StreamReader r = new StreamReader(path + "costs.json")) {
-        //            string json = r.ReadToEnd();
-        //            List<CostsDayReport> persons = JsonConvert.DeserializeObject<List<CostsDayReport>>(json);
-        //            persons.Add(newData);
-        //            newJson = JsonConvert.SerializeObject(persons); 
-        //        }
-
-        //        File.WriteAllText(path + "costs.json", newJson);
-        //    }
-        //    catch
-        //    {
-                
-        //    }
-        //}
-
-        public void AddNewTransaction(OneCashTransaction newTransaction)
+        public void AddOperation(OneCashTransaction newTransaction)
         {
             try
             {
@@ -157,7 +130,7 @@ namespace DataRepository
             }
         }
 
-        public void DeleteCashTransaction(OneCashTransaction delCashTransaction)
+        public void DeleteOperation(OneCashTransaction delCashTransaction)
         {
             try
             {

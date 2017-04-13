@@ -1,6 +1,7 @@
 ﻿using System;
 using System.Collections.Generic;
 using System.Collections.ObjectModel;
+using System.Globalization;
 using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
@@ -26,16 +27,7 @@ namespace LifesAssistant.ViewModel.ViewModelElements
         public WaterTabViewModel()
         {
             CurrentDate = Resources.todayLabel + DateTime.Today.ToString("d");
-
-            //if(CostsDayReport.Instance.DailyCosts == null)
-            //    CostsDayReport.Instance.DailyCosts = new ObservableCollection<OneCashTransaction>();
-
-            //DayCosts = CostsDayReport.Instance.DailyCosts;
-
-            //DailyTotalCosts = CostsDayReport.Instance.TotalCosts;
-
             
-
             DailyTotalWaterCapacity = WaterRepository.Instance.GetByDay(DateTime.Today).TotalCapacity;
 
             DayWaterCapacity = WaterRepository.Instance.GetByDay(DateTime.Today).DailyWaterOperations;
@@ -50,6 +42,8 @@ namespace LifesAssistant.ViewModel.ViewModelElements
             DayWaterCapacityPercent = new ObservableCollection<data>();
             DayWaterCapacityPercent.Add(new data(){capacity = DailyTotalWaterCapacity, name = "nevoda"});
             DayWaterCapacityPercent.Add(new data(){capacity = _dayWaterNorm - DailyTotalWaterCapacity, name = "voda"});
+
+            WaterPercent = DailyTotalWaterCapacity/_dayWaterNorm * 100;
         }
         #endregion
 
@@ -100,6 +94,17 @@ namespace LifesAssistant.ViewModel.ViewModelElements
             {
                 _dailyTotalWaterCapacity = value;
                 OnPropertyChanged("DailyTotalWaterCapacity");
+            }
+        }
+
+        protected double _waterPercent;
+        public double WaterPercent
+        {
+            get { return _waterPercent; }
+            set
+            {
+                _waterPercent = value;
+                OnPropertyChanged("WaterPercent");
             }
         }
 
@@ -180,7 +185,7 @@ namespace LifesAssistant.ViewModel.ViewModelElements
         public void ExecuteDellCurrentWaterOperationCommand(object parametr)
         {
             DailyTotalWaterCapacity -= CurrentWaterDrink.Capasity;
-            WaterRepository.Instance.DeleteWaterOperation(CurrentWaterDrink);
+            WaterRepository.Instance.DeleteOperation(CurrentWaterDrink);
             DayWaterCapacity.Remove(CurrentWaterDrink);
 
             if (DayWaterCapacity.Count > 0)
@@ -189,6 +194,7 @@ namespace LifesAssistant.ViewModel.ViewModelElements
             DayWaterCapacityPercent[0].capacity = DailyTotalWaterCapacity;
             DayWaterCapacityPercent[1].capacity = _dayWaterNorm - DailyTotalWaterCapacity;
             OnPropertyChanged("DayWaterCapacityPercent");
+            WaterPercent = DailyTotalWaterCapacity / _dayWaterNorm * 100;
         }
         #endregion
 
@@ -223,12 +229,13 @@ namespace LifesAssistant.ViewModel.ViewModelElements
             NewWaterOperation.Time = DateTime.Now;
             DayWaterCapacity.Add(new OnceDrink() { Capasity = NewWaterOperation.Capasity, Time = NewWaterOperation.Time});
             DailyTotalWaterCapacity += NewWaterOperation.Capasity;
-            WaterRepository.Instance.AddWaterOperation(NewWaterOperation);
+            WaterRepository.Instance.AddOperation(NewWaterOperation);
             NewWaterOperation = new OnceDrink();
 
             DayWaterCapacityPercent[0].capacity = DailyTotalWaterCapacity;
             DayWaterCapacityPercent[1].capacity = _dayWaterNorm - DailyTotalWaterCapacity;
             OnPropertyChanged("DayWaterCapacityPercent");
+            WaterPercent = DailyTotalWaterCapacity / _dayWaterNorm * 100;
         }
         #endregion
 

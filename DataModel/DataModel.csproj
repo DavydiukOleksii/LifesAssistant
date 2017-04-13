@@ -41,6 +41,8 @@
   <ItemGroup>
     <Compile Include="Credit\CostsDayReport.cs" />
     <Compile Include="Credit\OneCashTransaction.cs" />
+    <Compile Include="Dream\DaySleepReport.cs" />
+    <Compile Include="Dream\OneSleep.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
     <Compile Include="Water\OnceDrink.cs" />
     <Compile Include="Water\WaterDayReport.cs" />

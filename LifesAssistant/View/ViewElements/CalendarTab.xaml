@@ -33,7 +33,7 @@
         <DatePicker Grid.Row="1"
                     Grid.Column="0"
                     Width="150"
-                    Height="30" />
+                    Height="24" />
 
 
         <TextBlock Grid.Row="1"

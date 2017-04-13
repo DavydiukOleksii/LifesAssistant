@@ -52,12 +52,12 @@
                 <DataGridTextColumn Width="auto"
                                     MinWidth="90"
                                     Binding="{Binding Path=Time,
-                                                      StringFormat=Time: {0:HH:mm}}"
-                                    Header="Time" />
+                                                      StringFormat={}{0:HH:mm}}"
+                                    Header="{x:Static res:Resources.timeHeader}" />
                 <DataGridTextColumn Width="auto"
                                     MinWidth="80"
                                     Binding="{Binding Path=Capasity}"
-                                    Header="Capacity" />
+                                    Header="{x:Static res:Resources.capacityHeader}" />
             </DataGrid.Columns>
 
             <DataGrid.Resources>
@@ -82,10 +82,10 @@
             <Border BorderBrush="Black" BorderThickness="1">
                 <Grid>
                     <Grid.RowDefinitions>
+                        <RowDefinition Height="0.5*" />
                         <RowDefinition />
                         <RowDefinition />
-                        <RowDefinition />
-                        <RowDefinition />
+                        <RowDefinition Height="0.5*" />
                     </Grid.RowDefinitions>
                     <Grid.ColumnDefinitions>
                         <ColumnDefinition Width="35*" />
@@ -140,7 +140,7 @@
                    Background="#2EB7EC">
             <TextBlock Width="92"
                        MinWidth="120"
-                       Margin="10 10 10 3"
+                       Margin="0 10 0 0"
                        HorizontalAlignment="Center"
                        DockPanel.Dock="Top"
                        FontSize="15"
@@ -148,9 +148,10 @@
                        Text="{x:Static res:Resources.lastWaterDrinkingLabel}"
                        TextAlignment="Center"
                        TextWrapping="Wrap" />
-            <TextBlock HorizontalAlignment="Center"
+            <TextBlock Margin="0 5 0 0"
+                       HorizontalAlignment="Center"
                        DockPanel.Dock="Top"
-                       FontSize="24"
+                       FontSize="25"
                        FontWeight="UltraBold"
                        Foreground="white"
                        Text="{Binding TimeFromLastDrink}" />
@@ -177,6 +178,36 @@
                 </MetroChart:DoughnutChart.Series>
             </MetroChart:DoughnutChart>
 
+
+
         </DockPanel>
+        <Grid Grid.Row="2"
+              Grid.Column="1"
+              Margin="5">
+            <Grid.ColumnDefinitions>
+                <ColumnDefinition />
+                <ColumnDefinition Width="0.85*" />
+            </Grid.ColumnDefinitions>
+
+            <TextBlock Margin="0 0 1 0"
+                       HorizontalAlignment="Right"
+                       VerticalAlignment="Center"
+                       FontSize="18"
+                       FontWeight="Bold"
+                       Foreground="#00171F"
+                       Text="{Binding WaterPercent, StringFormat={}{0:#,#.}}" />
+
+            <TextBlock Grid.Column="1"
+                       Margin="1 0 0 0"
+                       HorizontalAlignment="Left"
+                       VerticalAlignment="Center"
+                       FontSize="18"
+                       FontWeight="Bold"
+                       Foreground="#00171F"
+                       Text="%" />
+        </Grid>
+
+
+
     </Grid>
 </UserControl>
