@@ -1,6 +1,9 @@
-﻿using System.Windows;
+﻿using System.Collections.ObjectModel;
+using System.Windows;
 using System.Windows.Controls;
 using System.Windows.Input;
+using DataModel.Charts;
+using DataRepository;
 using LifesAssistant.Infrastructure;
 using LifesAssistant.Properties.Language;
 using LifesAssistant.View.ViewElements;
@@ -23,6 +26,8 @@ namespace LifesAssistant.ViewModel
             WindowPosLeft = SystemParameters.WorkArea.Right - WindowWidth;
             ChartsLabel = Resources.showChartsLabel;
 
+            Charts = new ObservableCollection<ChartsElement>();
+
             ExecuteTabChangedCommand("Calendar");
         }
         #endregion
@@ -37,6 +42,9 @@ namespace LifesAssistant.ViewModel
         //current windows position
         protected int _currentWinTopPos;
         protected int _currentWinLeftPos;
+
+        protected string _currentTab;
+
         //property
         protected int _windowWidth;
         public int WindowWidth
@@ -189,6 +197,18 @@ namespace LifesAssistant.ViewModel
 
         #region Data for tabControle
 
+        protected ObservableCollection<ChartsElement> _charts;
+
+        public ObservableCollection<ChartsElement> Charts
+        {
+            get { return _charts; }
+            set
+            {
+                _charts = value;
+                OnPropertyChanged("Charts");
+            }
+        } 
+
         protected UserControl _mainPanel;
         public UserControl MainPanel
         {
@@ -285,6 +305,8 @@ namespace LifesAssistant.ViewModel
                 ChartsHeight = 275;
                 WindowHeight = _defaultWindowsHeight + 275;
                 ChartsLabel = Resources.hideChartsLabel;
+
+                Charts = CostsRepository.Instance.GetTotalByMonth();
             }
         }
 
@@ -362,6 +384,7 @@ namespace LifesAssistant.ViewModel
         public void ExecuteTabChangedCommand(object parameter)
         {
             string tabName = parameter.ToString();
+            _currentTab = parameter.ToString();
             ChartsButtonHeight = 25;
             if (ChartsHeight > 0)
                 ExecuteShowChartsCommand(this);

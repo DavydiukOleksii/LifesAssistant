@@ -6,6 +6,7 @@ using System.IO;
 using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
+using DataModel.Charts;
 using DataModel.Credit;
 using Newtonsoft.Json;
 
@@ -164,6 +165,106 @@ namespace DataRepository
             catch
             {
 
+            }
+        }
+
+        public ObservableCollection<ChartsElement> GetTotalByDay()
+        {
+            try
+            {
+                List<ChartsElement> result;
+
+                using (StreamReader r = new StreamReader(filePath + fileName))
+                {
+                    string json = r.ReadToEnd();
+                    List<CostsDayReport> today = JsonConvert.DeserializeObject<List<CostsDayReport>>(json);
+                    if (today != null )
+                    {
+                        result = today
+                                    .AsEnumerable()
+                                    .GroupBy(o => o.Date.Day)
+                                    .Select(g => new ChartsElement(){Name = g.First().Date.Day.ToString(), Value = g.Sum(c => c.TotalCosts)})
+                                    .ToList();
+                    }
+                    else
+                    {
+                        result = new List<ChartsElement>();
+                    }
+
+                }
+                return new ObservableCollection<ChartsElement>(result);
+            }
+            catch
+            {
+                return null;
+            }
+        }
+
+        public ObservableCollection<ChartsElement> GetTotalByMonth()
+        {
+            try
+            {
+                List<ChartsElement> result;
+
+                using (StreamReader r = new StreamReader(filePath + fileName))
+                {
+                    string json = r.ReadToEnd();
+                    List<CostsDayReport> today = JsonConvert.DeserializeObject<List<CostsDayReport>>(json);
+                    if (today != null)
+                    {
+                        result = today
+                                    .AsEnumerable()
+                                    .GroupBy(o => o.Date.Month)
+                                    .Select(g => new ChartsElement() { Name = g.First().Date.Month.ToString(), Value = g.Sum(c => c.TotalCosts) })
+                                    .ToList();
+                    }
+                    else
+                    {
+                        result = new List<ChartsElement>();
+                    }
+
+                }
+                return new ObservableCollection<ChartsElement>(result);
+            }
+            catch
+            {
+                return null;
+            }
+        }
+
+        public ObservableCollection<ChartsElement> GetTotalByYear()
+        {
+            try
+            {
+                List<ChartsElement> result;
+
+                using (StreamReader r = new StreamReader(filePath + fileName))
+                {
+                    string json = r.ReadToEnd();
+                    List<CostsDayReport> today = JsonConvert.DeserializeObject<List<CostsDayReport>>(json);
+                    if (today != null)
+                    {
+                        result = today
+                                    .AsEnumerable()
+                                    .GroupBy(o => o.Date.Year)
+                                    .Select(g => new ChartsElement()
+                                    {
+                                        Name = g.First().Date.Year.ToString(), 
+                                        Value = g.Sum(c => c.TotalCosts)
+                                    })
+                                    .ToList();
+                    }
+                    else
+                    {
+                        result = new List<ChartsElement>();
+                    }
+
+                }
+                return new ObservableCollection<ChartsElement>(result);
+            }
+            catch
+            {
+                return null;
             }
         }
     }

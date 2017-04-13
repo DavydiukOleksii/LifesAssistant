@@ -190,13 +190,15 @@
         <DockPanel Grid.Row="3"
                    Grid.ColumnSpan="2"
                    Background="Gray">
-            <MetroChart:StackedBar100Chart ChartSubTitle="" ChartTitle="Costs charts">
-                <MetroChart:StackedBar100Chart.Series>
+            <MetroChart:ClusteredColumnChart ChartTitleVisibility="Collapsed">
+                <MetroChart:ClusteredColumnChart.Series>
                     <MetroChart:ChartSeries DisplayMember="Name"
-                                            ItemsSource="{Binding ExampleValues}"
-                                            ValueMember="Count" />
-                </MetroChart:StackedBar100Chart.Series>
-            </MetroChart:StackedBar100Chart>
+                                            ItemsSource="{Binding Charts,
+                                                                  Mode=TwoWay}"
+                                            SeriesTitle="Days"
+                                            ValueMember="Value" />
+                </MetroChart:ClusteredColumnChart.Series>
+            </MetroChart:ClusteredColumnChart>
         </DockPanel>
 
         <!--  BottomBar  -->
@@ -251,10 +253,10 @@
                 </controls:Tile>
 
                 <controls:Tile Grid.Column="4"
-                               Visibility="Hidden"
                                Command="{Binding TabChanged}"
                                CommandParameter="Process"
-                               Style="{StaticResource bot-tile}">
+                               Style="{StaticResource bot-tile}"
+                               Visibility="Hidden">
                     <iconPacks:PackIconFontAwesome Width="40"
                                                    Height="40"
                                                    Kind="Tasks" />

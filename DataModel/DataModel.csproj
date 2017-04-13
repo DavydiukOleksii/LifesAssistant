@@ -39,6 +39,7 @@
     <Reference Include="System.Xml" />
   </ItemGroup>
   <ItemGroup>
+    <Compile Include="Charts\ChartsElement.cs" />
     <Compile Include="Credit\CostsDayReport.cs" />
     <Compile Include="Credit\OneCashTransaction.cs" />
     <Compile Include="Dream\DaySleepReport.cs" />
