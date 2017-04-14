@@ -30,5 +30,10 @@ namespace DataModel.Dream
         {
             return Duration.Hour*3600 + Duration.Minute*60 + Duration.Second;
         }
+
+        public double GetDurationInHour()
+        {
+            return GetDurationInSecond()/3600;
+        }
     }
 }

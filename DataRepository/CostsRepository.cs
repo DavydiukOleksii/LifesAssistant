@@ -190,7 +190,6 @@ namespace DataRepository
                     {
                         result = new List<ChartsElement>();
                     }
-
                 }
                 return new ObservableCollection<ChartsElement>(result);
             }

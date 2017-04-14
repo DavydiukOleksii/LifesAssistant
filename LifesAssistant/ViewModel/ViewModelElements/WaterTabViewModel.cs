@@ -34,11 +34,7 @@ namespace LifesAssistant.ViewModel.ViewModelElements
             timer.Tick += TimerTick;
             timer.Start();
 
-            DayWaterCapacityPercent = new ObservableCollection<data>();
-            DayWaterCapacityPercent.Add(new data(){capacity = DailyTotalWaterCapacity, name = "nevoda"});
-            DayWaterCapacityPercent.Add(new data(){capacity = _dayWaterNorm - DailyTotalWaterCapacity, name = "voda"});
-
-            WaterPercent = DailyTotalWaterCapacity/_dayWaterNorm * 100;
+            updateWaterPercent();
         }
         #endregion
 
@@ -49,6 +45,39 @@ namespace LifesAssistant.ViewModel.ViewModelElements
             else
             {
                 TimeFromLastDrink = DateTime.Now.ToLongTimeString();
+            }
+        }
+
+        protected void updateWaterPercent()
+        {
+            DayWaterCapacityPercent = new ObservableCollection<data>();
+            if (DailyTotalWaterCapacity < _dayWaterNorm)
+            {
+                DayWaterCapacityPercent.Add(new data() { capacity = DailyTotalWaterCapacity, name = "nevoda" });
+                DayWaterCapacityPercent.Add(new data()
+                {
+                    capacity = _dayWaterNorm - DailyTotalWaterCapacity,
+                    name = "voda"
+                });
+
+                if (DailyTotalWaterCapacity != 0)
+                {
+                   WaterPercent = DailyTotalWaterCapacity/_dayWaterNorm*100;
+                }
+                else
+                {
+                    WaterPercent = 0;
+                }
+            }
+            else
+            {
+                DayWaterCapacityPercent.Add(new data() { capacity = _dayWaterNorm, name = "nevoda" });
+                DayWaterCapacityPercent.Add(new data()
+                {
+                    capacity = 0,
+                    name = "voda"
+                });
+                WaterPercent = 100;
             }
         }
 
@@ -186,10 +215,7 @@ namespace LifesAssistant.ViewModel.ViewModelElements
             if (DayWaterCapacity.Count > 0)
                 CurrentWaterDrink = DayWaterCapacity.First();
 
-            DayWaterCapacityPercent[0].capacity = DailyTotalWaterCapacity;
-            DayWaterCapacityPercent[1].capacity = _dayWaterNorm - DailyTotalWaterCapacity;
-            OnPropertyChanged("DayWaterCapacityPercent");
-            WaterPercent = DailyTotalWaterCapacity / _dayWaterNorm * 100;
+            updateWaterPercent();
         }
         #endregion
 
@@ -227,10 +253,7 @@ namespace LifesAssistant.ViewModel.ViewModelElements
             WaterRepository.Instance.AddOperation(NewWaterOperation);
             NewWaterOperation = new OnceDrink();
 
-            DayWaterCapacityPercent[0].capacity = DailyTotalWaterCapacity;
-            DayWaterCapacityPercent[1].capacity = _dayWaterNorm - DailyTotalWaterCapacity;
-            OnPropertyChanged("DayWaterCapacityPercent");
-            WaterPercent = DailyTotalWaterCapacity / _dayWaterNorm * 100;
+            updateWaterPercent();
         }
         #endregion
 

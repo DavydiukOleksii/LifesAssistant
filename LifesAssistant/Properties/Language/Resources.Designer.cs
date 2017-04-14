@@ -70,6 +70,15 @@ namespace LifesAssistant.Properties.Language {
         }
         
         /// <summary>
+        ///   Looks up a localized string similar to Calendar.
+        /// </summary>
+        public static string calendarTabLabel {
+            get {
+                return ResourceManager.GetString("calendarTabLabel", resourceCulture);
+            }
+        }
+        
+        /// <summary>
         ///   Looks up a localized string similar to Capacity.
         /// </summary>
         public static string capacityHeader {
@@ -88,11 +97,29 @@ namespace LifesAssistant.Properties.Language {
         }
         
         /// <summary>
+        ///   Looks up a localized string similar to Chart elements group by: .
+        /// </summary>
+        public static string chartsByLabel {
+            get {
+                return ResourceManager.GetString("chartsByLabel", resourceCulture);
+            }
+        }
+        
+        /// <summary>
         ///   Looks up a localized string similar to Daily costs.
         /// </summary>
         public static string creditTabName {
             get {
                 return ResourceManager.GetString("creditTabName", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized string similar to day.
+        /// </summary>
+        public static string dayLabel {
+            get {
+                return ResourceManager.GetString("dayLabel", resourceCulture);
             }
         }
         
@@ -120,6 +147,15 @@ namespace LifesAssistant.Properties.Language {
         public static string durationHeader {
             get {
                 return ResourceManager.GetString("durationHeader", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized string similar to Find.
+        /// </summary>
+        public static string findLabel {
+            get {
+                return ResourceManager.GetString("findLabel", resourceCulture);
             }
         }
         
@@ -183,6 +219,15 @@ namespace LifesAssistant.Properties.Language {
         public static string moneyLabel {
             get {
                 return ResourceManager.GetString("moneyLabel", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized string similar to month.
+        /// </summary>
+        public static string monthLabel {
+            get {
+                return ResourceManager.GetString("monthLabel", resourceCulture);
             }
         }
         
@@ -282,6 +327,15 @@ namespace LifesAssistant.Properties.Language {
         public static string waterTabName {
             get {
                 return ResourceManager.GetString("waterTabName", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized string similar to year.
+        /// </summary>
+        public static string yearLabel {
+            get {
+                return ResourceManager.GetString("yearLabel", resourceCulture);
             }
         }
     }

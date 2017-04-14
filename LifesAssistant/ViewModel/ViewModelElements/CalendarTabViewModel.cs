@@ -1,5 +1,7 @@
-﻿using System.Windows.Input;
+﻿using System;
+using System.Windows.Input;
 using LifesAssistant.Infrastructure;
+using LifesAssistant.Properties.Language;
 
 namespace LifesAssistant.ViewModel.ViewModelElements
 {
@@ -9,50 +11,48 @@ namespace LifesAssistant.ViewModel.ViewModelElements
 
         public CalendarTabViewModel()
         {
-            TextBox = "Null;";
+            CurrentDate = Resources.todayLabel + DateTime.Today.ToString("d");
         }
         #endregion
 
         #region Data
-
-        protected string _textBox;
-
-        public string TextBox
+        protected string _currentDate;
+        public string CurrentDate
         {
-            get { return _textBox; }
+            get { return _currentDate; }
             set
             {
-                _textBox = value;
-                OnPropertyChanged("TextBox");
+                _currentDate = value;
+                OnPropertyChanged("CurrentDate");
             }
         }
         #endregion
 
         #region Commands
 
-        private ICommand _viewTasksCommand;
-        public ICommand ViewTasks
-        {
-            get
-            {
-                if (_viewTasksCommand == null)
-                {
-                    _viewTasksCommand = new RelayCommand(ExecuteViewTasksCommand, CanExecuteViewTasksCommand);
-                }
-                return _viewTasksCommand;
-            }
-        }
+        //private ICommand _viewTasksCommand;
+        //public ICommand ViewTasks
+        //{
+        //    get
+        //    {
+        //        if (_viewTasksCommand == null)
+        //        {
+        //            _viewTasksCommand = new RelayCommand(ExecuteViewTasksCommand, CanExecuteViewTasksCommand);
+        //        }
+        //        return _viewTasksCommand;
+        //    }
+        //}
 
-        public bool CanExecuteViewTasksCommand(object parametr)
-        {
-            return true;
-        }
+        //public bool CanExecuteViewTasksCommand(object parametr)
+        //{
+        //    return true;
+        //}
 
 
-        public void ExecuteViewTasksCommand(object parametr)
-        {
-            TextBox = "Click";
-        }
+        //public void ExecuteViewTasksCommand(object parametr)
+        //{
+        //    TextBox = "Click";
+        //}
         #endregion
 
         #region FreeData

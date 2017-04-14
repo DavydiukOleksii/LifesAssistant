@@ -120,14 +120,23 @@
   <data name="addLabel" xml:space="preserve">
     <value>Add</value>
   </data>
+  <data name="calendarTabLabel" xml:space="preserve">
+    <value>Calendar</value>
+  </data>
   <data name="capacityHeader" xml:space="preserve">
     <value>Capacity</value>
   </data>
   <data name="capacityLabel" xml:space="preserve">
     <value>Capacity: </value>
   </data>
+  <data name="chartsByLabel" xml:space="preserve">
+    <value>Chart elements group by: </value>
+  </data>
   <data name="creditTabName" xml:space="preserve">
     <value>Daily costs</value>
+  </data>
+  <data name="dayLabel" xml:space="preserve">
+    <value>day</value>
   </data>
   <data name="dellLabel" xml:space="preserve">
     <value>Dell</value>
@@ -137,6 +146,9 @@
   </data>
   <data name="durationHeader" xml:space="preserve">
     <value>Durations</value>
+  </data>
+  <data name="findLabel" xml:space="preserve">
+    <value>Find</value>
   </data>
   <data name="finishHeader" xml:space="preserve">
     <value>Finish</value>
@@ -158,6 +170,9 @@
   </data>
   <data name="moneyLabel" xml:space="preserve">
     <value>Money:</value>
+  </data>
+  <data name="monthLabel" xml:space="preserve">
+    <value>month</value>
   </data>
   <data name="purchaseHeader" xml:space="preserve">
     <value>Purchase</value>
@@ -191,5 +206,8 @@
   </data>
   <data name="waterTabName" xml:space="preserve">
     <value>Daily water balance</value>
+  </data>
+  <data name="yearLabel" xml:space="preserve">
+    <value>year</value>
   </data>
 </root>

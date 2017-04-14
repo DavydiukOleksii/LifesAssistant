@@ -5,40 +5,69 @@
              xmlns:d="http://schemas.microsoft.com/expression/blend/2008"
              xmlns:iconPacks="http://metro.mahapps.com/winfx/xaml/iconpacks"
              xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
+             xmlns:res="clr-namespace:LifesAssistant.Properties.Language"
              d:DesignHeight="300"
-             d:DesignWidth="350"
+             d:DesignWidth="360"
              DataContext="{Binding}"
              mc:Ignorable="d">
     <Grid Background="White">
         <Grid.ColumnDefinitions>
             <ColumnDefinition />
-            <ColumnDefinition Width="120" />
+            <ColumnDefinition Width="140" />
         </Grid.ColumnDefinitions>
         <Grid.RowDefinitions>
+            <RowDefinition Height="40" />
             <RowDefinition />
             <RowDefinition Height="50" />
         </Grid.RowDefinitions>
-        <controls:Tile Grid.Column="1"
-                       Width="100"
-                       Height="25"
-                       Margin="10"
-                       VerticalAlignment="Top"
-                       Command="{Binding ViewTasks}">
-            <TextBlock VerticalAlignment="Center" Text="View Tasks" />
-        </controls:Tile>
 
-        <Calendar Grid.Row="0"
-                  Grid.Column="0"
-                  VerticalAlignment="Center" />
-        <DatePicker Grid.Row="1"
-                    Grid.Column="0"
-                    Width="150"
-                    Height="24" />
+        <TextBlock Height="24"
+                   HorizontalAlignment="Center"
+                   VerticalAlignment="Center"
+                   FontSize="18"
+                   Text="{x:Static res:Resources.calendarTabLabel}" />
 
-
-        <TextBlock Grid.Row="1"
+        <TextBlock Name="CurrentDate"
+                   Grid.Row="0"
                    Grid.Column="1"
-                   Margin="10"
-                   Text="{Binding TextBox}" />
+                   Height="20"
+                   Margin="10 0"
+                   HorizontalAlignment="Right"
+                   VerticalAlignment="Center"
+                   FontSize="14"
+                   Text="{Binding CurrentDate}" />
+
+        <Calendar Grid.Row="1"
+                  Grid.Column="0"
+                  VerticalAlignment="Center"
+                  SelectedDate="{Binding CurrentSelectedDate}" />
+
+        <Grid Grid.Row="2">
+            <Grid.ColumnDefinitions>
+                <ColumnDefinition />
+                <ColumnDefinition />
+            </Grid.ColumnDefinitions>
+            <DatePicker Width="auto"
+                        Height="24"
+                        Margin="15 0 5 0" />
+
+            <controls:Tile Grid.Row="2"
+                           Grid.Column="1"
+                           Width="94"
+                           Height="26"
+                           Margin="5 5 10 5"
+                           HorizontalAlignment="Center"
+                           VerticalAlignment="Center"
+                           Command="{Binding FindSelectedDate}">
+
+                <TextBlock Margin="3"
+                           VerticalAlignment="Center"
+                           Text="{x:Static res:Resources.findLabel}" />
+            </controls:Tile>
+
+        </Grid>
+
+
+
     </Grid>
 </UserControl>

@@ -3,6 +3,6 @@
     public class ChartsElement
     {
         public string Name { get; set; }
-        public int Value { get; set; }
+        public double Value { get; set; }
     }
 }

@@ -42,9 +42,6 @@ namespace LifesAssistant.ViewModel
         //current windows position
         protected int _currentWinTopPos;
         protected int _currentWinLeftPos;
-
-        protected string _currentTab;
-
         //property
         protected int _windowWidth;
         public int WindowWidth
@@ -197,8 +194,18 @@ namespace LifesAssistant.ViewModel
 
         #region Data for tabControle
 
-        protected ObservableCollection<ChartsElement> _charts;
+        protected string _currentTab;
+        public string CurrentTab
+        {
+            get { return _currentTab; }
+            set
+            {
+                _currentTab = value;
+                OnPropertyChanged("CurrentTab");
+            }
+        }
 
+        protected ObservableCollection<ChartsElement> _charts;
         public ObservableCollection<ChartsElement> Charts
         {
             get { return _charts; }
@@ -219,8 +226,6 @@ namespace LifesAssistant.ViewModel
                 OnPropertyChanged("MainPanel");
             }
         }
-
-
 
         #endregion
 
@@ -306,7 +311,24 @@ namespace LifesAssistant.ViewModel
                 WindowHeight = _defaultWindowsHeight + 275;
                 ChartsLabel = Resources.hideChartsLabel;
 
-                Charts = CostsRepository.Instance.GetTotalByMonth();
+                switch (CurrentTab)
+                {
+                    case "Credit":
+                        {
+                            Charts = CostsRepository.Instance.GetTotalByDay();
+                            break;
+                        }
+                    case "Water":
+                        {
+                            Charts = WaterRepository.Instance.GetTotalByDay();
+                            break;
+                        }
+                    case "Dream":
+                        {
+                            Charts = SleepRepository.Instance.GetTotalByDay();
+                            break;
+                        }
+                }
             }
         }
 
@@ -384,7 +406,7 @@ namespace LifesAssistant.ViewModel
         public void ExecuteTabChangedCommand(object parameter)
         {
             string tabName = parameter.ToString();
-            _currentTab = parameter.ToString();
+            CurrentTab = parameter.ToString();
             ChartsButtonHeight = 25;
             if (ChartsHeight > 0)
                 ExecuteShowChartsCommand(this);
@@ -434,6 +456,102 @@ namespace LifesAssistant.ViewModel
             }
         }
       
+        #endregion
+
+        #region ChartGroupChange
+        private ICommand _chartGroupChangeCommand;
+        public ICommand ChartGroupChange
+        {
+            get
+            {
+                if (_chartGroupChangeCommand == null)
+                {
+                    _chartGroupChangeCommand = new RelayCommand(ExecuteChartGroupChangeCommand, CanExecuteChartGroupChangeCommand);
+                }
+                return _chartGroupChangeCommand;
+            }
+        }
+
+        public void ExecuteChartGroupChangeCommand(object parameter)
+        {
+            string group = parameter.ToString();
+
+            switch (CurrentTab)
+            {
+                case "Credit":
+                    {
+                        switch (group)
+                        {
+                            case "day":
+                                {
+                                    Charts = CostsRepository.Instance.GetTotalByDay();
+                                    break;
+                                }
+                            case "month":
+                                {
+                                    Charts = CostsRepository.Instance.GetTotalByMonth();
+                                    break;
+                                }
+                            case "year":
+                                {
+                                    Charts = CostsRepository.Instance.GetTotalByYear();
+                                    break;
+                                }
+                        }
+                        break;
+                    }
+                case "Water":
+                    {
+                        switch (group)
+                        {
+                            case "day":
+                                {
+                                    Charts = WaterRepository.Instance.GetTotalByDay();
+                                    break;
+                                }
+                            case "month":
+                                {
+                                    Charts = WaterRepository.Instance.GetTotalByMonth();
+                                    break;
+                                }
+                            case "year":
+                                {
+                                    Charts = WaterRepository.Instance.GetTotalByYear();
+                                    break;
+                                }
+                        }
+                        break;
+                    }
+                case "Dream":
+                    {
+                        switch (group)
+                        {
+                            case "day":
+                                {
+                                    Charts = SleepRepository.Instance.GetTotalByDay();
+                                    break;
+                                }
+                            case "month":
+                                {
+                                    Charts = SleepRepository.Instance.GetTotalByMonth();
+                                    break;
+                                }
+                            case "year":
+                                {
+                                    Charts = SleepRepository.Instance.GetTotalByYear();
+                                    break;
+                                }
+                        }
+                        break;
+                    }
+            }
+        }
+
+        public bool CanExecuteChartGroupChangeCommand(object parameter)
+        {
+            return true;
+        }
+
         #endregion
 
         #endregion

@@ -3,6 +3,7 @@ using System.Collections.Generic;
 using System.Collections.ObjectModel;
 using System.IO;
 using System.Linq;
+using DataModel.Charts;
 using DataModel.Dream;
 using Newtonsoft.Json;
 
@@ -164,6 +165,105 @@ namespace DataRepository
             catch
             {
 
+            }
+        }
+
+        public ObservableCollection<ChartsElement> GetTotalByDay()
+        {
+            try
+            {
+                List<ChartsElement> result;
+
+                using (StreamReader r = new StreamReader(filePath + fileName))
+                {
+                    string json = r.ReadToEnd();
+                    List<DaySleepReport> today = JsonConvert.DeserializeObject<List<DaySleepReport>>(json);
+                    if (today != null)
+                    {
+                        result = today
+                                    .AsEnumerable()
+                                    .GroupBy(o => o.Date.Day)
+                                    .Select(g => new ChartsElement() { Name = g.First().Date.Day.ToString(), Value = g.Sum(c => c.TotalSleepTimeInSecond/3600) })
+                                    .ToList();
+                    }
+                    else
+                    {
+                        result = new List<ChartsElement>();
+                    }
+                }
+                return new ObservableCollection<ChartsElement>(result);
+            }
+            catch
+            {
+                return null;
+            }
+        }
+
+        public ObservableCollection<ChartsElement> GetTotalByMonth()
+        {
+            try
+            {
+                List<ChartsElement> result;
+
+                using (StreamReader r = new StreamReader(filePath + fileName))
+                {
+                    string json = r.ReadToEnd();
+                    List<DaySleepReport> today = JsonConvert.DeserializeObject<List<DaySleepReport>>(json);
+                    if (today != null)
+                    {
+                        result = today
+                                    .AsEnumerable()
+                                    .GroupBy(o => o.Date.Month)
+                                    .Select(g => new ChartsElement() { Name = g.First().Date.Month.ToString(), Value = g.Sum(c => c.TotalSleepTimeInSecond / 3600) })
+                                    .ToList();
+                    }
+                    else
+                    {
+                        result = new List<ChartsElement>();
+                    }
+
+                }
+                return new ObservableCollection<ChartsElement>(result);
+            }
+            catch
+            {
+                return null;
+            }
+        }
+
+        public ObservableCollection<ChartsElement> GetTotalByYear()
+        {
+            try
+            {
+                List<ChartsElement> result;
+
+                using (StreamReader r = new StreamReader(filePath + fileName))
+                {
+                    string json = r.ReadToEnd();
+                    List<DaySleepReport> today = JsonConvert.DeserializeObject<List<DaySleepReport>>(json);
+                    if (today != null)
+                    {
+                        result = today
+                                    .AsEnumerable()
+                                    .GroupBy(o => o.Date.Year)
+                                    .Select(g => new ChartsElement()
+                                    {
+                                        Name = g.First().Date.Year.ToString(),
+                                        Value = g.Sum(c => c.TotalSleepTimeInSecond / 3600)
+                                    })
+                                    .ToList();
+                    }
+                    else
+                    {
+                        result = new List<ChartsElement>();
+                    }
+
+                }
+                return new ObservableCollection<ChartsElement>(result);
+            }
+            catch
+            {
+                return null;
             }
         }
     }
