@@ -133,6 +133,15 @@ namespace LifesAssistant.Properties.Language {
         }
         
         /// <summary>
+        ///   Looks up a localized string similar to Descriptions.
+        /// </summary>
+        public static string descriptionsHeader {
+            get {
+                return ResourceManager.GetString("descriptionsHeader", resourceCulture);
+            }
+        }
+        
+        /// <summary>
         ///   Looks up a localized string similar to Dreams time.
         /// </summary>
         public static string dreamTabName {
@@ -183,6 +192,15 @@ namespace LifesAssistant.Properties.Language {
         public static string hideChartsLabel {
             get {
                 return ResourceManager.GetString("hideChartsLabel", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized string similar to Hide Tasks ▲.
+        /// </summary>
+        public static string hideTasksLabel {
+            get {
+                return ResourceManager.GetString("hideTasksLabel", resourceCulture);
             }
         }
         
@@ -259,6 +277,15 @@ namespace LifesAssistant.Properties.Language {
         }
         
         /// <summary>
+        ///   Looks up a localized string similar to Show Task ▼.
+        /// </summary>
+        public static string showTasksLabel {
+            get {
+                return ResourceManager.GetString("showTasksLabel", resourceCulture);
+            }
+        }
+        
+        /// <summary>
         ///   Looks up a localized string similar to Sleep duration: .
         /// </summary>
         public static string sleepDurationLabel {
@@ -318,6 +345,15 @@ namespace LifesAssistant.Properties.Language {
         public static string totalSleepLabel {
             get {
                 return ResourceManager.GetString("totalSleepLabel", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized string similar to View tasks.
+        /// </summary>
+        public static string viewTaskLabel {
+            get {
+                return ResourceManager.GetString("viewTaskLabel", resourceCulture);
             }
         }
         

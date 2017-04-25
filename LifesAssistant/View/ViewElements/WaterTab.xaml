@@ -195,7 +195,8 @@
                        FontSize="18"
                        FontWeight="Bold"
                        Foreground="#00171F"
-                       Text="{Binding WaterPercent, StringFormat={}{0:#,#.}}" />
+                       Text="{Binding WaterPercent,
+                                      StringFormat={}{0:#,#.}}" />
 
             <TextBlock Grid.Column="1"
                        Margin="1 0 0 0"

@@ -48,7 +48,9 @@
                   BorderBrush="#003459"
                   BorderThickness="1"
                   IsReadOnly="True"
-                  ItemsSource="{Binding DaySleepTime, Mode=TwoWay,UpdateSourceTrigger=PropertyChanged}"
+                  ItemsSource="{Binding DaySleepTime,
+                                        Mode=TwoWay,
+                                        UpdateSourceTrigger=PropertyChanged}"
                   SelectedItem="{Binding CurrentSleep}">
             <DataGrid.Columns>
                 <DataGridTextColumn Width="auto"

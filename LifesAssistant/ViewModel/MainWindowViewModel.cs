@@ -36,6 +36,7 @@ namespace LifesAssistant.ViewModel
 
         #region Data for controle Windows size, position and state
         //default windows width in diferent states
+        protected int _defoultChartsHeight = 275;
         protected int _defaultWindowWidth = 430;
         protected int _defaultWindowsHeight = 385;
         protected int _minimizeWindowWidth = 72;
@@ -307,8 +308,8 @@ namespace LifesAssistant.ViewModel
             }
             else
             {
-                ChartsHeight = 275;
-                WindowHeight = _defaultWindowsHeight + 275;
+                ChartsHeight = _defoultChartsHeight;
+                WindowHeight = _defaultWindowsHeight + _defoultChartsHeight;
                 ChartsLabel = Resources.hideChartsLabel;
 
                 switch (CurrentTab)
@@ -408,6 +409,7 @@ namespace LifesAssistant.ViewModel
             string tabName = parameter.ToString();
             CurrentTab = parameter.ToString();
             ChartsButtonHeight = 25;
+            WindowHeight = _defaultWindowsHeight;
             if (ChartsHeight > 0)
                 ExecuteShowChartsCommand(this);
             switch (tabName)
@@ -416,6 +418,7 @@ namespace LifesAssistant.ViewModel
                 {
                     MainPanel = new CalendarTab();
                     MainPanel.DataContext = new CalendarTabViewModel();
+                    (MainPanel.DataContext as CalendarTabViewModel).UserEvent += UserEventsHandler;
                     ChartsButtonHeight = 0;
                     
                     break;
@@ -553,6 +556,23 @@ namespace LifesAssistant.ViewModel
         }
 
         #endregion
+
+        #endregion
+
+        #region Events
+
+        public void UserEventsHandler()
+        {
+            if (WindowHeight == _defaultWindowsHeight)
+            {
+                WindowHeight = _defoultChartsHeight + _defaultWindowsHeight;
+            }
+            else
+            {
+                WindowHeight = _defaultWindowsHeight;
+            }
+            
+        }
 
         #endregion
 

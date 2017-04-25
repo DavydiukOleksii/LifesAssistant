@@ -141,6 +141,9 @@
   <data name="dellLabel" xml:space="preserve">
     <value>Dell</value>
   </data>
+  <data name="descriptionsHeader" xml:space="preserve">
+    <value>Descriptions</value>
+  </data>
   <data name="dreamTabName" xml:space="preserve">
     <value>Dreams time</value>
   </data>
@@ -158,6 +161,9 @@
   </data>
   <data name="hideChartsLabel" xml:space="preserve">
     <value>Hide Charts  ▲</value>
+  </data>
+  <data name="hideTasksLabel" xml:space="preserve">
+    <value>Hide Tasks ▲</value>
   </data>
   <data name="lastSleepingLabel" xml:space="preserve">
     <value>Time from the latest sleep</value>
@@ -183,6 +189,9 @@
   <data name="showChartsLabel" xml:space="preserve">
     <value>Charts  ▼</value>
   </data>
+  <data name="showTasksLabel" xml:space="preserve">
+    <value>Show Task ▼</value>
+  </data>
   <data name="sleepDurationLabel" xml:space="preserve">
     <value>Sleep duration: </value>
   </data>
@@ -203,6 +212,9 @@
   </data>
   <data name="totalSleepLabel" xml:space="preserve">
     <value>Total sleep time:</value>
+  </data>
+  <data name="viewTaskLabel" xml:space="preserve">
+    <value>View tasks</value>
   </data>
   <data name="waterTabName" xml:space="preserve">
     <value>Daily water balance</value>

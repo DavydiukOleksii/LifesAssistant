@@ -122,7 +122,7 @@
         <!--  Control Panel  -->
         <DockPanel Name="ControlPanel"
                    Grid.Row="1"
-                   Grid.RowSpan="4"
+                   Grid.RowSpan="5"
                    Grid.Column="2"
                    Background="#00171F"
                    MouseDown="ControlPanel_MouseDown">
@@ -258,7 +258,7 @@
 
         <!--  BottomBar  -->
         <DockPanel Name="BottomBar"
-                   Grid.Row="4"
+                   Grid.Row="5"
                    Grid.Column="0"
                    Background="#003459">
             <Grid>
