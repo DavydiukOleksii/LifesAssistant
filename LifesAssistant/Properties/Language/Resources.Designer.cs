@@ -142,6 +142,15 @@ namespace LifesAssistant.Properties.Language {
         }
         
         /// <summary>
+        ///   Looks up a localized string similar to Descriptions:.
+        /// </summary>
+        public static string descriptionsLabel {
+            get {
+                return ResourceManager.GetString("descriptionsLabel", resourceCulture);
+            }
+        }
+        
+        /// <summary>
         ///   Looks up a localized string similar to Dreams time.
         /// </summary>
         public static string dreamTabName {
@@ -318,6 +327,15 @@ namespace LifesAssistant.Properties.Language {
         public static string timeHeader {
             get {
                 return ResourceManager.GetString("timeHeader", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized string similar to Time:.
+        /// </summary>
+        public static string timeLabel {
+            get {
+                return ResourceManager.GetString("timeLabel", resourceCulture);
             }
         }
         

@@ -49,14 +49,15 @@
                 <ColumnDefinition />
                 <ColumnDefinition />
             </Grid.ColumnDefinitions>
-            <DatePicker Width="100"
+            <DatePicker Width="auto"
                         Height="24"
-                        Margin="15 0 5 0" />
+                        Margin="15 0 5 0"
+                        SelectedDate="{Binding SearchDate}" />
             <controls:Tile Grid.Row="2"
                            Grid.Column="1"
                            Width="94"
                            Height="26"
-                           Margin="5 5 10 5"
+                           Margin="10 5 10 5"
                            HorizontalAlignment="Center"
                            VerticalAlignment="Center"
                            Command="{Binding FindSelectedDate}">
@@ -119,7 +120,7 @@
                 <StackPanel>
                     <TextBlock Margin="10 3"
                                FontSize="14"
-                               Text="Time:" />
+                               Text="{x:Static res:Resources.timeLabel}" />
 
                     <xctk:DateTimePicker Height="25"
                                          Margin="10 3"
@@ -131,13 +132,13 @@
                                          Format="Custom"
                                          FormatString="HH:mm:ss"
                                          ShowDropDownButton="False"
-                                         Value="{Binding Path=NewSleep.Duration,
+                                         Value="{Binding Path=NewTask.Time,
                                                          UpdateSourceTrigger=PropertyChanged,
                                                          Mode=TwoWay}" />
 
                     <TextBlock Margin="10 3"
                                FontSize="14"
-                               Text="Description:" />
+                               Text="{x:Static res:Resources.descriptionsLabel}" />
 
                     <TextBox Name="descriptions"
                              Height="50"
@@ -148,7 +149,7 @@
                              TextWrapping="Wrap">
                         <TextBox.Text>
                             <Binding Mode="TwoWay"
-                                     Path="NewCashTransaction.Money"
+                                     Path="NewTask.Descriptions"
                                      UpdateSourceTrigger="PropertyChanged">
                                 <Binding.ValidationRules>
                                     <ExceptionValidationRule />
@@ -160,7 +161,6 @@
                     <controls:Tile Width="auto"
                                    Height="25"
                                    Margin="10"
-                                   Background="#00171F"
                                    Command="{Binding AddTask}">
                         <TextBlock Margin="3"
                                    VerticalAlignment="Center"
@@ -178,28 +178,27 @@
                       BorderBrush="#003459"
                       BorderThickness="1"
                       IsReadOnly="True"
-                      ItemsSource="{Binding DaySleepTime,
+                      ItemsSource="{Binding DayTasks,
                                             Mode=TwoWay,
                                             UpdateSourceTrigger=PropertyChanged}"
-                      SelectedItem="{Binding CurrentSleep}">
+                      SelectedItem="{Binding SelectedTask}">
                 <DataGrid.Columns>
                     <DataGridTextColumn Width="auto"
-                                        MinWidth="60"
+                                        MinWidth="80"
                                         Binding="{Binding Path=Time,
-                                                          StringFormat=Time: {0:HH:mm}}"
+                                                          StringFormat={}{0:HH:mm}}"
                                         Header="{x:Static res:Resources.timeHeader}" />
 
                     <DataGridTextColumn Width="auto"
                                         MinWidth="160"
-                                        Binding="{Binding Path=Duration,
-                                                          StringFormat=Time: {0:HH:mm}}"
+                                        Binding="{Binding Path=Descriptions}"
                                         Header="{x:Static res:Resources.descriptionsHeader}" />
                 </DataGrid.Columns>
 
                 <DataGrid.Resources>
                     <ContextMenu x:Key="itemContextMenu">
                         <ContextMenu.Items>
-                            <MenuItem Command="{Binding DataContext.DellCurrentSleepTime, RelativeSource={RelativeSource AncestorType=UserControl}}" Header="Delete" />
+                            <MenuItem Command="{Binding DataContext.DellCurrentTask, RelativeSource={RelativeSource AncestorType=UserControl}}" Header="Delete" />
                         </ContextMenu.Items>
                     </ContextMenu>
                 </DataGrid.Resources>

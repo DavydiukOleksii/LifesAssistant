@@ -181,6 +181,7 @@ namespace DataRepository
                     {
                         result = today
                                     .AsEnumerable()
+                                    .Where(y => y.Date.Year == DateTime.Now.Year && y.Date.Month == DateTime.Now.Month)
                                     .GroupBy(o => o.Date.Day)
                                     .Select(g => new ChartsElement() { Name = g.First().Date.Day.ToString(), Value = g.Sum(c => c.TotalCapacity) })
                                     .ToList();
@@ -212,6 +213,7 @@ namespace DataRepository
                     {
                         result = today
                                     .AsEnumerable()
+                                    .Where(y => y.Date.Year == DateTime.Now.Year)
                                     .GroupBy(o => o.Date.Month)
                                     .Select(g => new ChartsElement() { Name = g.First().Date.Month.ToString(), Value = g.Sum(c => c.TotalCapacity) })
                                     .ToList();

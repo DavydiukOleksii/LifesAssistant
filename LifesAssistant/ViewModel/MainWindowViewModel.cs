@@ -28,7 +28,7 @@ namespace LifesAssistant.ViewModel
 
             Charts = new ObservableCollection<ChartsElement>();
 
-            ExecuteTabChangedCommand("Calendar");
+            ExecuteTabChangedCommand("CalendarRepository");
         }
         #endregion
 
@@ -414,7 +414,7 @@ namespace LifesAssistant.ViewModel
                 ExecuteShowChartsCommand(this);
             switch (tabName)
             {
-                case "Calendar":
+                case "CalendarRepository":
                 {
                     MainPanel = new CalendarTab();
                     MainPanel.DataContext = new CalendarTabViewModel();

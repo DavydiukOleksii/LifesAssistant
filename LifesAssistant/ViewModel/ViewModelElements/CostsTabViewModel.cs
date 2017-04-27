@@ -17,13 +17,6 @@ namespace LifesAssistant.ViewModel.ViewModelElements
         {
             CurrentDate = Resources.todayLabel + DateTime.Today.ToString("d");
 
-            //if(CostsDayReport.Instance.DailyCosts == null)
-            //    CostsDayReport.Instance.DailyCosts = new ObservableCollection<OneCashTransaction>();
-
-            //DayCosts = CostsDayReport.Instance.DailyCosts;
-
-            //DailyTotalCosts = CostsDayReport.Instance.TotalCosts;
-
             DayCosts = CostsRepository.Instance.GetByDay(DateTime.Today).DailyCosts;
             DailyTotalCosts = CostsRepository.Instance.GetByDay(DateTime.Today).TotalCosts;
 

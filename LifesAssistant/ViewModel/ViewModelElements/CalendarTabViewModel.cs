@@ -1,6 +1,8 @@
 ﻿using System;
-using System.Windows;
+using System.Collections.ObjectModel;
 using System.Windows.Input;
+using DataModel.Calendar;
+using DataRepository;
 using LifesAssistant.Infrastructure;
 using LifesAssistant.Properties.Language;
 
@@ -23,7 +25,6 @@ namespace LifesAssistant.ViewModel.ViewModelElements
 
         #endregion
 
-
         #region Constructor
 
         public CalendarTabViewModel()
@@ -32,6 +33,11 @@ namespace LifesAssistant.ViewModel.ViewModelElements
             ShowTasksLabel = Resources.showTasksLabel;
             FlyoutIsOpen = false;
             TaskHeight = 0;
+
+            NewTask = new OneTask();
+
+            SearchDate = DateTime.Now;
+            DayTasks = CalendarRepository.Instance.GetByDay(DateTime.Today).DailyTasks;
         }
         #endregion
 
@@ -82,6 +88,77 @@ namespace LifesAssistant.ViewModel.ViewModelElements
                 OnPropertyChanged("TaskHeight");
             }
         }
+
+        protected DateTime _searchDate;
+        public DateTime SearchDate
+        {
+            get { return _searchDate; }
+            set
+            {
+                _searchDate = value;
+                OnPropertyChanged("SearchDate");
+            }
+        }
+
+        protected DateTime _currentSelectedDate;
+        public DateTime CurrentSelectedDate
+        {
+            get { return _currentSelectedDate; }
+            set
+            {
+                _currentSelectedDate = value;
+                OnPropertyChanged("CurrentSelectedDate");
+            }
+        }
+
+        #region Tasks panel data
+
+        protected OneTask _newTask;
+        public OneTask NewTask
+        {
+            get { return _newTask; }
+            set
+            {
+                _newTask = value;
+                OnPropertyChanged("NewTask");
+            }
+        }
+
+        protected DateTime _tasksDate;
+        public DateTime TasksDate
+        {
+            get { return _tasksDate; }
+            set
+            {
+                _tasksDate = value;
+                OnPropertyChanged("TasksDate");
+            }
+        }
+
+        protected OneTask _searchTask;
+        public OneTask SearchTask
+        {
+            get { return _searchTask; }
+            set
+            {
+                _searchTask = value;
+                OnPropertyChanged("SearchTask");
+            }
+        }
+
+        protected ObservableCollection<OneTask> _dayTasks;
+        public ObservableCollection<OneTask> DayTasks
+        {
+            get { return _dayTasks; }
+            set
+            {
+                _dayTasks = value;
+                OnPropertyChanged("DayTasks");
+            }
+        }
+
+        #endregion
+
         #endregion
 
         #region Commands
@@ -104,7 +181,6 @@ namespace LifesAssistant.ViewModel.ViewModelElements
         {
             return true;
         }
-
 
         public void ExecuteViewTasksCommand(object parametr)
         {
@@ -152,6 +228,68 @@ namespace LifesAssistant.ViewModel.ViewModelElements
             {
                 FlyoutIsOpen = false;
             }
+        }
+        #endregion
+
+        #region FindDate
+        private ICommand _findSelectedDateCommand;
+        public ICommand FindSelectedDate
+        {
+            get
+            {
+                if (_findSelectedDateCommand == null)
+                {
+                    _findSelectedDateCommand = new RelayCommand(ExecuteFindSelectedDateCommand, CanExecuteFindSelectedDateCommand);
+                }
+                return _findSelectedDateCommand;
+            }
+        }
+
+        public bool CanExecuteFindSelectedDateCommand(object parametr)
+        {
+            return true;
+        }
+
+        public void ExecuteFindSelectedDateCommand(object parametr)
+        {
+            if (SearchDate != null)
+            {
+                CurrentSelectedDate = SearchDate;
+            }
+        }
+        #endregion
+
+        #region Add Task
+        private ICommand _addTaskCommand;
+        public ICommand AddTask
+        {
+            get
+            {
+                if (_addTaskCommand == null)
+                {
+                    _addTaskCommand = new RelayCommand(ExecuteAddTaskCommand, CanExecuteAddTaskCommand);
+                }
+                return _addTaskCommand;
+            }
+        }
+
+        public bool CanExecuteAddTaskCommand(object parametr)
+        {
+            if (NewTask != null && NewTask.Time != null && NewTask.Descriptions != null && NewTask.Descriptions.Length > 1)
+            {
+                return true;
+            }
+            else
+            {
+                return false;
+            }
+        }
+
+        public void ExecuteAddTaskCommand(object parametr)
+        {
+            CalendarRepository.Instance.AddOperation(NewTask);
+            NewTask = new OneTask();
+            DayTasks = CalendarRepository.Instance.GetByDay(DateTime.Today).DailyTasks;
         }
         #endregion
 

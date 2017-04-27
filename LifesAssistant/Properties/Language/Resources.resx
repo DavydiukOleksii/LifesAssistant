@@ -144,6 +144,9 @@
   <data name="descriptionsHeader" xml:space="preserve">
     <value>Descriptions</value>
   </data>
+  <data name="descriptionsLabel" xml:space="preserve">
+    <value>Descriptions:</value>
+  </data>
   <data name="dreamTabName" xml:space="preserve">
     <value>Dreams time</value>
   </data>
@@ -203,6 +206,9 @@
   </data>
   <data name="timeHeader" xml:space="preserve">
     <value>Time</value>
+  </data>
+  <data name="timeLabel" xml:space="preserve">
+    <value>Time:</value>
   </data>
   <data name="todayLabel" xml:space="preserve">
     <value>Today: </value>
