@@ -85,6 +85,7 @@ namespace DataRepository
             try
             {
                 string newJson = "";
+                DateTime date = DateTime.Parse(newTask.Time.ToLongDateString());
 
                 if (!File.Exists(filePath + fileName))
                 {
@@ -95,10 +96,10 @@ namespace DataRepository
                 {
                     string json = r.ReadToEnd();
                     List<DayTaskReport> today = JsonConvert.DeserializeObject<List<DayTaskReport>>(json);
-                    if (today != null && today.Where(x => x.Date == DateTime.Today)
+                    if (today != null && today.Where(x => x.Date == date)
                             .FirstOrDefault() != null)
                     {
-                        today.Where(x => x.Date == DateTime.Today)
+                        today.Where(x => x.Date == date)
                             .FirstOrDefault().DailyTasks.Add(newTask);
                     }
                     else
@@ -109,7 +110,7 @@ namespace DataRepository
                         }
                         today.Add(new DayTaskReport()
                         {
-                            Date = DateTime.Today,
+                            Date = date,
                             DailyTasks = new ObservableCollection<OneTask>() { newTask }
                         });
                     }
@@ -129,6 +130,7 @@ namespace DataRepository
             try
             {
                 string newJson = "";
+                DateTime date = DateTime.Parse(dellTask.Time.ToLongDateString());
 
                 if (!File.Exists(filePath + fileName))
                 {
@@ -145,7 +147,7 @@ namespace DataRepository
                     }
                     else
                     {
-                        today.Where(x => x.Date == DateTime.Today)
+                        today.Where(x => x.Date == date)
                             .FirstOrDefault().DailyTasks.Remove(dellTask);
                     }
                     newJson = JsonConvert.SerializeObject(today);

@@ -1,10 +1,12 @@
 ﻿using System;
 using System.Collections.ObjectModel;
+using System.Linq;
 using System.Windows.Input;
 using DataModel.Calendar;
 using DataRepository;
 using LifesAssistant.Infrastructure;
 using LifesAssistant.Properties.Language;
+using Xceed.Wpf.Toolkit.Core.Converters;
 
 namespace LifesAssistant.ViewModel.ViewModelElements
 {
@@ -36,7 +38,7 @@ namespace LifesAssistant.ViewModel.ViewModelElements
 
             NewTask = new OneTask();
 
-            SearchDate = DateTime.Now;
+            SearchDate = DateTime.Today;
             DayTasks = CalendarRepository.Instance.GetByDay(DateTime.Today).DailyTasks;
         }
         #endregion
@@ -107,7 +109,9 @@ namespace LifesAssistant.ViewModel.ViewModelElements
             set
             {
                 _currentSelectedDate = value;
+                SearchDate = value;
                 OnPropertyChanged("CurrentSelectedDate");
+                OnPropertyChanged("SearchDate");
             }
         }
 
@@ -143,6 +147,17 @@ namespace LifesAssistant.ViewModel.ViewModelElements
             {
                 _searchTask = value;
                 OnPropertyChanged("SearchTask");
+            }
+        }
+
+        protected OneTask _selectedTask;
+        public OneTask SelectedTask
+        {
+            get { return _selectedTask; }
+            set
+            {
+                _selectedTask = value;
+                OnPropertyChanged("SelectedTask");
             }
         }
 
@@ -186,6 +201,7 @@ namespace LifesAssistant.ViewModel.ViewModelElements
         {
             if (TaskHeight == 0)
             {
+                DayTasks = CalendarRepository.Instance.GetByDay(SearchDate).DailyTasks;
                 ShowTasksLabel = Resources.hideTasksLabel;
                 TaskHeight = _defaultTaskHeight;
             }
@@ -255,6 +271,9 @@ namespace LifesAssistant.ViewModel.ViewModelElements
             if (SearchDate != null)
             {
                 CurrentSelectedDate = SearchDate;
+                DayTasks = CalendarRepository.Instance.GetByDay(CurrentSelectedDate).DailyTasks;
+                if(_taskHeight == 0)
+                    ViewTasks.Execute(null);
             }
         }
         #endregion
@@ -287,9 +306,45 @@ namespace LifesAssistant.ViewModel.ViewModelElements
 
         public void ExecuteAddTaskCommand(object parametr)
         {
+            NewTask.Time = SearchDate + NewTask.Time.TimeOfDay;
             CalendarRepository.Instance.AddOperation(NewTask);
             NewTask = new OneTask();
-            DayTasks = CalendarRepository.Instance.GetByDay(DateTime.Today).DailyTasks;
+            DayTasks = CalendarRepository.Instance.GetByDay(SearchDate).DailyTasks;
+        }
+        #endregion
+
+        #region Dell Task
+        private ICommand _dellCurrentTaskCommand;
+        public ICommand DellCurrentTask
+        {
+            get
+            {
+                if (_dellCurrentTaskCommand == null)
+                {
+                    _dellCurrentTaskCommand = new RelayCommand(ExecuteDellCurrentTaskCommand, CanExecuteDellCurrentTaskCommand);
+                }
+                return _dellCurrentTaskCommand;
+            }
+        }
+
+        public bool CanExecuteDellCurrentTaskCommand(object parametr)
+        {
+            if (SelectedTask != null)
+            {
+                return true;
+            }
+            else
+            {
+                return false;
+            }
+        }
+
+        public void ExecuteDellCurrentTaskCommand(object parametr)
+        {
+            SelectedTask.Time = SearchDate + SelectedTask.Time.TimeOfDay;
+            CalendarRepository.Instance.DeleteOperation(SelectedTask);
+            SelectedTask = new OneTask();
+            DayTasks = CalendarRepository.Instance.GetByDay(SearchDate).DailyTasks;
         }
         #endregion
 

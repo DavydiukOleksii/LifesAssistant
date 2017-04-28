@@ -184,10 +184,11 @@
                       SelectedItem="{Binding SelectedTask}">
                 <DataGrid.Columns>
                     <DataGridTextColumn Width="auto"
-                                        MinWidth="80"
+                                        MinWidth="65"
                                         Binding="{Binding Path=Time,
                                                           StringFormat={}{0:HH:mm}}"
-                                        Header="{x:Static res:Resources.timeHeader}" />
+                                        Header="{x:Static res:Resources.timeHeader}"
+                                        SortDirection="Ascending" />
 
                     <DataGridTextColumn Width="auto"
                                         MinWidth="160"
