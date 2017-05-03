@@ -70,6 +70,42 @@ namespace LifesAssistant.Properties.Language {
         }
         
         /// <summary>
+        ///   Looks up a localized string similar to Add new money operation.
+        /// </summary>
+        public static string addNewMoneyOperLabel {
+            get {
+                return ResourceManager.GetString("addNewMoneyOperLabel", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized string similar to Add new sleeps time.
+        /// </summary>
+        public static string addNewSleepTimeLabel {
+            get {
+                return ResourceManager.GetString("addNewSleepTimeLabel", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized string similar to Add new water operation.
+        /// </summary>
+        public static string addNewWaterOperLabel {
+            get {
+                return ResourceManager.GetString("addNewWaterOperLabel", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized string similar to Add task.
+        /// </summary>
+        public static string addTaskLabel {
+            get {
+                return ResourceManager.GetString("addTaskLabel", resourceCulture);
+            }
+        }
+        
+        /// <summary>
         ///   Looks up a localized string similar to Calendar.
         /// </summary>
         public static string calendarTabLabel {
@@ -124,6 +160,15 @@ namespace LifesAssistant.Properties.Language {
         }
         
         /// <summary>
+        ///   Looks up a localized string similar to Delete.
+        /// </summary>
+        public static string deleteLabel {
+            get {
+                return ResourceManager.GetString("deleteLabel", resourceCulture);
+            }
+        }
+        
+        /// <summary>
         ///   Looks up a localized string similar to Dell.
         /// </summary>
         public static string dellLabel {
@@ -151,7 +196,7 @@ namespace LifesAssistant.Properties.Language {
         }
         
         /// <summary>
-        ///   Looks up a localized string similar to Dreams time.
+        ///   Looks up a localized string similar to Sleeping time.
         /// </summary>
         public static string dreamTabName {
             get {
@@ -259,6 +304,15 @@ namespace LifesAssistant.Properties.Language {
         }
         
         /// <summary>
+        ///   Looks up a localized string similar to Add new task.
+        /// </summary>
+        public static string newTaskLabel {
+            get {
+                return ResourceManager.GetString("newTaskLabel", resourceCulture);
+            }
+        }
+        
+        /// <summary>
         ///   Looks up a localized string similar to Purchase.
         /// </summary>
         public static string purchaseHeader {
@@ -295,7 +349,7 @@ namespace LifesAssistant.Properties.Language {
         }
         
         /// <summary>
-        ///   Looks up a localized string similar to Sleep duration: .
+        ///   Looks up a localized string similar to Duration of sleep:.
         /// </summary>
         public static string sleepDurationLabel {
             get {
@@ -318,6 +372,15 @@ namespace LifesAssistant.Properties.Language {
         public static string startSleepingLabel {
             get {
                 return ResourceManager.GetString("startSleepingLabel", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized string similar to Task list.
+        /// </summary>
+        public static string taskListLabel {
+            get {
+                return ResourceManager.GetString("taskListLabel", resourceCulture);
             }
         }
         

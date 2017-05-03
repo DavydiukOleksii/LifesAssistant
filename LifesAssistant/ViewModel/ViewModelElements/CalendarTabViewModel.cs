@@ -1,7 +1,10 @@
 ﻿using System;
 using System.Collections.ObjectModel;
+using System.Globalization;
 using System.Linq;
+using System.Threading;
 using System.Windows.Input;
+using System.Windows.Markup;
 using DataModel.Calendar;
 using DataRepository;
 using LifesAssistant.Infrastructure;
@@ -199,6 +202,8 @@ namespace LifesAssistant.ViewModel.ViewModelElements
 
         public void ExecuteViewTasksCommand(object parametr)
         {
+            FlyoutIsOpen = false;
+
             if (TaskHeight == 0)
             {
                 DayTasks = CalendarRepository.Instance.GetByDay(SearchDate).DailyTasks;
@@ -310,6 +315,7 @@ namespace LifesAssistant.ViewModel.ViewModelElements
             CalendarRepository.Instance.AddOperation(NewTask);
             NewTask = new OneTask();
             DayTasks = CalendarRepository.Instance.GetByDay(SearchDate).DailyTasks;
+            FlyoutIsOpen = false;
         }
         #endregion
 

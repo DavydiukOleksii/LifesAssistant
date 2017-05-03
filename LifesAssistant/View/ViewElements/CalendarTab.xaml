@@ -3,6 +3,7 @@
              xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
              xmlns:controls="http://metro.mahapps.com/winfx/xaml/controls"
              xmlns:d="http://schemas.microsoft.com/expression/blend/2008"
+             xmlns:glob="clr-namespace:System.Globalization;assembly=mscorlib"
              xmlns:iconPacks="http://metro.mahapps.com/winfx/xaml/iconpacks"
              xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
              xmlns:res="clr-namespace:LifesAssistant.Properties.Language"
@@ -14,7 +15,7 @@
     <Grid Background="White">
         <Grid.ColumnDefinitions>
             <ColumnDefinition />
-            <ColumnDefinition Width="140" />
+            <ColumnDefinition Width="145" />
         </Grid.ColumnDefinitions>
         <Grid.RowDefinitions>
             <RowDefinition Height="40" />
@@ -25,8 +26,8 @@
         </Grid.RowDefinitions>
 
         <TextBlock Height="24"
+                   Margin="0 10 0 0"
                    HorizontalAlignment="Center"
-                   VerticalAlignment="Center"
                    FontSize="18"
                    Text="{x:Static res:Resources.calendarTabLabel}" />
 
@@ -34,7 +35,7 @@
                    Grid.Row="0"
                    Grid.Column="1"
                    Height="20"
-                   Margin="10 0"
+                   Margin="0 10 10 0"
                    HorizontalAlignment="Right"
                    VerticalAlignment="Center"
                    FontSize="14"
@@ -86,7 +87,7 @@
               Background="Gray"
               ColumnSpan="2">
             <Grid.RowDefinitions>
-                <RowDefinition Height="25" />
+                <RowDefinition Height="28" />
                 <RowDefinition />
             </Grid.RowDefinitions>
             <Grid.ColumnDefinitions>
@@ -95,7 +96,7 @@
             </Grid.ColumnDefinitions>
 
             <Label HorizontalContentAlignment="Center"
-                   Content="Tasks list"
+                   Content="{x:Static res:Resources.taskListLabel}"
                    FontSize="14" />
 
             <controls:Tile Grid.RowSpan="2"
@@ -107,14 +108,14 @@
                            Command="{Binding ViewFlyout}">
                 <TextBlock Margin="3"
                            VerticalAlignment="Center"
-                           Text="Add new task" />
+                           Text="{x:Static res:Resources.newTaskLabel}" />
             </controls:Tile>
 
             <!--  flyout  -->
             <controls:Flyout Grid.RowSpan="2"
                              Grid.Column="1"
                              MaxWidth="160"
-                             Header="Add Task"
+                             Header="{x:Static res:Resources.addTaskLabel}"
                              IsOpen="{Binding FlyoutIsOpen}"
                              Position="Right">
                 <StackPanel>
@@ -164,7 +165,7 @@
                                    Command="{Binding AddTask}">
                         <TextBlock Margin="3"
                                    VerticalAlignment="Center"
-                                   Text="Add" />
+                                   Text="{x:Static res:Resources.addLabel}" />
                     </controls:Tile>
                 </StackPanel>
             </controls:Flyout>
@@ -199,7 +200,7 @@
                 <DataGrid.Resources>
                     <ContextMenu x:Key="itemContextMenu">
                         <ContextMenu.Items>
-                            <MenuItem Command="{Binding DataContext.DellCurrentTask, RelativeSource={RelativeSource AncestorType=UserControl}}" Header="Delete" />
+                            <MenuItem Command="{Binding DataContext.DellCurrentTask, RelativeSource={RelativeSource AncestorType=UserControl}}" Header="{x:Static res:Resources.deleteLabel}" />
                         </ContextMenu.Items>
                     </ContextMenu>
                 </DataGrid.Resources>

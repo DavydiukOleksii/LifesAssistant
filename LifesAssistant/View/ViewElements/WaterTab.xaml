@@ -22,8 +22,8 @@
         </Grid.RowDefinitions>
 
         <TextBlock Height="24"
+                   Margin="0 10 0 0"
                    HorizontalAlignment="Center"
-                   VerticalAlignment="Center"
                    FontSize="18"
                    Text="{x:Static res:Resources.waterTabName}" />
 
@@ -31,7 +31,7 @@
                    Grid.Row="0"
                    Grid.Column="1"
                    Height="20"
-                   Margin="10 0"
+                   Margin="0 10 10 0"
                    HorizontalAlignment="Right"
                    VerticalAlignment="Center"
                    FontSize="14"
@@ -52,7 +52,7 @@
                 <DataGridTextColumn Width="auto"
                                     MinWidth="90"
                                     Binding="{Binding Path=Time,
-                                                      StringFormat={}{0:HH:mm}}"
+                                                      StringFormat={} {0:HH:mm}}"
                                     Header="{x:Static res:Resources.timeHeader}" />
                 <DataGridTextColumn Width="auto"
                                     MinWidth="80"
@@ -79,47 +79,72 @@
         <DockPanel Grid.Row="1"
                    Grid.Column="1"
                    Margin="5">
-            <Border BorderBrush="Black" BorderThickness="1">
-                <Grid>
+
+            <Grid>
+                <Grid.RowDefinitions>
+                    <RowDefinition Height="24" />
+                    <RowDefinition />
+                    <RowDefinition Height="12" />
+                </Grid.RowDefinitions>
+                <Grid.ColumnDefinitions>
+                    <ColumnDefinition Width="10" />
+                    <ColumnDefinition Width="Auto" />
+                    <ColumnDefinition />
+                    <ColumnDefinition Width="10" />
+                </Grid.ColumnDefinitions>
+
+                <Grid Grid.Column="1"
+                      Width="auto"
+                      Background="White"
+                      ZIndex="1">
+                    <TextBlock Width="auto"
+                               Margin="5 0"
+                               HorizontalAlignment="Center"
+                               VerticalAlignment="Center"
+                               Text="{x:Static res:Resources.addNewWaterOperLabel}" />
+                </Grid>
+
+                <DockPanel Grid.Row="1"
+                           Grid.RowSpan="2"
+                           Grid.ColumnSpan="4">
+                    <Border Margin="0 -12 0 0"
+                            BorderBrush="Gray"
+                            BorderThickness="2"
+                            CornerRadius="10" />
+                </DockPanel>
+
+                <!--  Context  -->
+                <Grid Grid.Row="1"
+                      Grid.Column="1"
+                      Grid.ColumnSpan="2">
                     <Grid.RowDefinitions>
-                        <RowDefinition Height="0.5*" />
                         <RowDefinition />
                         <RowDefinition />
-                        <RowDefinition Height="0.5*" />
                     </Grid.RowDefinitions>
                     <Grid.ColumnDefinitions>
-                        <ColumnDefinition Width="35*" />
+                        <ColumnDefinition Width="30*" />
                         <ColumnDefinition Width="53*" />
                     </Grid.ColumnDefinitions>
 
-                    <TextBlock Grid.Row="1"
-                               Height="16"
-                               Margin="15 0 0 0"
+                    <TextBlock Height="16"
+                               Margin="5 0 0 0"
                                VerticalAlignment="Center"
                                Text="{x:Static res:Resources.capacityLabel}" />
 
-                    <TextBox Name="AddPurchaseText"
-                             Grid.Row="1"
-                             Grid.Column="1"
-                             Height="25"
-                             Margin="5 3 10 3"
-                             VerticalAlignment="Center">
-                        <TextBox.Text>
-                            <Binding Mode="TwoWay"
-                                     Path="NewWaterOperation.Capasity"
-                                     UpdateSourceTrigger="PropertyChanged">
-                                <Binding.ValidationRules>
-                                    <ExceptionValidationRule />
-                                </Binding.ValidationRules>
-                            </Binding>
-                        </TextBox.Text>
-                    </TextBox>
+                    <controls:NumericUpDown Grid.Column="1"
+                                            Margin="10"
+                                            VerticalAlignment="Center"
+                                            Interval="0.1"
+                                            Maximum="5"
+                                            Minimum="0.1"
+                                            Value="{Binding Path=NewWaterOperation.Capasity,
+                                                            Mode=TwoWay,
+                                                            UpdateSourceTrigger=PropertyChanged}" />
 
-                    <controls:Tile Grid.Row="2"
+                    <controls:Tile Grid.Row="1"
                                    Grid.Column="1"
-                                   Width="94"
                                    Height="26"
-                                   Margin="5 5 10 5"
+                                   Margin="10 5"
                                    HorizontalAlignment="Center"
                                    VerticalAlignment="Center"
                                    Command="{Binding AddNewWaterOperation}">
@@ -130,20 +155,20 @@
                     </controls:Tile>
 
                 </Grid>
-            </Border>
+            </Grid>
         </DockPanel>
 
         <!--  time from last water operation  -->
         <DockPanel Grid.Row="2"
                    Grid.Column="0"
-                   Margin="10"
+                   Margin="10 10 5 10"
                    Background="#2EB7EC">
             <TextBlock Width="92"
                        MinWidth="120"
-                       Margin="0 10 0 0"
+                       Margin="0 5 0 0"
                        HorizontalAlignment="Center"
                        DockPanel.Dock="Top"
-                       FontSize="15"
+                       FontSize="14"
                        Foreground="White"
                        Text="{x:Static res:Resources.lastWaterDrinkingLabel}"
                        TextAlignment="Center"

@@ -23,8 +23,8 @@
 
         <!--  Tab Name  -->
         <TextBlock Height="24"
+                   Margin="0 10 0 0"
                    HorizontalAlignment="Center"
-                   VerticalAlignment="Center"
                    FontSize="18"
                    Text="{x:Static res:Resources.dreamTabName}" />
 
@@ -33,7 +33,7 @@
                    Grid.Row="0"
                    Grid.Column="1"
                    Height="20"
-                   Margin="10 0"
+                   Margin="0 10 10 0"
                    HorizontalAlignment="Right"
                    VerticalAlignment="Center"
                    FontSize="14"
@@ -56,20 +56,20 @@
                 <DataGridTextColumn Width="auto"
                                     MinWidth="60"
                                     Binding="{Binding Path=Time,
-                                                      StringFormat=Time: {0:HH:mm}}"
+                                                      StringFormat={} {0:HH:mm}}"
                                     Header="{x:Static res:Resources.timeHeader}" />
 
                 <DataGridTextColumn Width="auto"
                                     MinWidth="60"
                                     Binding="{Binding Path=Duration,
-                                                      StringFormat=Time: {0:HH:mm}}"
+                                                      StringFormat={} {0:HH:mm}}"
                                     Header="{x:Static res:Resources.durationHeader}" />
             </DataGrid.Columns>
 
             <DataGrid.Resources>
                 <ContextMenu x:Key="itemContextMenu">
                     <ContextMenu.Items>
-                        <MenuItem Command="{Binding DataContext.DellCurrentSleepTime, RelativeSource={RelativeSource AncestorType=UserControl}}" Header="Delete" />
+                        <MenuItem Command="{Binding DataContext.DellCurrentSleepTime, RelativeSource={RelativeSource AncestorType=UserControl}}" Header="{x:Static res:Resources.deleteLabel}" />
                     </ContextMenu.Items>
                 </ContextMenu>
             </DataGrid.Resources>
@@ -81,58 +81,71 @@
             </DataGrid.RowStyle>
         </DataGrid>
 
-        <!--  Add water operation  -->
+        <!--  Add new sleeps time  -->
         <DockPanel Grid.Row="1"
                    Grid.Column="1"
-                   Margin="5">
-            <Border BorderBrush="Black" BorderThickness="1">
-                <Grid>
+                   Margin="15 5">
+            <Grid>
+                <Grid.RowDefinitions>
+                    <RowDefinition Height="24" />
+                    <RowDefinition />
+                    <RowDefinition Height="12" />
+                </Grid.RowDefinitions>
+                <Grid.ColumnDefinitions>
+                    <ColumnDefinition Width="10" />
+                    <ColumnDefinition Width="Auto" />
+                    <ColumnDefinition />
+                    <ColumnDefinition Width="10" />
+                </Grid.ColumnDefinitions>
+
+                <Grid Grid.Column="1"
+                      Width="auto"
+                      Background="White"
+                      ZIndex="1">
+                    <TextBlock Width="auto"
+                               Margin="5 0"
+                               HorizontalAlignment="Center"
+                               VerticalAlignment="Center"
+                               Text="{x:Static res:Resources.addNewSleepTimeLabel}" />
+                </Grid>
+
+                <DockPanel Grid.Row="1"
+                           Grid.RowSpan="2"
+                           Grid.ColumnSpan="4">
+                    <Border Margin="0 -12 0 0"
+                            BorderBrush="Gray"
+                            BorderThickness="2"
+                            CornerRadius="10" />
+                </DockPanel>
+
+                <!--  Context  -->
+                <Grid Grid.Row="1"
+                      Grid.Column="1"
+                      Grid.ColumnSpan="2">
                     <Grid.RowDefinitions>
-                        <RowDefinition Height="0.3*" />
                         <RowDefinition />
                         <RowDefinition />
-                        <RowDefinition Height="0.3*" />
+                        <RowDefinition />
                     </Grid.RowDefinitions>
                     <Grid.ColumnDefinitions>
-                        <ColumnDefinition Width="30*" />
-                        <ColumnDefinition Width="30*" />
+                        <ColumnDefinition />
+                        <ColumnDefinition Width="Auto" />
+                        <ColumnDefinition />
                     </Grid.ColumnDefinitions>
 
-                    <TextBlock Grid.Row="1"
+                    <TextBlock Grid.Row="0"
+                               Grid.Column="1"
                                Height="16"
-                               Margin="8 0 0 0"
+                               Margin="1"
+                               HorizontalAlignment="Center"
                                VerticalAlignment="Center"
                                Text="{x:Static res:Resources.sleepDurationLabel}" />
-
-                    <!--<TextBox Grid.Row="1"
-                             Grid.Column="1"
-                             Height="25"
-                             Margin="5 3 10 3"
-                             VerticalAlignment="Center">
-                        <TextBox.Text>
-                            <Binding Mode="TwoWay"
-                                     Path="NewSleep.Duration"
-                                     UpdateSourceTrigger="PropertyChanged">
-                                <Binding.ValidationRules>
-                                    <ExceptionValidationRule />
-                                </Binding.ValidationRules>
-                            </Binding>
-                        </TextBox.Text>
-                    </TextBox>-->
-
-                    <!--<controls:TimePicker Grid.Row="1"
-                                         Grid.Column="1"
-                                         Height="25"
-                                         Margin="5 3 10 3"
-                                         VerticalAlignment="Center"
-                                         SelectedTime="{Binding NewSleep.Duration,
-                                                                Mode=TwoWay,
-                                                                UpdateSourceTrigger=PropertyChanged}" />-->
 
                     <xctk:DateTimePicker Grid.Row="1"
                                          Grid.Column="1"
                                          Height="25"
-                                         Margin="5 3 10 3"
+                                         Margin="1"
+                                         HorizontalAlignment="Center"
                                          VerticalAlignment="Center"
                                          AutoCloseCalendar="True"
                                          DefaultValue="00:00:00"
@@ -144,12 +157,11 @@
                                                          UpdateSourceTrigger=PropertyChanged,
                                                          Mode=TwoWay}" />
 
-
                     <controls:Tile Grid.Row="2"
                                    Grid.Column="1"
                                    Width="94"
                                    Height="26"
-                                   Margin="5 5 10 5"
+                                   Margin="10 5"
                                    HorizontalAlignment="Center"
                                    VerticalAlignment="Center"
                                    Command="{Binding AddNewSleepTime}">
@@ -158,34 +170,9 @@
                                    VerticalAlignment="Center"
                                    Text="{x:Static res:Resources.addLabel}" />
                     </controls:Tile>
-
                 </Grid>
-            </Border>
+            </Grid>
         </DockPanel>
-
-        <!--  time from last sleep  -->
-        <!--<DockPanel Grid.Row="2"
-                   Grid.Column="0"
-                   Margin="10"
-                   Background="#2EB7EC">
-            <TextBlock Width="92"
-                       MinWidth="120"
-                       Margin="0 10 0 0"
-                       HorizontalAlignment="Center"
-                       DockPanel.Dock="Top"
-                       FontSize="15"
-                       Foreground="White"
-                       Text="{x:Static res:Resources.lastSleepingLabel}"
-                       TextAlignment="Center"
-                       TextWrapping="Wrap" />
-            <TextBlock Margin="0 5 0 0"
-                       HorizontalAlignment="Center"
-                       DockPanel.Dock="Top"
-                       FontSize="25"
-                       FontWeight="UltraBold"
-                       Foreground="white"
-                       Text="{Binding TimeFromLastDream}" />
-        </DockPanel>-->
 
         <!--  total sleeping time today  -->
         <DockPanel Grid.Row="2"

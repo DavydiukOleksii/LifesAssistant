@@ -120,6 +120,18 @@
   <data name="addLabel" xml:space="preserve">
     <value>Add</value>
   </data>
+  <data name="addNewMoneyOperLabel" xml:space="preserve">
+    <value>Add new money operation</value>
+  </data>
+  <data name="addNewSleepTimeLabel" xml:space="preserve">
+    <value>Add new sleeps time</value>
+  </data>
+  <data name="addNewWaterOperLabel" xml:space="preserve">
+    <value>Add new water operation</value>
+  </data>
+  <data name="addTaskLabel" xml:space="preserve">
+    <value>Add task</value>
+  </data>
   <data name="calendarTabLabel" xml:space="preserve">
     <value>Calendar</value>
   </data>
@@ -138,6 +150,9 @@
   <data name="dayLabel" xml:space="preserve">
     <value>day</value>
   </data>
+  <data name="deleteLabel" xml:space="preserve">
+    <value>Delete</value>
+  </data>
   <data name="dellLabel" xml:space="preserve">
     <value>Dell</value>
   </data>
@@ -148,7 +163,7 @@
     <value>Descriptions:</value>
   </data>
   <data name="dreamTabName" xml:space="preserve">
-    <value>Dreams time</value>
+    <value>Sleeping time</value>
   </data>
   <data name="durationHeader" xml:space="preserve">
     <value>Durations</value>
@@ -183,6 +198,9 @@
   <data name="monthLabel" xml:space="preserve">
     <value>month</value>
   </data>
+  <data name="newTaskLabel" xml:space="preserve">
+    <value>Add new task</value>
+  </data>
   <data name="purchaseHeader" xml:space="preserve">
     <value>Purchase</value>
   </data>
@@ -196,13 +214,16 @@
     <value>Show Task ▼</value>
   </data>
   <data name="sleepDurationLabel" xml:space="preserve">
-    <value>Sleep duration: </value>
+    <value>Duration of sleep:</value>
   </data>
   <data name="startHeader" xml:space="preserve">
     <value>Start</value>
   </data>
   <data name="startSleepingLabel" xml:space="preserve">
     <value>Begin dream:</value>
+  </data>
+  <data name="taskListLabel" xml:space="preserve">
+    <value>Task list</value>
   </data>
   <data name="timeHeader" xml:space="preserve">
     <value>Time</value>

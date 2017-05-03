@@ -117,7 +117,127 @@
   <resheader name="writer">
     <value>System.Resources.ResXResourceWriter, System.Windows.Forms, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089</value>
   </resheader>
+  <data name="addLabel" xml:space="preserve">
+    <value>Добавить</value>
+  </data>
+  <data name="addNewSleepTimeLabel" xml:space="preserve">
+    <value>Добавить новое время сна:</value>
+  </data>
+  <data name="addTaskLabel" xml:space="preserve">
+    <value>Добавить задачу</value>
+  </data>
+  <data name="calendarTabLabel" xml:space="preserve">
+    <value>Календарь</value>
+  </data>
+  <data name="capacityHeader" xml:space="preserve">
+    <value>Объем</value>
+  </data>
+  <data name="capacityLabel" xml:space="preserve">
+    <value>Объем:</value>
+  </data>
+  <data name="chartsByLabel" xml:space="preserve">
+    <value>График за </value>
+  </data>
+  <data name="creditTabName" xml:space="preserve">
+    <value>Расходы</value>
+  </data>
+  <data name="dayLabel" xml:space="preserve">
+    <value>день</value>
+  </data>
+  <data name="dellLabel" xml:space="preserve">
+    <value>Удалить</value>
+  </data>
+  <data name="descriptionsHeader" xml:space="preserve">
+    <value>Описание</value>
+  </data>
+  <data name="descriptionsLabel" xml:space="preserve">
+    <value>Описание:</value>
+  </data>
+  <data name="dreamTabName" xml:space="preserve">
+    <value>Время сна</value>
+  </data>
+  <data name="durationHeader" xml:space="preserve">
+    <value>Длительность</value>
+  </data>
+  <data name="findLabel" xml:space="preserve">
+    <value>Найти</value>
+  </data>
+  <data name="finishHeader" xml:space="preserve">
+    <value>Финиш</value>
+  </data>
+  <data name="finishSleepingLabel" xml:space="preserve">
+    <value>Окончание сна:</value>
+  </data>
+  <data name="hideChartsLabel" xml:space="preserve">
+    <value>Скрыть график  ▲</value>
+  </data>
+  <data name="hideTasksLabel" xml:space="preserve">
+    <value>Скрыть задачи ▲</value>
+  </data>
+  <data name="lastSleepingLabel" xml:space="preserve">
+    <value>Время от последнего сна</value>
+  </data>
+  <data name="lastWaterDrinkingLabel" xml:space="preserve">
+    <value>Время от последнего приема воды</value>
+  </data>
+  <data name="moneyHeader" xml:space="preserve">
+    <value>Деньги</value>
+  </data>
+  <data name="moneyLabel" xml:space="preserve">
+    <value>Деньги:</value>
+  </data>
+  <data name="monthLabel" xml:space="preserve">
+    <value>месяц</value>
+  </data>
+  <data name="newTaskLabel" xml:space="preserve">
+    <value>Новая задача</value>
+  </data>
+  <data name="purchaseHeader" xml:space="preserve">
+    <value>Покупка</value>
+  </data>
+  <data name="purchaseLabel" xml:space="preserve">
+    <value>Покупка:</value>
+  </data>
+  <data name="showChartsLabel" xml:space="preserve">
+    <value>Графики ▼</value>
+  </data>
+  <data name="showTasksLabel" xml:space="preserve">
+    <value>Показать задачи ▼</value>
+  </data>
+  <data name="sleepDurationLabel" xml:space="preserve">
+    <value>Длительность:</value>
+  </data>
+  <data name="startHeader" xml:space="preserve">
+    <value>Старт</value>
+  </data>
+  <data name="startSleepingLabel" xml:space="preserve">
+    <value>Начало сна:</value>
+  </data>
+  <data name="taskListLabel" xml:space="preserve">
+    <value>Список задач</value>
+  </data>
+  <data name="timeHeader" xml:space="preserve">
+    <value>Время</value>
+  </data>
+  <data name="timeLabel" xml:space="preserve">
+    <value>Время:</value>
+  </data>
   <data name="todayLabel" xml:space="preserve">
-    <value>Сегоня: </value>
+    <value>Сегодня: </value>
+  </data>
+  <data name="totalCostsLable" xml:space="preserve">
+    <value>Расходы за день:</value>
+  </data>
+  <data name="totalSleepLabel" xml:space="preserve">
+    <value>Общие время сна:</value>
+  </data>
+  <data name="viewTaskLabel" xml:space="preserve">
+    <value>Показать задачи</value>
+  </data>
+  <data name="waterTabName" xml:space="preserve">
+    <value>Баланс воды</value>
+  </data>
+  <data name="yearLabel" xml:space="preserve">
+    <value>год</value>
   </data>
 </root>
