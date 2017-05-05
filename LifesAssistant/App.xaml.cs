@@ -1,6 +1,4 @@
-﻿using System.Globalization;
-using System.Threading;
-using System.Windows;
+﻿using System.Windows;
 using LifesAssistant.ViewModel;
 
 namespace LifesAssistant

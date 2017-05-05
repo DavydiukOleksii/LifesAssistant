@@ -3,8 +3,6 @@
              xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
              xmlns:controls="http://metro.mahapps.com/winfx/xaml/controls"
              xmlns:d="http://schemas.microsoft.com/expression/blend/2008"
-             xmlns:glob="clr-namespace:System.Globalization;assembly=mscorlib"
-             xmlns:iconPacks="http://metro.mahapps.com/winfx/xaml/iconpacks"
              xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
              xmlns:res="clr-namespace:LifesAssistant.Properties.Language"
              xmlns:xctk="http://schemas.xceed.com/wpf/xaml/toolkit"
@@ -50,10 +48,12 @@
                 <ColumnDefinition />
                 <ColumnDefinition />
             </Grid.ColumnDefinitions>
-            <DatePicker Width="auto"
+            <DatePicker Name="DatePicker"
+                        Width="auto"
                         Height="24"
                         Margin="15 0 5 0"
-                        SelectedDate="{Binding SearchDate}" />
+                        SelectedDate="{Binding SearchDate,
+                                               StringFormat=dd.MM.yyyy}" />
             <controls:Tile Grid.Row="2"
                            Grid.Column="1"
                            Width="94"
@@ -99,10 +99,15 @@
                    Content="{x:Static res:Resources.taskListLabel}"
                    FontSize="14" />
 
+            <Label Grid.Column="1"
+                   HorizontalContentAlignment="Center"
+                   Content="{Binding TaskDate}"
+                   FontSize="14" />
+
             <controls:Tile Grid.RowSpan="2"
                            Grid.Column="1"
                            Height="25"
-                           Margin="10 30 10 5"
+                           Margin="10 33 10 5"
                            HorizontalAlignment="Center"
                            VerticalAlignment="Top"
                            Command="{Binding ViewFlyout}">
@@ -211,10 +216,6 @@
                     </Style>
                 </DataGrid.RowStyle>
             </DataGrid>
-
-
         </Grid>
-
     </Grid>
-
 </UserControl>

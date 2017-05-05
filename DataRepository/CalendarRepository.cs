@@ -3,6 +3,7 @@ using System.Collections.Generic;
 using System.Collections.ObjectModel;
 using System.IO;
 using System.Linq;
+using System.Windows.Controls;
 using DataModel.Calendar;
 using Newtonsoft.Json;
 
@@ -157,6 +158,40 @@ namespace DataRepository
             }
             catch
             {
+
+            }
+        }
+
+        public List<CalendarDateRange> GetListDaysWithTask()
+        {
+            try
+            {
+                List<CalendarDateRange> result = new List<CalendarDateRange>();
+
+                if (!File.Exists(filePath + fileName))
+                {
+                    File.Create(filePath + fileName);
+                }
+
+                using (StreamReader r = new StreamReader(filePath + fileName))
+                {
+                    string json = r.ReadToEnd();
+                    List<DayTaskReport> today = JsonConvert.DeserializeObject<List<DayTaskReport>>(json);
+                    if (today != null)
+                    {
+                        result = today.Where(x => x.DailyTasks.Count > 0).Select(x => new CalendarDateRange(x.Date)).ToList();
+                    }
+                    else
+                    {
+                        result.Add(new CalendarDateRange(DateTime.Today));
+                    }
+
+                }
+                return result;
+            }
+            catch
+            {
+                return new List<CalendarDateRange>();
 
             }
         }

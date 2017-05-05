@@ -1,15 +1,12 @@
 ﻿using System;
+using System.Collections.Generic;
 using System.Collections.ObjectModel;
-using System.Globalization;
-using System.Linq;
-using System.Threading;
+using System.Windows.Controls;
 using System.Windows.Input;
-using System.Windows.Markup;
 using DataModel.Calendar;
 using DataRepository;
 using LifesAssistant.Infrastructure;
 using LifesAssistant.Properties.Language;
-using Xceed.Wpf.Toolkit.Core.Converters;
 
 namespace LifesAssistant.ViewModel.ViewModelElements
 {
@@ -43,6 +40,10 @@ namespace LifesAssistant.ViewModel.ViewModelElements
 
             SearchDate = DateTime.Today;
             DayTasks = CalendarRepository.Instance.GetByDay(DateTime.Today).DailyTasks;
+
+            DaysWithTask = CalendarRepository.Instance.GetListDaysWithTask();
+
+            
         }
         #endregion
 
@@ -94,6 +95,17 @@ namespace LifesAssistant.ViewModel.ViewModelElements
             }
         }
 
+        protected string _taskDate;
+        public string TaskDate
+        {
+            get { return _taskDate; }
+            set
+            {
+                _taskDate = value;
+                OnPropertyChanged("TaskDate");
+            }
+        }
+
         protected DateTime _searchDate;
         public DateTime SearchDate
         {
@@ -102,6 +114,17 @@ namespace LifesAssistant.ViewModel.ViewModelElements
             {
                 _searchDate = value;
                 OnPropertyChanged("SearchDate");
+            }
+        }
+
+        protected List<CalendarDateRange> _daysWithTask;
+        public List<CalendarDateRange> DaysWithTask
+        {
+            get { return _daysWithTask; }
+            set
+            {
+                _daysWithTask = value;
+                OnPropertyChanged("DaysWithTask");
             }
         }
 
@@ -209,6 +232,7 @@ namespace LifesAssistant.ViewModel.ViewModelElements
                 DayTasks = CalendarRepository.Instance.GetByDay(SearchDate).DailyTasks;
                 ShowTasksLabel = Resources.hideTasksLabel;
                 TaskHeight = _defaultTaskHeight;
+                TaskDate = SearchDate.ToShortDateString();
             }
             else
             {
@@ -279,6 +303,8 @@ namespace LifesAssistant.ViewModel.ViewModelElements
                 DayTasks = CalendarRepository.Instance.GetByDay(CurrentSelectedDate).DailyTasks;
                 if(_taskHeight == 0)
                     ViewTasks.Execute(null);
+
+                TaskDate = SearchDate.ToShortDateString();
             }
         }
         #endregion
