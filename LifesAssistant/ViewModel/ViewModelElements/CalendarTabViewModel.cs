@@ -7,6 +7,7 @@ using DataModel.Calendar;
 using DataRepository;
 using LifesAssistant.Infrastructure;
 using LifesAssistant.Properties.Language;
+using System.IO;
 
 namespace LifesAssistant.ViewModel.ViewModelElements
 {
@@ -33,7 +34,8 @@ namespace LifesAssistant.ViewModel.ViewModelElements
         {
             CurrentDate = Resources.todayLabel + DateTime.Today.ToString("d");
             ShowTasksLabel = Resources.showTasksLabel;
-            FlyoutIsOpen = false;
+            TaskFlyoutIsOpen = false;
+            HBFlyoutIsOpen = false;
             TaskHeight = 0;
 
             NewTask = new OneTask();
@@ -41,15 +43,26 @@ namespace LifesAssistant.ViewModel.ViewModelElements
             SearchDate = DateTime.Today;
             DayTasks = CalendarRepository.Instance.GetByDay(DateTime.Today).DailyTasks;
 
-            DaysWithTask = CalendarRepository.Instance.GetListDaysWithTask();
+            var filesPath = Directory.GetFiles(Path.GetDirectoryName(Path.GetDirectoryName(System.IO.Directory.GetCurrentDirectory()))+ "/Image/Calendar", "*.jpg", SearchOption.AllDirectories);
 
-            
+            Random rnd = new Random();
+            ImagePath = filesPath[rnd.Next(0, filesPath.Length - 1)];
         }
         #endregion
 
         #region Data
-
         protected int _defaultTaskHeight = 275;
+
+        protected string _imagePath;
+        public string ImagePath
+        {
+            get { return _imagePath; }
+            set
+            {
+                _imagePath = value;
+                OnPropertyChanged("ImagePath");
+            }
+        }
 
         protected string _showTasksLabel;
         public string ShowTasksLabel
@@ -62,14 +75,25 @@ namespace LifesAssistant.ViewModel.ViewModelElements
             }
         }
 
-        protected bool _flyoutIsOpen;
-        public bool FlyoutIsOpen
+        protected bool _taskFlyoutIsOpen;
+        public bool TaskFlyoutIsOpen
         {
-            get { return _flyoutIsOpen; }
+            get { return _taskFlyoutIsOpen; }
             set
             {
-                _flyoutIsOpen = value;
-                OnPropertyChanged("FlyoutIsOpen");
+                _taskFlyoutIsOpen = value;
+                OnPropertyChanged("TaskFlyoutIsOpen");
+            }
+        }
+
+        protected bool _hbFlyoutIsOpen;
+        public bool HBFlyoutIsOpen
+        {
+            get { return _hbFlyoutIsOpen; }
+            set
+            {
+                _hbFlyoutIsOpen = value;
+                OnPropertyChanged("HBFlyoutIsOpen");
             }
         }
 
@@ -225,7 +249,7 @@ namespace LifesAssistant.ViewModel.ViewModelElements
 
         public void ExecuteViewTasksCommand(object parametr)
         {
-            FlyoutIsOpen = false;
+            TaskFlyoutIsOpen = false;
 
             if (TaskHeight == 0)
             {
@@ -243,35 +267,66 @@ namespace LifesAssistant.ViewModel.ViewModelElements
         }
         #endregion
 
-        #region FlyoutOpen
-        private ICommand _viewFlyoutCommand;
-        public ICommand ViewFlyout
+        #region TaskFlyoutOpen
+        private ICommand _viewTaskFlyoutCommand;
+        public ICommand ViewTaskFlyout
         {
             get
             {
-                if (_viewFlyoutCommand == null)
+                if (_viewTaskFlyoutCommand == null)
                 {
-                    _viewFlyoutCommand = new RelayCommand(ExecuteViewFlyoutCommand, CanExecuteViewFlyoutCommand);
+                    _viewTaskFlyoutCommand = new RelayCommand(ExecuteViewTaskFlyoutCommand, CanExecuteViewTaskFlyoutCommand);
                 }
-                return _viewFlyoutCommand;
+                return _viewTaskFlyoutCommand;
             }
         }
 
-        public bool CanExecuteViewFlyoutCommand(object parametr)
+        public bool CanExecuteViewTaskFlyoutCommand(object parametr)
         {
             return true;
         }
 
-
-        public void ExecuteViewFlyoutCommand(object parametr)
+        public void ExecuteViewTaskFlyoutCommand(object parametr)
         {
-            if (FlyoutIsOpen == false)
+            if (TaskFlyoutIsOpen == false)
             {
-                FlyoutIsOpen = true;
+                TaskFlyoutIsOpen = true;
             }
             else
             {
-                FlyoutIsOpen = false;
+                TaskFlyoutIsOpen = false;
+            }
+        }
+        #endregion
+
+        #region HBFlyoutOpen
+        private ICommand _viewHBFlyoutCommand;
+        public ICommand ViewHBFlyout
+        {
+            get
+            {
+                if (_viewHBFlyoutCommand == null)
+                {
+                    _viewHBFlyoutCommand = new RelayCommand(ExecuteViewHBFlyoutCommand, CanExecuteViewHBFlyoutCommand);
+                }
+                return _viewHBFlyoutCommand;
+            }
+        }
+
+        public bool CanExecuteViewHBFlyoutCommand(object parametr)
+        {
+            return true;
+        }
+
+        public void ExecuteViewHBFlyoutCommand(object parametr)
+        {
+            if (HBFlyoutIsOpen == false)
+            {
+                HBFlyoutIsOpen = true;
+            }
+            else
+            {
+                HBFlyoutIsOpen = false;
             }
         }
         #endregion
@@ -341,7 +396,7 @@ namespace LifesAssistant.ViewModel.ViewModelElements
             CalendarRepository.Instance.AddOperation(NewTask);
             NewTask = new OneTask();
             DayTasks = CalendarRepository.Instance.GetByDay(SearchDate).DailyTasks;
-            FlyoutIsOpen = false;
+            TaskFlyoutIsOpen = false;
         }
         #endregion
 

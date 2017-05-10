@@ -112,9 +112,6 @@
     <Compile Include="View\ViewElements\DreamTab.xaml.cs">
       <DependentUpon>DreamTab.xaml</DependentUpon>
     </Compile>
-    <Compile Include="View\ViewElements\ProcessTab.xaml.cs">
-      <DependentUpon>ProcessTab.xaml</DependentUpon>
-    </Compile>
     <Compile Include="View\ViewElements\WaterTab.xaml.cs">
       <DependentUpon>WaterTab.xaml</DependentUpon>
     </Compile>
@@ -142,10 +139,6 @@
       <Generator>MSBuild:Compile</Generator>
     </Page>
     <Page Include="View\ViewElements\DreamTab.xaml">
-      <Generator>MSBuild:Compile</Generator>
-      <SubType>Designer</SubType>
-    </Page>
-    <Page Include="View\ViewElements\ProcessTab.xaml">
       <Generator>MSBuild:Compile</Generator>
       <SubType>Designer</SubType>
     </Page>
@@ -207,6 +200,11 @@
       <Project>{680ba66d-95bc-44b6-b649-4954529ec307}</Project>
       <Name>DataRepository</Name>
     </ProjectReference>
+  </ItemGroup>
+  <ItemGroup>
+    <Resource Include="Image\Sleep\cloud.jpg" />
+    <Resource Include="Image\Sleep\moon.jpg" />
+    <Resource Include="Image\Sleep\star.jpg" />
   </ItemGroup>
   <Import Project="$(MSBuildToolsPath)\Microsoft.CSharp.targets" />
   <!-- To modify your build process, add your task inside one of the targets below and uncomment it. 

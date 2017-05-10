@@ -61,6 +61,24 @@ namespace LifesAssistant.Properties.Language {
         }
         
         /// <summary>
+        ///   Looks up a localized string similar to Add HB.
+        /// </summary>
+        public static string addHBFloLabelyout {
+            get {
+                return ResourceManager.GetString("addHBFloLabelyout", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized string similar to Add new HB.
+        /// </summary>
+        public static string addHBLabel {
+            get {
+                return ResourceManager.GetString("addHBLabel", resourceCulture);
+            }
+        }
+        
+        /// <summary>
         ///   Looks up a localized string similar to Add.
         /// </summary>
         public static string addLabel {
@@ -147,6 +165,15 @@ namespace LifesAssistant.Properties.Language {
         public static string creditTabName {
             get {
                 return ResourceManager.GetString("creditTabName", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized string similar to Date:.
+        /// </summary>
+        public static string dateLabel {
+            get {
+                return ResourceManager.GetString("dateLabel", resourceCulture);
             }
         }
         
@@ -241,6 +268,15 @@ namespace LifesAssistant.Properties.Language {
         }
         
         /// <summary>
+        ///   Looks up a localized string similar to HB List: .
+        /// </summary>
+        public static string hbListLabel {
+            get {
+                return ResourceManager.GetString("hbListLabel", resourceCulture);
+            }
+        }
+        
+        /// <summary>
         ///   Looks up a localized string similar to Hide Charts  ▲.
         /// </summary>
         public static string hideChartsLabel {
@@ -300,6 +336,24 @@ namespace LifesAssistant.Properties.Language {
         public static string monthLabel {
             get {
                 return ResourceManager.GetString("monthLabel", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized string similar to Name.
+        /// </summary>
+        public static string nameHeader {
+            get {
+                return ResourceManager.GetString("nameHeader", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized string similar to Name:.
+        /// </summary>
+        public static string nameLabel {
+            get {
+                return ResourceManager.GetString("nameLabel", resourceCulture);
             }
         }
         

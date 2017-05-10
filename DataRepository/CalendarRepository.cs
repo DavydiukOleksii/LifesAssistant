@@ -162,11 +162,11 @@ namespace DataRepository
             }
         }
 
-        public List<CalendarDateRange> GetListDaysWithTask()
+        public List<DateTime> GetListDaysWithTask()
         {
             try
             {
-                List<CalendarDateRange> result = new List<CalendarDateRange>();
+                List<DateTime> result = new List<DateTime>();
 
                 if (!File.Exists(filePath + fileName))
                 {
@@ -179,11 +179,11 @@ namespace DataRepository
                     List<DayTaskReport> today = JsonConvert.DeserializeObject<List<DayTaskReport>>(json);
                     if (today != null)
                     {
-                        result = today.Where(x => x.DailyTasks.Count > 0).Select(x => new CalendarDateRange(x.Date)).ToList();
+                        result = today.Where(x => x.DailyTasks.Count > 0).Select(x => x.Date).ToList();
                     }
                     else
                     {
-                        result.Add(new CalendarDateRange(DateTime.Today));
+                        result.Add(DateTime.Today);
                     }
 
                 }
@@ -191,7 +191,7 @@ namespace DataRepository
             }
             catch
             {
-                return new List<CalendarDateRange>();
+                return new List<DateTime>();
 
             }
         }

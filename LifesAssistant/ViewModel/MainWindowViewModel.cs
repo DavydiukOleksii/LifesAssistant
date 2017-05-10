@@ -260,7 +260,8 @@ namespace LifesAssistant.ViewModel
                 TabHeight = 60;
                 WindowWidth = _defaultWindowWidth;
                 MainWidth = 400;
-                ChartsButtonHeight = 25;
+                if(!(MainPanel is CalendarTab))
+                    ChartsButtonHeight = 25;
                 WindowPosLeft = _currentWinLeftPos;
                 WindowPosTop = _currentWinTopPos;
             }
@@ -441,12 +442,9 @@ namespace LifesAssistant.ViewModel
                     MainPanel.DataContext = new DreamTabViewModel();
                     break;
                 }
-                case "Process":
-                {
-                    MainPanel = new ProcessTab();
-                    break;
-                }
             }
+            if(WindowWidth < _defaultWindowWidth)
+                ChangeWindowSize.Execute(this);
         }
 
         public bool CanExecuteTabChangedCommand(object parameter)
@@ -559,6 +557,7 @@ namespace LifesAssistant.ViewModel
 
         #endregion
 
+        //to do rewrite
         #region Events
 
         public void UserEventsHandler()

@@ -13,22 +13,24 @@
     <Grid Background="White">
         <Grid.ColumnDefinitions>
             <ColumnDefinition />
-            <ColumnDefinition Width="145" />
+            <ColumnDefinition Width="165" />
         </Grid.ColumnDefinitions>
         <Grid.RowDefinitions>
             <RowDefinition Height="40" />
             <RowDefinition />
-            <RowDefinition Height="60" />
+            <RowDefinition Height="40" />
             <RowDefinition Height="25" />
             <RowDefinition Height="{Binding TaskHeight}" />
         </Grid.RowDefinitions>
 
+        <!--Tab label-->
         <TextBlock Height="24"
                    Margin="0 10 0 0"
                    HorizontalAlignment="Center"
                    FontSize="18"
                    Text="{x:Static res:Resources.calendarTabLabel}" />
 
+        <!--Current date-->
         <TextBlock Name="CurrentDate"
                    Grid.Row="0"
                    Grid.Column="1"
@@ -39,26 +41,36 @@
                    FontSize="14"
                    Text="{Binding CurrentDate}" />
 
+        <!--Calendar-->
         <Viewbox Grid.Row="1" Grid.Column="0">
-            <Calendar Margin="10" SelectedDate="{Binding CurrentSelectedDate}" />
+            <Calendar Name="Calendar"
+                      Margin="5"
+                      HorizontalAlignment="Left"
+                      SelectedDate="{Binding CurrentSelectedDate}" />
         </Viewbox>
 
+        <Image Grid.Column="1" 
+               Grid.Row="1" 
+               Grid.RowSpan="2" 
+               Source="{Binding ImagePath}" 
+               Stretch="Fill"/>
+
+        <!--Find date-->
         <Grid Grid.Row="2">
             <Grid.ColumnDefinitions>
-                <ColumnDefinition />
+                <ColumnDefinition Width="125"/>
                 <ColumnDefinition />
             </Grid.ColumnDefinitions>
             <DatePicker Name="DatePicker"
                         Width="auto"
                         Height="24"
-                        Margin="15 0 5 0"
+                        Margin="15 0 0 0"
+                        HorizontalContentAlignment="Right"
                         SelectedDate="{Binding SearchDate,
-                                               StringFormat=dd.MM.yyyy}" />
-            <controls:Tile Grid.Row="2"
-                           Grid.Column="1"
-                           Width="94"
+                                               StringFormat=dd.MMM.yyyy}" />
+            <controls:Tile Grid.Column="1"
                            Height="26"
-                           Margin="10 5 10 5"
+                           Margin="10 5 15 5"
                            HorizontalAlignment="Center"
                            VerticalAlignment="Center"
                            Command="{Binding FindSelectedDate}">
@@ -95,33 +107,108 @@
                 <ColumnDefinition Width="160" />
             </Grid.ColumnDefinitions>
 
+            <!--Task list label-->
             <Label HorizontalContentAlignment="Center"
                    Content="{x:Static res:Resources.taskListLabel}"
                    FontSize="14" />
 
+            <!--Task Date Label-->
             <Label Grid.Column="1"
-                   HorizontalContentAlignment="Center"
+                   HorizontalContentAlignment="Right"
+                   Margin="20 0"
                    Content="{Binding TaskDate}"
                    FontSize="14" />
 
-            <controls:Tile Grid.RowSpan="2"
-                           Grid.Column="1"
+            <!-- date label-->
+            <Label Grid.Column="1"
+                   HorizontalContentAlignment="Right"
+                   Margin="0 0 95 0"
+                   Content="{x:Static res:Resources.dateLabel}"
+                   FontSize="14" />
+
+            <!--add new items, panel-->
+            <Grid Grid.Column="1" Grid.Row="1">
+                <Grid.RowDefinitions>
+                    <RowDefinition Height="35"></RowDefinition>
+                    <RowDefinition Height="35"></RowDefinition>
+                    <RowDefinition></RowDefinition>
+                    <RowDefinition Height="145"></RowDefinition>
+                </Grid.RowDefinitions>
+
+                <!--Add task-->
+                <controls:Tile Grid.Row="0"
                            Height="25"
-                           Margin="10 33 10 5"
                            HorizontalAlignment="Center"
-                           VerticalAlignment="Top"
-                           Command="{Binding ViewFlyout}">
-                <TextBlock Margin="3"
+                           Command="{Binding ViewTaskFlyout}"
+                           Margin="20 5"
+                           VerticalAlignment="Top">
+                    <TextBlock Margin="3"
                            VerticalAlignment="Center"
                            Text="{x:Static res:Resources.newTaskLabel}" />
-            </controls:Tile>
+                </controls:Tile>
 
-            <!--  flyout  -->
+                <!--add HB-->
+                <controls:Tile Grid.Row="1"
+                           Height="25"
+                           HorizontalAlignment="Center"
+                           VerticalAlignment="Top"
+                           Margin="20 5"
+                           Command="{Binding ViewHBFlyout}">
+                    <TextBlock Margin="3"
+                           VerticalAlignment="Center"
+                           Text="{x:Static res:Resources.addHBLabel}" />
+                </controls:Tile>
+
+                <Label Grid.Row="2" 
+                       HorizontalContentAlignment="Left" 
+                       VerticalAlignment="Bottom"
+                       Margin="5 0"
+                       Content="{x:Static res:Resources.hbListLabel}"
+                       FontSize="14" />
+                
+                <!--HB List-->
+                <DataGrid Name="HBList"
+                      Grid.Row="3"
+                      Margin="10 0 10 5"
+                      AutoGenerateColumns="False"
+                      BorderBrush="#003459"
+                      BorderThickness="1"
+                      IsReadOnly="True"
+                      ItemsSource="{Binding DayHBs,
+                                            Mode=TwoWay,
+                                            UpdateSourceTrigger=PropertyChanged}"
+                      SelectedItem="{Binding SelectedHB}">
+                    <DataGrid.Columns>
+                        <DataGridTextColumn Width="auto"
+                                            MinWidth="135"
+                                        Binding="{Binding Path=Name}"
+                                        Header="{x:Static res:Resources.nameHeader}"
+                                        SortDirection="Ascending" />
+                    </DataGrid.Columns>
+
+                    <!--<DataGrid.Resources>
+                        <ContextMenu x:Key="itemContextMenu">
+                            <ContextMenu.Items>
+                                <MenuItem Command="{Binding DataContext.DellCurrentTask, RelativeSource={RelativeSource AncestorType=UserControl}}" Header="{x:Static res:Resources.deleteLabel}" />
+                            </ContextMenu.Items>
+                        </ContextMenu>
+                    </DataGrid.Resources>
+
+                    <DataGrid.RowStyle>
+                        <Style BasedOn="{StaticResource MetroDataGridRow}" TargetType="DataGridRow">
+                            <Setter Property="ContextMenu" Value="{StaticResource itemContextMenu}" />
+                        </Style>
+                    </DataGrid.RowStyle>-->
+                </DataGrid>
+            </Grid>
+
+            <!-- New task  flyout  -->
             <controls:Flyout Grid.RowSpan="2"
                              Grid.Column="1"
                              MaxWidth="160"
+                             MinWidth="150"
                              Header="{x:Static res:Resources.addTaskLabel}"
-                             IsOpen="{Binding FlyoutIsOpen}"
+                             IsOpen="{Binding TaskFlyoutIsOpen}"
                              Position="Right">
                 <StackPanel>
                     <TextBlock Margin="10 3"
@@ -175,6 +262,57 @@
                 </StackPanel>
             </controls:Flyout>
 
+            <!-- New HB  flyout  -->
+            <controls:Flyout Grid.RowSpan="2"
+                             Grid.Column="1"
+                             MaxWidth="160"
+                             MinWidth="150"
+                             Header="{x:Static res:Resources.addHBFloLabelyout}"
+                             IsOpen="{Binding HBFlyoutIsOpen}"
+                             Position="Right">
+                <StackPanel>
+                    <TextBlock Margin="10 10 10 3"
+                               FontSize="14"
+                               Text="{x:Static res:Resources.dateLabel}" />
+
+                    <DatePicker Name="HBDatePicker"
+                        Width="auto"
+                        Height="20"
+                        Margin="10 3"
+                        HorizontalContentAlignment="Right"
+                        SelectedDate="{Binding HBDate,
+                                               StringFormat=dd.MMM.yyyy}" />
+
+                    <TextBlock Margin="10 10 10 3"
+                               FontSize="14"
+                               Text="{x:Static res:Resources.nameLabel}" />
+
+                    <TextBox Name="FIO"
+                             Height="24"
+                             Margin="10 3"
+                             VerticalAlignment="Center">
+                        <TextBox.Text>
+                            <Binding Mode="TwoWay"
+                                     Path="HBName"
+                                     UpdateSourceTrigger="PropertyChanged">
+                                <Binding.ValidationRules>
+                                    <ExceptionValidationRule />
+                                </Binding.ValidationRules>
+                            </Binding>
+                        </TextBox.Text>
+                    </TextBox>
+
+                    <controls:Tile Width="auto"
+                                   Height="25"
+                                   Margin="10 15 10 0"
+                                   Command="{Binding AddHB}">
+                        <TextBlock Margin="3"
+                                   VerticalAlignment="Center"
+                                   Text="{x:Static res:Resources.addLabel}" />
+                    </controls:Tile>
+                </StackPanel>
+            </controls:Flyout>
+
             <!--  List all tasks  -->
             <DataGrid Name="TasksGrid"
                       Grid.Row="1"
@@ -197,7 +335,7 @@
                                         SortDirection="Ascending" />
 
                     <DataGridTextColumn Width="auto"
-                                        MinWidth="160"
+                                        MinWidth="150"
                                         Binding="{Binding Path=Descriptions}"
                                         Header="{x:Static res:Resources.descriptionsHeader}" />
                 </DataGrid.Columns>

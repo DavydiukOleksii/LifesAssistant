@@ -10,8 +10,6 @@
 # User-specific files (MonoDevelop/Xamarin Studio)
 *.userprefs
 
-!/LifesAssistant/bin/Debug/Resource/calendar.json
-
 # Build results
 [Dd]ebug/
 [Dd]ebugPublic/
@@ -21,6 +19,7 @@ x64/
 x86/
 bld/
 [Bb]in/
+!bin/Debug/Resource/*
 [Oo]bj/
 [Ll]og/
 

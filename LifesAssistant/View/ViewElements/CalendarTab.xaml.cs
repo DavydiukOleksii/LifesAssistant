@@ -1,9 +1,6 @@
-﻿using System.Globalization;
-using System.Threading;
+﻿using System.Threading;
 using System.Windows.Controls;
 using System.Windows.Markup;
-using LifesAssistant.ViewModel;
-using LifesAssistant.ViewModel.ViewModelElements;
 
 namespace LifesAssistant.View.ViewElements
 {

@@ -13,7 +13,7 @@
              mc:Ignorable="d">
     <Grid Background="White">
         <Grid.ColumnDefinitions>
-            <ColumnDefinition Width="165" />
+            <ColumnDefinition />
             <ColumnDefinition />
 
         </Grid.ColumnDefinitions>
@@ -57,7 +57,7 @@
                                     Binding="{Binding Path=Money}"
                                     Header="{x:Static res:Resources.moneyHeader}" />
                 <DataGridTextColumn Width="auto"
-                                    MinWidth="96"
+                                    MinWidth="120"
                                     Binding="{Binding Path=Article}"
                                     Header="{x:Static res:Resources.purchaseHeader}" />
             </DataGrid.Columns>
@@ -73,13 +73,14 @@
             <DataGrid.RowStyle>
                 <Style BasedOn="{StaticResource MetroDataGridRow}" TargetType="DataGridRow">
                     <Setter Property="ContextMenu" Value="{StaticResource itemContextMenu}" />
+                    <Setter Property="HorizontalAlignment" Value="Center"></Setter>
                 </Style>
             </DataGrid.RowStyle>
         </DataGrid>
 
         <Grid Grid.Row="1"
               Grid.Column="1"
-              Margin="15 5">
+              Margin="5 5">
 
             <Grid>
                 <Grid.RowDefinitions>
