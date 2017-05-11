@@ -174,22 +174,26 @@
                       BorderBrush="#003459"
                       BorderThickness="1"
                       IsReadOnly="True"
-                      ItemsSource="{Binding DayHBs,
+                      ItemsSource="{Binding DaysHB,
                                             Mode=TwoWay,
                                             UpdateSourceTrigger=PropertyChanged}"
                       SelectedItem="{Binding SelectedHB}">
                     <DataGrid.Columns>
+                        <DataGridTextColumn Width="50"
+                                            MinWidth="35"
+                                            Binding="{Binding Path=Date.Year}"
+                                            Header="{x:Static res:Resources.yearLabel}"/>
                         <DataGridTextColumn Width="auto"
-                                            MinWidth="135"
-                                        Binding="{Binding Path=Name}"
-                                        Header="{x:Static res:Resources.nameHeader}"
-                                        SortDirection="Ascending" />
+                                            MinWidth="100"
+                                            Binding="{Binding Path=FullName}"
+                                            Header="{x:Static res:Resources.nameHeader}"
+                                            SortDirection="Ascending" />
                     </DataGrid.Columns>
 
-                    <!--<DataGrid.Resources>
+                    <DataGrid.Resources>
                         <ContextMenu x:Key="itemContextMenu">
                             <ContextMenu.Items>
-                                <MenuItem Command="{Binding DataContext.DellCurrentTask, RelativeSource={RelativeSource AncestorType=UserControl}}" Header="{x:Static res:Resources.deleteLabel}" />
+                                <MenuItem Command="{Binding DataContext.DellHB, RelativeSource={RelativeSource AncestorType=UserControl}}" Header="{x:Static res:Resources.deleteLabel}" />
                             </ContextMenu.Items>
                         </ContextMenu>
                     </DataGrid.Resources>
@@ -198,7 +202,7 @@
                         <Style BasedOn="{StaticResource MetroDataGridRow}" TargetType="DataGridRow">
                             <Setter Property="ContextMenu" Value="{StaticResource itemContextMenu}" />
                         </Style>
-                    </DataGrid.RowStyle>-->
+                    </DataGrid.RowStyle>
                 </DataGrid>
             </Grid>
 
@@ -280,7 +284,7 @@
                         Height="20"
                         Margin="10 3"
                         HorizontalContentAlignment="Right"
-                        SelectedDate="{Binding HBDate,
+                        SelectedDate="{Binding NewHB.Date,
                                                StringFormat=dd.MMM.yyyy}" />
 
                     <TextBlock Margin="10 10 10 3"
@@ -293,7 +297,7 @@
                              VerticalAlignment="Center">
                         <TextBox.Text>
                             <Binding Mode="TwoWay"
-                                     Path="HBName"
+                                     Path="NewHB.FullName"
                                      UpdateSourceTrigger="PropertyChanged">
                                 <Binding.ValidationRules>
                                     <ExceptionValidationRule />

@@ -15,14 +15,14 @@ namespace LifesAssistant.ViewModel.ViewModelElements
     {
         #region Events
 
-        public delegate void UserDel();
+        public delegate void OpenTaskDelegate();
 
-        public event UserDel UserEvent;
+        public event OpenTaskDelegate OpenTaskEvent;
 
-        public void OnUserEvent()
+        public void OnOpenTaskEvent()
         {
-            if(null != UserEvent)
-                UserEvent();
+            if(null != OpenTaskEvent)
+                OpenTaskEvent();
         }
 
 
@@ -43,15 +43,19 @@ namespace LifesAssistant.ViewModel.ViewModelElements
             SearchDate = DateTime.Today;
             DayTasks = CalendarRepository.Instance.GetByDay(DateTime.Today).DailyTasks;
 
-            var filesPath = Directory.GetFiles(Path.GetDirectoryName(Path.GetDirectoryName(System.IO.Directory.GetCurrentDirectory()))+ "/Image/Calendar", "*.jpg", SearchOption.AllDirectories);
+            var filesPath = Directory.GetFiles(Path.GetDirectoryName(Path.GetDirectoryName(System.IO.Directory.GetCurrentDirectory()))+ "/Config/Image/Calendar", "*.jpg", SearchOption.AllDirectories);
 
             Random rnd = new Random();
             ImagePath = filesPath[rnd.Next(0, filesPath.Length - 1)];
+
+            NewHB = new OneHB { Date = DateTime.Today, FullName = "" };
         }
         #endregion
 
         #region Data
         protected int _defaultTaskHeight = 275;
+
+        #region Window
 
         protected string _imagePath;
         public string ImagePath
@@ -64,6 +68,44 @@ namespace LifesAssistant.ViewModel.ViewModelElements
             }
         }
 
+        protected string _currentDate;
+        public string CurrentDate
+        {
+            get { return _currentDate; }
+            set
+            {
+                _currentDate = value;
+                OnPropertyChanged("CurrentDate");
+            }
+        }
+
+        protected DateTime _searchDate;
+        public DateTime SearchDate
+        {
+            get { return _searchDate; }
+            set
+            {
+                _searchDate = value;
+                OnPropertyChanged("SearchDate");
+            }
+        }
+
+        protected DateTime _currentSelectedDate;
+        public DateTime CurrentSelectedDate
+        {
+            get { return _currentSelectedDate; }
+            set
+            {
+                _currentSelectedDate = value;
+                SearchDate = value;
+                OnPropertyChanged("CurrentSelectedDate");
+                OnPropertyChanged("SearchDate");
+            }
+        }
+
+        #endregion
+
+        #region Task
         protected string _showTasksLabel;
         public string ShowTasksLabel
         {
@@ -83,28 +125,6 @@ namespace LifesAssistant.ViewModel.ViewModelElements
             {
                 _taskFlyoutIsOpen = value;
                 OnPropertyChanged("TaskFlyoutIsOpen");
-            }
-        }
-
-        protected bool _hbFlyoutIsOpen;
-        public bool HBFlyoutIsOpen
-        {
-            get { return _hbFlyoutIsOpen; }
-            set
-            {
-                _hbFlyoutIsOpen = value;
-                OnPropertyChanged("HBFlyoutIsOpen");
-            }
-        }
-
-        protected string _currentDate;
-        public string CurrentDate
-        {
-            get { return _currentDate; }
-            set
-            {
-                _currentDate = value;
-                OnPropertyChanged("CurrentDate");
             }
         }
 
@@ -130,17 +150,6 @@ namespace LifesAssistant.ViewModel.ViewModelElements
             }
         }
 
-        protected DateTime _searchDate;
-        public DateTime SearchDate
-        {
-            get { return _searchDate; }
-            set
-            {
-                _searchDate = value;
-                OnPropertyChanged("SearchDate");
-            }
-        }
-
         protected List<CalendarDateRange> _daysWithTask;
         public List<CalendarDateRange> DaysWithTask
         {
@@ -151,21 +160,6 @@ namespace LifesAssistant.ViewModel.ViewModelElements
                 OnPropertyChanged("DaysWithTask");
             }
         }
-
-        protected DateTime _currentSelectedDate;
-        public DateTime CurrentSelectedDate
-        {
-            get { return _currentSelectedDate; }
-            set
-            {
-                _currentSelectedDate = value;
-                SearchDate = value;
-                OnPropertyChanged("CurrentSelectedDate");
-                OnPropertyChanged("SearchDate");
-            }
-        }
-
-        #region Tasks panel data
 
         protected OneTask _newTask;
         public OneTask NewTask
@@ -224,6 +218,63 @@ namespace LifesAssistant.ViewModel.ViewModelElements
 
         #endregion
 
+        #region HB
+
+        protected bool _hbFlyoutIsOpen;
+        public bool HBFlyoutIsOpen
+        {
+            get { return _hbFlyoutIsOpen; }
+            set
+            {
+                _hbFlyoutIsOpen = value;
+                OnPropertyChanged("HBFlyoutIsOpen");
+            }
+        }
+
+        protected List<OneHB> _daysHB;
+        public List<OneHB> DaysHB
+        {
+            get
+            {
+                return _daysHB;
+            }
+            set
+            {
+                _daysHB = value;
+                OnPropertyChanged("DaysHB");
+            }
+        }
+
+        protected OneHB _selectedHB;
+        public OneHB SelectedHB
+        {
+            get
+            {
+                return _selectedHB;
+            }
+            set
+            {
+                _selectedHB = value;
+                OnPropertyChanged("SelectedHB");
+            }
+        }
+
+        protected OneHB _newHB;
+        public OneHB NewHB
+        {
+            get
+            {
+                return _newHB;
+            }
+            set
+            {
+                _newHB = value;
+                OnPropertyChanged("NewHB");
+            }
+        }
+
+        #endregion
+
         #endregion
 
         #region Commands
@@ -263,7 +314,7 @@ namespace LifesAssistant.ViewModel.ViewModelElements
                 ShowTasksLabel = Resources.showTasksLabel;
                 TaskHeight = 0;
             }
-            OnUserEvent();
+            OnOpenTaskEvent();
         }
         #endregion
 
@@ -356,6 +407,7 @@ namespace LifesAssistant.ViewModel.ViewModelElements
             {
                 CurrentSelectedDate = SearchDate;
                 DayTasks = CalendarRepository.Instance.GetByDay(CurrentSelectedDate).DailyTasks;
+                DaysHB = CalendarRepository.Instance.GetHBByDay(CurrentSelectedDate);
                 if(_taskHeight == 0)
                     ViewTasks.Execute(null);
 
@@ -432,6 +484,75 @@ namespace LifesAssistant.ViewModel.ViewModelElements
             CalendarRepository.Instance.DeleteOperation(SelectedTask);
             SelectedTask = new OneTask();
             DayTasks = CalendarRepository.Instance.GetByDay(SearchDate).DailyTasks;
+        }
+        #endregion
+
+        #region Add HB
+        private ICommand _addHBCommand;
+        public ICommand AddHB
+        {
+            get
+            {
+                if (_addHBCommand == null)
+                {
+                    _addHBCommand = new RelayCommand(ExecuteAddHBCommand, CanExecuteAddHBCommand);
+                }
+                return _addHBCommand;
+            }
+        }
+
+        public bool CanExecuteAddHBCommand(object parametr)
+        {
+            if (NewHB != null && NewHB.Date != null && NewHB.FullName != null && NewHB.FullName.Length > 6)
+            {
+                return true;
+            }
+            else
+            {
+                return false;
+            }
+        }
+
+        public void ExecuteAddHBCommand(object parametr)
+        {
+            CalendarRepository.Instance.AddHBOperation(NewHB);
+            NewHB = new OneHB();
+            DaysHB = CalendarRepository.Instance.GetHBByDay(SearchDate);
+            HBFlyoutIsOpen = false;
+        }
+        #endregion
+
+        #region Dell HB
+        private ICommand _dellHBCommand;
+        public ICommand DellHB
+        {
+            get
+            {
+                if (_dellHBCommand == null)
+                {
+                    _dellHBCommand = new RelayCommand(ExecuteDellHBCommand, CanExecuteDellHBCommand);
+                }
+                return _dellHBCommand;
+            }
+        }
+
+        public bool CanExecuteDellHBCommand(object parametr)
+        {
+            if (SelectedHB != null)
+            {
+                return true;
+            }
+            else
+            {
+                return false;
+            }
+        }
+
+        public void ExecuteDellHBCommand(object parametr)
+        {
+            CalendarRepository.Instance.DeleteHBOperation(SelectedHB);
+            SelectedHB = new OneHB();
+            DaysHB = CalendarRepository.Instance.GetHBByDay(SearchDate);
         }
         #endregion
 

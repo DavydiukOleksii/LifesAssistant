@@ -34,7 +34,7 @@ namespace DataRepository
         #region Data
 
         protected string fileName = "costs.json";
-        protected string filePath = "Resource\\";
+        protected string filePath = Path.GetDirectoryName(Path.GetDirectoryName(System.IO.Directory.GetCurrentDirectory())) + "\\Config\\Resource\\";
 
         #endregion
 

@@ -31,10 +31,12 @@ namespace DataRepository
         #region Data
 
         protected string fileName = "calendar.json";
-        protected string filePath = "Resource\\";
+        protected string HBFileName = "HB.json";
+        protected string filePath = Path.GetDirectoryName(Path.GetDirectoryName(System.IO.Directory.GetCurrentDirectory())) + "\\Config\\Resource\\";
 
         #endregion
 
+        #region Task Methods
         public DayTaskReport GetByDay(DateTime day)
         {
             try
@@ -148,18 +150,13 @@ namespace DataRepository
                     }
                     else
                     {
-                        today.Where(x => x.Date == date)
-                            .FirstOrDefault().DailyTasks.Remove(dellTask);
+                        today.Where(x => x.Date == date).FirstOrDefault().DailyTasks.Remove(dellTask);
                     }
                     newJson = JsonConvert.SerializeObject(today);
                 }
-
                 File.WriteAllText(filePath + fileName, newJson);
             }
-            catch
-            {
-
-            }
+            catch{}
         }
 
         public List<DateTime> GetListDaysWithTask()
@@ -195,5 +192,108 @@ namespace DataRepository
 
             }
         }
+        #endregion
+
+        #region HB Methods
+
+        public List<OneHB> GetHBByDay(DateTime day)
+        {
+            try
+            {
+                List<OneHB> result = new List<OneHB>();
+
+                if (!File.Exists(filePath + HBFileName))
+                {
+                    File.Create(filePath + HBFileName);
+                }
+
+                using (StreamReader r = new StreamReader(filePath + HBFileName))
+                {
+                    string json = r.ReadToEnd();
+                    List<OneHB> today = JsonConvert.DeserializeObject<List<OneHB>>(json);
+                    if (today != null)
+                    {
+                        result = today.Where(x => x.Date.Day == day.Day && x.Date.Month == day.Month).Select(x => x).ToList();
+                    }
+                }
+                return result;
+            }
+            catch
+            {
+                return new List<OneHB>();
+            }
+        }
+
+        public void AddHBOperation(OneHB newHB)
+        {
+            try
+            {
+                string newJson = "";
+
+                if (!File.Exists(filePath + HBFileName))
+                {
+                    File.Create(filePath + HBFileName);
+                }
+
+                using (StreamReader r = new StreamReader(filePath + HBFileName))
+                {
+                    string json = r.ReadToEnd();
+                    List<OneHB> today = JsonConvert.DeserializeObject<List<OneHB>>(json);
+                    if (today != null )
+                    {
+                        today.Add(newHB);
+                    }
+                    else
+                    {
+                        if (today == null)
+                        {
+                            today = new List<OneHB>();
+                        }
+                        today.Add(new OneHB()
+                        {
+                            Date = newHB.Date,
+                            FullName = newHB.FullName
+                        });
+                    }
+                    newJson = JsonConvert.SerializeObject(today);
+                }
+
+                File.WriteAllText(filePath + HBFileName, newJson);
+            }
+            catch {}
+        }
+
+        public void DeleteHBOperation(OneHB delHB)
+        {
+            try
+            {
+                string newJson = "";
+
+                if (!File.Exists(filePath + HBFileName))
+                {
+                    File.Create(filePath + HBFileName);
+                }
+
+                using (StreamReader r = new StreamReader(filePath + HBFileName))
+                {
+                    string json = r.ReadToEnd();
+                    List<OneHB> today = JsonConvert.DeserializeObject<List<OneHB>>(json);
+                    if (today == null)
+                    {
+                        return;
+                    }
+                    else
+                    {
+                        bool tryDell = today.Remove(today.Where(x => (x.Date.Year == delHB.Date.Year && x.Date.Year == delHB.Date.Year && x.Date.Year == delHB.Date.Year && x.FullName == delHB.FullName)).FirstOrDefault());
+                    }
+                    newJson = JsonConvert.SerializeObject(today);
+                }
+
+                File.WriteAllText(filePath + HBFileName, newJson);
+            }
+            catch { }
+        }
+
+        #endregion
     }
 }

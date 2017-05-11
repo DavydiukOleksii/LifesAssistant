@@ -208,8 +208,8 @@
                                       Mode=TwoWay,
                                       UpdateSourceTrigger=PropertyChanged}" />
 
-            <Image Grid.Column="0" Grid.RowSpan="2" Width="100" Height="100" Source="D:\Projects\LifesAssistent\LifesAssistant\Image\Sleep\nightcloud.png"/>
-            <Image Grid.Column="2" Grid.RowSpan="2" Width="100" Height="100" Source="D:\Projects\LifesAssistent\LifesAssistant\Image\Sleep\sleep.png"/>
+            <Image Grid.Column="0" Grid.RowSpan="2" Width="100" Height="100" Source="D:\Projects\LifesAssistent\LifesAssistant\Config\Image\Sleep\nightcloud.png"/>
+            <Image Grid.Column="2" Grid.RowSpan="2" Width="100" Height="100" Source="D:\Projects\LifesAssistent\LifesAssistant\Config\Image\Sleep\sleep.png"/>
         </Grid>
 
     </Grid>

@@ -8,7 +8,6 @@ using LifesAssistant.Infrastructure;
 using LifesAssistant.Properties.Language;
 using LifesAssistant.View.ViewElements;
 using LifesAssistant.ViewModel.ViewModelElements;
-using MahApps.Metro.Controls;
 
 namespace LifesAssistant.ViewModel
 {
@@ -267,9 +266,12 @@ namespace LifesAssistant.ViewModel
             }
             else
             {
+                if ((MainPanel is CalendarTab) && (MainPanel.DataContext as CalendarTabViewModel).TaskHeight > 0)
+                    (MainPanel.DataContext as CalendarTabViewModel).ViewTasks.Execute(this);
                 TabWidth = 42;
                 TabHeight = 0;
                 WindowWidth = _minimizeWindowWidth;
+                WindowHeight = _defaultWindowsHeight;
                 MainWidth = 0;
                 ChartsButtonHeight = 0;
                 _currentWinLeftPos = (int)WindowPosLeft;
@@ -419,7 +421,7 @@ namespace LifesAssistant.ViewModel
                 {
                     MainPanel = new CalendarTab();
                     MainPanel.DataContext = new CalendarTabViewModel();
-                    (MainPanel.DataContext as CalendarTabViewModel).UserEvent += UserEventsHandler;
+                    (MainPanel.DataContext as CalendarTabViewModel).OpenTaskEvent += ChangeWindowSizeEventsHandler;
                     ChartsButtonHeight = 0;
                     
                     break;
@@ -557,10 +559,10 @@ namespace LifesAssistant.ViewModel
 
         #endregion
 
-        //to do rewrite
+        //todo: rewrite
         #region Events
 
-        public void UserEventsHandler()
+        public void ChangeWindowSizeEventsHandler()
         {
             if (WindowHeight == _defaultWindowsHeight)
             {
