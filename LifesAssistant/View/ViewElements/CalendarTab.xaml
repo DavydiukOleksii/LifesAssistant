@@ -46,6 +46,8 @@
             <Calendar Name="Calendar"
                       Margin="5"
                       HorizontalAlignment="Left"
+                      BorderBrush="Gray"
+                      BorderThickness="0.4"
                       SelectedDate="{Binding CurrentSelectedDate}" />
         </Viewbox>
 

@@ -3,7 +3,6 @@
              xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
              xmlns:controls="http://metro.mahapps.com/winfx/xaml/controls"
              xmlns:d="http://schemas.microsoft.com/expression/blend/2008"
-             xmlns:iconPacks="http://metro.mahapps.com/winfx/xaml/iconpacks"
              xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
              xmlns:res="clr-namespace:LifesAssistant.Properties.Language"
              xmlns:xctk="http://schemas.xceed.com/wpf/xaml/toolkit"
@@ -45,8 +44,8 @@
                   Grid.Column="0"
                   Margin="10 5 5 5"
                   AutoGenerateColumns="False"
-                  BorderBrush="#003459"
-                  BorderThickness="1"
+                  BorderBrush="Gray"
+                  BorderThickness="0.5"
                   IsReadOnly="True"
                   ItemsSource="{Binding DaySleepTime,
                                         Mode=TwoWay,
@@ -114,7 +113,7 @@
                            Grid.ColumnSpan="4">
                     <Border Margin="0 -12 0 0"
                             BorderBrush="Gray"
-                            BorderThickness="2"
+                            BorderThickness="1"
                             CornerRadius="10" />
                 </DockPanel>
 
@@ -208,8 +207,8 @@
                                       Mode=TwoWay,
                                       UpdateSourceTrigger=PropertyChanged}" />
 
-            <Image Grid.Column="0" Grid.RowSpan="2" Width="100" Height="100" Source="D:\Projects\LifesAssistent\LifesAssistant\Config\Image\Sleep\nightcloud.png"/>
-            <Image Grid.Column="2" Grid.RowSpan="2" Width="100" Height="100" Source="D:\Projects\LifesAssistent\LifesAssistant\Config\Image\Sleep\sleep.png"/>
+            <Image Grid.Column="0" Grid.RowSpan="2" Width="100" Height="100" Source="{Binding MoonImgPath}"/>
+            <Image Grid.Column="2" Grid.RowSpan="2" Width="100" Height="100" Source="{Binding WorkImgPath}"/>
         </Grid>
 
     </Grid>

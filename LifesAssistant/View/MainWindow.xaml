@@ -72,7 +72,7 @@
 
                 <controls:Tile Grid.Row="0"
                                Command="{Binding TabChanged}"
-                               CommandParameter="CalendarRepository"
+                               CommandParameter="Calendar"
                                Style="{StaticResource side-tile}">
                     <iconPacks:PackIconMaterial Width="30"
                                                 Height="30"
@@ -163,7 +163,8 @@
                 </controls:Tile>
 
                 <controls:Tile Grid.Row="4"
-                               Command="{Binding OpenOptions}"
+                               Command="{Binding TabChanged}"
+                               CommandParameter="Options"
                                Style="{StaticResource contr-tile}">
                     <iconPacks:PackIconModern Width="12"
                                               Height="12"
@@ -273,7 +274,7 @@
 
                 <controls:Tile Grid.Column="0"
                                Command="{Binding TabChanged}"
-                               CommandParameter="CalendarRepository"
+                               CommandParameter="Calendar"
                                Style="{StaticResource bot-tile}">
                     <iconPacks:PackIconMaterial Width="40"
                                                 Height="40"

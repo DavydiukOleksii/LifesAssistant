@@ -43,8 +43,8 @@
                   Grid.Column="0"
                   Margin="10 5 5 5"
                   AutoGenerateColumns="False"
-                  BorderBrush="#003459"
-                  BorderThickness="1"
+                  BorderBrush="Gray"
+                  BorderThickness="0.5"
                   IsReadOnly="True"
                   ItemsSource="{Binding DayWaterCapacity}"
                   SelectedItem="{Binding CurrentWaterDrink}">
@@ -109,7 +109,7 @@
                            Grid.ColumnSpan="4">
                     <Border Margin="0 -12 0 0"
                             BorderBrush="Gray"
-                            BorderThickness="2"
+                            BorderThickness="1"
                             CornerRadius="10" />
                 </DockPanel>
 
@@ -232,8 +232,6 @@
                        Foreground="#00171F"
                        Text="%" />
         </Grid>
-
-
 
     </Grid>
 </UserControl>

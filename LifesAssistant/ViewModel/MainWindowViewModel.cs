@@ -27,7 +27,7 @@ namespace LifesAssistant.ViewModel
 
             Charts = new ObservableCollection<ChartsElement>();
 
-            ExecuteTabChangedCommand("CalendarRepository");
+            ExecuteTabChangedCommand("Calendar");
         }
         #endregion
 
@@ -417,7 +417,7 @@ namespace LifesAssistant.ViewModel
                 ExecuteShowChartsCommand(this);
             switch (tabName)
             {
-                case "CalendarRepository":
+                case "Calendar":
                 {
                     MainPanel = new CalendarTab();
                     MainPanel.DataContext = new CalendarTabViewModel();
@@ -444,6 +444,13 @@ namespace LifesAssistant.ViewModel
                     MainPanel.DataContext = new DreamTabViewModel();
                     break;
                 }
+                case "Options":
+                    {
+                        MainPanel = new OptionsTab();
+                        MainPanel.DataContext = new OptionsTabViewModel();
+                        ChartsButtonHeight = 0;
+                        break;
+                    }
             }
             if(WindowWidth < _defaultWindowWidth)
                 ChangeWindowSize.Execute(this);

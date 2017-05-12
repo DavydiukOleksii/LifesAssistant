@@ -108,9 +108,13 @@
     <Compile Include="ViewModel\ViewModelElements\CostsTabViewModel.cs" />
     <Compile Include="ViewModel\ViewModelElements\CalendarTabViewModel.cs" />
     <Compile Include="ViewModel\ViewModelElements\DreamTabViewModel.cs" />
+    <Compile Include="ViewModel\ViewModelElements\OptionsTabViewModel.cs" />
     <Compile Include="ViewModel\ViewModelElements\WaterTabViewModel.cs" />
     <Compile Include="View\ViewElements\DreamTab.xaml.cs">
       <DependentUpon>DreamTab.xaml</DependentUpon>
+    </Compile>
+    <Compile Include="View\ViewElements\OptionsTab.xaml.cs">
+      <DependentUpon>OptionsTab.xaml</DependentUpon>
     </Compile>
     <Compile Include="View\ViewElements\WaterTab.xaml.cs">
       <DependentUpon>WaterTab.xaml</DependentUpon>
@@ -141,6 +145,10 @@
     <Page Include="View\ViewElements\DreamTab.xaml">
       <Generator>MSBuild:Compile</Generator>
       <SubType>Designer</SubType>
+    </Page>
+    <Page Include="View\ViewElements\OptionsTab.xaml">
+      <SubType>Designer</SubType>
+      <Generator>MSBuild:Compile</Generator>
     </Page>
     <Page Include="View\ViewElements\WaterTab.xaml">
       <Generator>MSBuild:Compile</Generator>

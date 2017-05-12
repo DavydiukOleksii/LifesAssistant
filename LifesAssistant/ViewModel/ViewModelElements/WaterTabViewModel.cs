@@ -28,6 +28,7 @@ namespace LifesAssistant.ViewModel.ViewModelElements
             DayWaterCapacity = WaterRepository.Instance.GetByDay(DateTime.Today).DailyWaterOperations;
 
             NewWaterOperation = new OnceDrink();
+            NewWaterOperation.Capasity = 0.1;
 
             DispatcherTimer timer = new DispatcherTimer();
             timer.Interval = TimeSpan.FromSeconds(1);
@@ -235,7 +236,7 @@ namespace LifesAssistant.ViewModel.ViewModelElements
 
         public bool CanExecuteAddNewWaterOperationCommand(object parametr)
         {
-            if (NewWaterOperation.Capasity > 0 )
+            if (NewWaterOperation.Capasity > 0  && NewWaterOperation.Capasity < 5.1)
             {
                 return true;
             }
@@ -252,6 +253,8 @@ namespace LifesAssistant.ViewModel.ViewModelElements
             DailyTotalWaterCapacity += NewWaterOperation.Capasity;
             WaterRepository.Instance.AddOperation(NewWaterOperation);
             NewWaterOperation = new OnceDrink();
+
+            NewWaterOperation.Capasity = 0.1;
 
             updateWaterPercent();
         }

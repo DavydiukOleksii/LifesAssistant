@@ -124,11 +124,29 @@ namespace LifesAssistant.Properties.Language {
         }
         
         /// <summary>
+        ///   Looks up a localized string similar to Apply.
+        /// </summary>
+        public static string applyLabel {
+            get {
+                return ResourceManager.GetString("applyLabel", resourceCulture);
+            }
+        }
+        
+        /// <summary>
         ///   Looks up a localized string similar to Calendar.
         /// </summary>
         public static string calendarTabLabel {
             get {
                 return ResourceManager.GetString("calendarTabLabel", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized string similar to Cancel.
+        /// </summary>
+        public static string cancelLabel {
+            get {
+                return ResourceManager.GetString("cancelLabel", resourceCulture);
             }
         }
         
@@ -169,6 +187,15 @@ namespace LifesAssistant.Properties.Language {
         }
         
         /// <summary>
+        ///   Looks up a localized string similar to Daily water norm:.
+        /// </summary>
+        public static string dailyWaterNormLabel {
+            get {
+                return ResourceManager.GetString("dailyWaterNormLabel", resourceCulture);
+            }
+        }
+        
+        /// <summary>
         ///   Looks up a localized string similar to Date:.
         /// </summary>
         public static string dateLabel {
@@ -183,6 +210,15 @@ namespace LifesAssistant.Properties.Language {
         public static string dayLabel {
             get {
                 return ResourceManager.GetString("dayLabel", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized string similar to Default.
+        /// </summary>
+        public static string defaultLabel {
+            get {
+                return ResourceManager.GetString("defaultLabel", resourceCulture);
             }
         }
         
@@ -295,6 +331,15 @@ namespace LifesAssistant.Properties.Language {
         }
         
         /// <summary>
+        ///   Looks up a localized string similar to Language:.
+        /// </summary>
+        public static string languageLabel {
+            get {
+                return ResourceManager.GetString("languageLabel", resourceCulture);
+            }
+        }
+        
+        /// <summary>
         ///   Looks up a localized string similar to Time from the latest sleep.
         /// </summary>
         public static string lastSleepingLabel {
@@ -367,6 +412,15 @@ namespace LifesAssistant.Properties.Language {
         }
         
         /// <summary>
+        ///   Looks up a localized string similar to Options.
+        /// </summary>
+        public static string optionsTabLabel {
+            get {
+                return ResourceManager.GetString("optionsTabLabel", resourceCulture);
+            }
+        }
+        
+        /// <summary>
         ///   Looks up a localized string similar to Purchase.
         /// </summary>
         public static string purchaseHeader {
@@ -435,6 +489,15 @@ namespace LifesAssistant.Properties.Language {
         public static string taskListLabel {
             get {
                 return ResourceManager.GetString("taskListLabel", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized string similar to Theme:.
+        /// </summary>
+        public static string themeLabel {
+            get {
+                return ResourceManager.GetString("themeLabel", resourceCulture);
             }
         }
         

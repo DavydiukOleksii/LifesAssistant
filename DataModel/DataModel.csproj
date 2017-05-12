@@ -43,6 +43,9 @@
     <Compile Include="Calendar\OneHB.cs" />
     <Compile Include="Calendar\OneTask.cs" />
     <Compile Include="Charts\ChartsElement.cs" />
+    <Compile Include="Config\AllConfigData.cs" />
+    <Compile Include="Config\ConfigData.cs" />
+    <Compile Include="Config\LanguageItem.cs" />
     <Compile Include="Credit\CostsDayReport.cs" />
     <Compile Include="Credit\OneCashTransaction.cs" />
     <Compile Include="Dream\DaySleepReport.cs" />

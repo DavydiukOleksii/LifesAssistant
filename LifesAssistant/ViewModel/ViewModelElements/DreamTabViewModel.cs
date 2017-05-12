@@ -6,6 +6,7 @@ using DataModel.Dream;
 using DataRepository;
 using LifesAssistant.Infrastructure;
 using LifesAssistant.Properties.Language;
+using System.IO;
 
 namespace LifesAssistant.ViewModel.ViewModelElements
 {
@@ -20,11 +21,38 @@ namespace LifesAssistant.ViewModel.ViewModelElements
             
             TotalSleepTime = DateTime.Today.Add(TimeSpan.FromSeconds(SleepRepository.Instance.GetByDay(DateTime.Today).TotalSleepTimeInSecond));
             DaySleepTime = SleepRepository.Instance.GetByDay(DateTime.Today).DailySleepTimes;
+
+            _appFolderPath = Path.GetDirectoryName(Path.GetDirectoryName(Directory.GetCurrentDirectory()));
+            MoonImgPath = _appFolderPath + "\\Config\\Image\\Sleep\\nightcloud.png";
+            WorkImgPath = _appFolderPath + "\\Config\\Image\\Sleep\\sleep.png";
         }
         #endregion
 
         #region Data
         protected double _daySleepNorm = 8;
+        protected string _appFolderPath;
+
+        protected string _moonImgPath;
+        public string MoonImgPath
+        {
+            get { return _moonImgPath; }
+            set
+            {
+                _moonImgPath = value;
+                OnPropertyChanged("MoonImgPath");
+            }
+        }
+
+        protected string _workImgPath;
+        public string WorkImgPath
+        {
+            get { return _workImgPath; }
+            set
+            {
+                _workImgPath = value;
+                OnPropertyChanged("WorkImgPath");
+            }
+        }
 
         protected string _currentDate;
         public string CurrentDate
