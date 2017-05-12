@@ -15,13 +15,11 @@ namespace LifesAssistant.ViewModel.ViewModelElements
         #region Constructor
         public OptionsTabViewModel()
         {
-            ConfigRepository.Instance.SetDefaultConfig();
-
             LanguageList = ConfigRepository.Instance.GetLanguageList();
             ThemeList = ConfigRepository.Instance.GetThemeList();
-            CurrentConfig = SelectedConfig = ConfigRepository.Instance.GetCurrentConfig();
+            CurrentConfig = ConfigRepository.Instance.GetCurrentConfig();
+            SelectedConfig = ConfigRepository.Instance.GetCurrentConfig();
             DefaultConfig = ConfigRepository.Instance.GetDefaultConfig();
-
         }
         #endregion
 
@@ -87,26 +85,54 @@ namespace LifesAssistant.ViewModel.ViewModelElements
 
         #region Set Default Config
         private ICommand _setDefaultConfigCommand;
-        public ICommand SetDefaultConfigCommand
+        public ICommand SetDefaultConfig
         {
             get
             {
                 if (_setDefaultConfigCommand == null)
                 {
-                    _setDefaultConfigCommand = new RelayCommand(ExecuteSetDefaultConfigCommandCommand, CanExecuteSetDefaultConfigCommandCommand);
+                    _setDefaultConfigCommand = new RelayCommand(ExecuteSetDefaultConfigCommand, CanExecuteSetDefaultConfigCommand);
                 }
                 return _setDefaultConfigCommand;
             }
         }
 
-        public bool CanExecuteSetDefaultConfigCommandCommand(object parametr)
+        public bool CanExecuteSetDefaultConfigCommand(object parametr)
         {
             return true;
         }
 
-        public void ExecuteSetDefaultConfigCommandCommand(object parametr)
+        public void ExecuteSetDefaultConfigCommand(object parametr)
         {
             SelectedConfig = DefaultConfig;
+        }
+        #endregion
+
+        #region Cancel
+        private ICommand _cancelCommand;
+        public ICommand Cancel
+        {
+            get
+            {
+                if (_cancelCommand == null)
+                {
+                    _cancelCommand = new RelayCommand(ExecuteCancelCommand, CanExecuteCancelCommand);
+                }
+                return _cancelCommand;
+            }
+        }
+
+        public bool CanExecuteCancelCommand(object parametr)
+        {
+            if (CurrentConfig != null)
+                return true;
+            else
+                return false;
+        }
+
+        public void ExecuteCancelCommand(object parametr)
+        {
+            SelectedConfig = CurrentConfig;
         }
         #endregion
 
