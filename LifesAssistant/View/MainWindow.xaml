@@ -5,7 +5,7 @@
                       xmlns:controls="http://metro.mahapps.com/winfx/xaml/controls"
                       xmlns:iconPacks="http://metro.mahapps.com/winfx/xaml/iconpacks"
                       xmlns:res="clr-namespace:LifesAssistant.Properties.Language"
-                      Title="MainWindow"
+                      Title="Life Assistant"
                       Width="{Binding WindowWidth,
                                       Mode=TwoWay}"
                       Height="{Binding WindowHeight,
@@ -131,6 +131,7 @@
                     <RowDefinition Height="30" />
                     <RowDefinition Height="30" />
                     <RowDefinition Height="30" />
+                    <RowDefinition Height="30" />
                     <RowDefinition />
                     <RowDefinition Height="30" />
                 </Grid.RowDefinitions>
@@ -162,7 +163,16 @@
                                                 Kind="MoveResizeVariant" />
                 </controls:Tile>
 
-                <controls:Tile Grid.Row="4"
+                <controls:Tile Grid.Row="3"
+                               Command="{Binding MoveRightWindow}"
+                               Style="{StaticResource contr-tile}">
+                    <iconPacks:PackIconMaterial Width="12"
+                                                Height="12"
+                                                VerticalAlignment="Center"
+                                                Kind="ArrowTopRight" />
+                </controls:Tile>
+
+                <controls:Tile Grid.Row="5"
                                Command="{Binding TabChanged}"
                                CommandParameter="Options"
                                Style="{StaticResource contr-tile}">

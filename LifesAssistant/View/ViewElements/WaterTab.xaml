@@ -63,7 +63,7 @@
             <DataGrid.Resources>
                 <ContextMenu x:Key="itemContextMenu">
                     <ContextMenu.Items>
-                        <MenuItem Command="{Binding DataContext.DellCurrentWaterOperation, RelativeSource={RelativeSource AncestorType=UserControl}}" Header="Delete" />
+                        <MenuItem Command="{Binding DataContext.DellCurrentWaterOperation, RelativeSource={RelativeSource AncestorType=UserControl}}" Header="{x:Static res:Resources.deleteLabel}" />
                     </ContextMenu.Items>
                 </ContextMenu>
             </DataGrid.Resources>

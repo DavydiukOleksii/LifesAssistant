@@ -185,8 +185,8 @@
                                             MinWidth="35"
                                             Binding="{Binding Path=Date.Year}"
                                             Header="{x:Static res:Resources.yearLabel}"/>
-                        <DataGridTextColumn Width="auto"
-                                            MinWidth="100"
+                        <DataGridTextColumn Width="80"
+                                            MinWidth="80"
                                             Binding="{Binding Path=FullName}"
                                             Header="{x:Static res:Resources.nameHeader}"
                                             SortDirection="Ascending" />
@@ -286,7 +286,7 @@
                         Height="20"
                         Margin="10 3"
                         HorizontalContentAlignment="Right"
-                        SelectedDate="{Binding NewHB.Date,
+                        SelectedDate="{Binding NewHB.Date, Mode=TwoWay, UpdateSourceTrigger=PropertyChanged,
                                                StringFormat=dd.MMM.yyyy}" />
 
                     <TextBlock Margin="10 10 10 3"

@@ -439,6 +439,24 @@ namespace LifesAssistant.Properties.Language {
         }
         
         /// <summary>
+        ///   Looks up a localized string similar to Restart.
+        /// </summary>
+        public static string restartLabel {
+            get {
+                return ResourceManager.GetString("restartLabel", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized string similar to Please, restart the application to apply the changes..
+        /// </summary>
+        public static string restartMessageLabel {
+            get {
+                return ResourceManager.GetString("restartMessageLabel", resourceCulture);
+            }
+        }
+        
+        /// <summary>
         ///   Looks up a localized string similar to Charts  ▼.
         /// </summary>
         public static string showChartsLabel {

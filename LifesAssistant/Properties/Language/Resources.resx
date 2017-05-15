@@ -243,6 +243,12 @@
   <data name="purchaseLabel" xml:space="preserve">
     <value>Purchase:</value>
   </data>
+  <data name="restartLabel" xml:space="preserve">
+    <value>Restart</value>
+  </data>
+  <data name="restartMessageLabel" xml:space="preserve">
+    <value>Please, restart the application to apply the changes.</value>
+  </data>
   <data name="showChartsLabel" xml:space="preserve">
     <value>Charts  ▼</value>
   </data>

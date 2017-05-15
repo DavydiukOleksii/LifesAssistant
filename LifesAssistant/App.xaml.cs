@@ -1,5 +1,9 @@
 ﻿using System.Windows;
 using LifesAssistant.ViewModel;
+using DataRepository;
+using System.Threading;
+using System.Globalization;
+using DataModel.Config;
 
 namespace LifesAssistant
 {
@@ -10,7 +14,12 @@ namespace LifesAssistant
     {
         App()
         {
-            //Thread.CurrentThread.CurrentUICulture = new CultureInfo("uk-UA");
+            string cultureLanguage = "ua-Uk";
+            if (ConfigRepository.Instance.GetCurrentConfig().Language.Value != null)
+            {
+                cultureLanguage = ConfigRepository.Instance.GetCurrentConfig().Language.Value;
+            }
+            Thread.CurrentThread.CurrentUICulture = new CultureInfo(cultureLanguage);
             //Thread.CurrentThread.CurrentUICulture = new CultureInfo("en-US");
             //Thread.CurrentThread.CurrentUICulture = new CultureInfo("ru-RU");
         }

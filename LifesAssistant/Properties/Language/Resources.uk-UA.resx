@@ -117,8 +117,35 @@
   <resheader name="writer">
     <value>System.Resources.ResXResourceWriter, System.Windows.Forms, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089</value>
   </resheader>
+  <data name="addHBFloLabelyout" xml:space="preserve">
+    <value>Додати ДН</value>
+  </data>
+  <data name="addHBLabel" xml:space="preserve">
+    <value>Новий ДН</value>
+  </data>
   <data name="addLabel" xml:space="preserve">
     <value>Додати</value>
+  </data>
+  <data name="addNewMoneyOperLabel" xml:space="preserve">
+    <value>Додати покупку</value>
+  </data>
+  <data name="addNewSleepTimeLabel" xml:space="preserve">
+    <value>Додати час сну</value>
+  </data>
+  <data name="addNewWaterOperLabel" xml:space="preserve">
+    <value>Додати операцію з водою</value>
+  </data>
+  <data name="addTaskLabel" xml:space="preserve">
+    <value>Додати задачу</value>
+  </data>
+  <data name="applyLabel" xml:space="preserve">
+    <value>Застосувати</value>
+  </data>
+  <data name="calendarTabLabel" xml:space="preserve">
+    <value>Календар</value>
+  </data>
+  <data name="cancelLabel" xml:space="preserve">
+    <value>Відміна</value>
   </data>
   <data name="capacityHeader" xml:space="preserve">
     <value>Об'єм</value>
@@ -126,14 +153,65 @@
   <data name="capacityLabel" xml:space="preserve">
     <value>Об'єм:</value>
   </data>
+  <data name="chartsByLabel" xml:space="preserve">
+    <value>Згруповати графік за</value>
+  </data>
   <data name="creditTabName" xml:space="preserve">
     <value>Витрати за день</value>
+  </data>
+  <data name="dailyWaterNormLabel" xml:space="preserve">
+    <value>Денна норма води:</value>
+  </data>
+  <data name="dateLabel" xml:space="preserve">
+    <value>Дата:</value>
+  </data>
+  <data name="dayLabel" xml:space="preserve">
+    <value>день</value>
+  </data>
+  <data name="defaultLabel" xml:space="preserve">
+    <value>За замовчуванням</value>
+  </data>
+  <data name="deleteLabel" xml:space="preserve">
+    <value>Видалити</value>
   </data>
   <data name="dellLabel" xml:space="preserve">
     <value>Видалити</value>
   </data>
+  <data name="descriptionsHeader" xml:space="preserve">
+    <value>Опис</value>
+  </data>
+  <data name="descriptionsLabel" xml:space="preserve">
+    <value>Опис:</value>
+  </data>
+  <data name="dreamTabName" xml:space="preserve">
+    <value>Час сна</value>
+  </data>
+  <data name="durationHeader" xml:space="preserve">
+    <value>Тривалість</value>
+  </data>
+  <data name="findLabel" xml:space="preserve">
+    <value>Знайти</value>
+  </data>
+  <data name="finishHeader" xml:space="preserve">
+    <value>Кінець</value>
+  </data>
+  <data name="finishSleepingLabel" xml:space="preserve">
+    <value>Кінець сна:</value>
+  </data>
+  <data name="hbListLabel" xml:space="preserve">
+    <value>Список ДН:</value>
+  </data>
   <data name="hideChartsLabel" xml:space="preserve">
     <value>Приховати графік  ▲</value>
+  </data>
+  <data name="hideTasksLabel" xml:space="preserve">
+    <value>Приховати задачі ▲</value>
+  </data>
+  <data name="languageLabel" xml:space="preserve">
+    <value>Мова:</value>
+  </data>
+  <data name="lastSleepingLabel" xml:space="preserve">
+    <value>Час від останього сну</value>
   </data>
   <data name="lastWaterDrinkingLabel" xml:space="preserve">
     <value>Час від останього прийому води</value>
@@ -142,27 +220,78 @@
     <value>₴</value>
   </data>
   <data name="moneyLabel" xml:space="preserve">
-    <value>Вартість:</value>
+    <value>Гроші:</value>
+  </data>
+  <data name="monthLabel" xml:space="preserve">
+    <value>місяць</value>
+  </data>
+  <data name="nameHeader" xml:space="preserve">
+    <value>Ім'я</value>
+  </data>
+  <data name="nameLabel" xml:space="preserve">
+    <value>Ім'я:</value>
+  </data>
+  <data name="newTaskLabel" xml:space="preserve">
+    <value>Додати нове завдання</value>
+  </data>
+  <data name="optionsTabLabel" xml:space="preserve">
+    <value>Налаштування</value>
   </data>
   <data name="purchaseHeader" xml:space="preserve">
     <value>Покупка</value>
   </data>
   <data name="purchaseLabel" xml:space="preserve">
-    <value>Покупка:</value>
+    <value>Опис:</value>
+  </data>
+  <data name="restartLabel" xml:space="preserve">
+    <value>Перезавантажити</value>
+  </data>
+  <data name="restartMessageLabel" xml:space="preserve">
+    <value>Будь ласка, перезапустіть додаток, щоб застосувати зміни.</value>
   </data>
   <data name="showChartsLabel" xml:space="preserve">
-    <value>Графік ▼</value>
+    <value>Графіки  ▼</value>
+  </data>
+  <data name="showTasksLabel" xml:space="preserve">
+    <value>Показати задачі ▼</value>
+  </data>
+  <data name="sleepDurationLabel" xml:space="preserve">
+    <value>Тривалість сну:</value>
+  </data>
+  <data name="startHeader" xml:space="preserve">
+    <value>Початок</value>
+  </data>
+  <data name="startSleepingLabel" xml:space="preserve">
+    <value>Початок сну:</value>
+  </data>
+  <data name="taskListLabel" xml:space="preserve">
+    <value>Список задач</value>
+  </data>
+  <data name="themeLabel" xml:space="preserve">
+    <value>Тема:</value>
   </data>
   <data name="timeHeader" xml:space="preserve">
     <value>Час</value>
+  </data>
+  <data name="timeLabel" xml:space="preserve">
+    <value>Час:</value>
   </data>
   <data name="todayLabel" xml:space="preserve">
     <value>Сьогодні:</value>
   </data>
   <data name="totalCostsLable" xml:space="preserve">
-    <value>Витрати за день:</value>
+    <value>Витрати за сьогодні: </value>
+  </data>
+  <data name="totalSleepLabel" xml:space="preserve">
+    <value>Загальний час сну:</value>
+  </data>
+  <data name="viewTaskLabel" xml:space="preserve">
+    <value>Показати задачі:</value>
   </data>
   <data name="waterTabName" xml:space="preserve">
     <value>Водний баланс</value>
+  </data>
+  <data name="yearLabel" xml:space="preserve">
+    <value>рік</value>
   </data>
 </root>

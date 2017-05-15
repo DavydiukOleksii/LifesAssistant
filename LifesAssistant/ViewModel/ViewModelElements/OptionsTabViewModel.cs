@@ -6,6 +6,7 @@ using System.Collections.Generic;
 using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
+using System.Windows;
 using System.Windows.Input;
 
 namespace LifesAssistant.ViewModel.ViewModelElements
@@ -19,7 +20,9 @@ namespace LifesAssistant.ViewModel.ViewModelElements
             ThemeList = ConfigRepository.Instance.GetThemeList();
             CurrentConfig = ConfigRepository.Instance.GetCurrentConfig();
             SelectedConfig = ConfigRepository.Instance.GetCurrentConfig();
-            DefaultConfig = ConfigRepository.Instance.GetDefaultConfig();
+            SelectedLanguage = LanguageList.FirstOrDefault( x => x.Equals(SelectedConfig.Language));
+
+            IsRestartMessageVisible = Visibility.Hidden;
         }
         #endregion
 
@@ -32,6 +35,17 @@ namespace LifesAssistant.ViewModel.ViewModelElements
             {
                 _languageList = value;
                 OnPropertyChanged("LanguageList");
+            }
+        }
+
+        protected LanguageItem _selectedLanguage;
+        public LanguageItem SelectedLanguage
+        {
+            get { return _selectedLanguage; }
+            set
+            {
+                _selectedLanguage = value;
+                OnPropertyChanged("SelectedLanguage");
             }
         }
 
@@ -68,14 +82,14 @@ namespace LifesAssistant.ViewModel.ViewModelElements
             }
         }
 
-        protected ConfigData _defaultConfig;
-        public ConfigData DefaultConfig
+        protected Visibility _isRestartMessageVisible;
+        public Visibility IsRestartMessageVisible
         {
-            get { return _defaultConfig; }
+            get { return _isRestartMessageVisible; }
             set
             {
-                _defaultConfig = value;
-                OnPropertyChanged("DefaultConfig");
+                _isRestartMessageVisible = value;
+                OnPropertyChanged("IsRestartMessageVisible");
             }
         }
 
@@ -104,7 +118,8 @@ namespace LifesAssistant.ViewModel.ViewModelElements
 
         public void ExecuteSetDefaultConfigCommand(object parametr)
         {
-            SelectedConfig = DefaultConfig;
+            SelectedConfig = ConfigRepository.Instance.GetDefaultConfig();
+            SelectedLanguage = LanguageList.FirstOrDefault(x => x.Equals(SelectedConfig.Language));
         }
         #endregion
 
@@ -114,11 +129,7 @@ namespace LifesAssistant.ViewModel.ViewModelElements
         {
             get
             {
-                if (_cancelCommand == null)
-                {
-                    _cancelCommand = new RelayCommand(ExecuteCancelCommand, CanExecuteCancelCommand);
-                }
-                return _cancelCommand;
+                return _cancelCommand ?? (_cancelCommand = new RelayCommand(ExecuteCancelCommand, CanExecuteCancelCommand));
             }
         }
 
@@ -132,7 +143,61 @@ namespace LifesAssistant.ViewModel.ViewModelElements
 
         public void ExecuteCancelCommand(object parametr)
         {
-            SelectedConfig = CurrentConfig;
+            SelectedConfig = ConfigRepository.Instance.GetCurrentConfig();
+            SelectedLanguage = LanguageList.FirstOrDefault(x => x.Equals(SelectedConfig.Language));
+        }
+        #endregion
+
+        #region Apply
+        private ICommand _applyCommand;
+        public ICommand Apply
+        {
+            get
+            {
+                if (_applyCommand == null)
+                {
+                    _applyCommand = new RelayCommand(ExecuteApplyCommand, CanExecuteApplyCommand);
+                }
+                return _applyCommand;
+            }
+        }
+
+        public bool CanExecuteApplyCommand(object parametr)
+        {
+            if (SelectedConfig != null)
+                return true;
+            else
+                return false;
+        }
+
+        public void ExecuteApplyCommand(object parametr)
+        {
+            SelectedConfig.Language = SelectedLanguage;
+            ConfigRepository.Instance.SetCurrentConfig(SelectedConfig);
+            CurrentConfig = ConfigRepository.Instance.GetCurrentConfig();
+
+            IsRestartMessageVisible = Visibility.Visible;
+        }
+        #endregion
+
+        #region Restart
+        private ICommand _restartCommand;
+        public ICommand Restart
+        {
+            get
+            {
+                if (_restartCommand == null)
+                {
+                    _restartCommand = new RelayCommand(ExecuteRestartCommand);
+                }
+                return _restartCommand;
+            }
+        }
+
+        public void ExecuteRestartCommand(object parametr)
+        {
+            System.Diagnostics.Process.Start(Application.ResourceAssembly.Location);
+            Application.Current.Shutdown();
         }
         #endregion
 

@@ -517,6 +517,7 @@ namespace LifesAssistant.ViewModel.ViewModelElements
         {
             CalendarRepository.Instance.AddHBOperation(NewHB);
             NewHB = new OneHB();
+            NewHB.Date = DateTime.Today;
             DaysHB = CalendarRepository.Instance.GetHBByDay(SearchDate);
             HBFlyoutIsOpen = false;
         }

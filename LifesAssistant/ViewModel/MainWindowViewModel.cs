@@ -287,6 +287,27 @@ namespace LifesAssistant.ViewModel
         }
         #endregion
 
+        #region Move Window to Right Side
+        RelayCommand _moveRightWindowCommand;
+        public ICommand MoveRightWindow
+        {
+            get
+            {
+                if (_moveRightWindowCommand == null)
+                {
+                    _moveRightWindowCommand = new RelayCommand(ExecuteMoveRightWindowCommand);
+                }
+                return _moveRightWindowCommand;
+            }
+        }
+
+        public void ExecuteMoveRightWindowCommand(object parameter)
+        {
+            WindowPosLeft = SystemParameters.WorkArea.Right - WindowWidth;
+            WindowPosTop = 0;
+        }
+        #endregion
+
         #region ShowCharts
         RelayCommand _showChartsCommand;
         public ICommand ShowCharts

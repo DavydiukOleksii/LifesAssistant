@@ -102,7 +102,7 @@
                     HorizontalAlignment="Left"
                     Margin="15 0 0 0"
                     VerticalContentAlignment="Center"
-                    SelectedValue="{Binding SelectedConfig.Language}"
+                    SelectedValue="{Binding SelectedLanguage, Mode=TwoWay, UpdateSourceTrigger=PropertyChanged}"
                     ItemsSource="{Binding LanguageList}"
                     DisplayMemberPath="Title"
                     VerticalAlignment="Center" />
@@ -137,6 +137,30 @@
             </Grid>
         </Grid>
     </DockPanel>
+
+        <DockPanel Grid.ColumnSpan="2" Grid.Row="2" Visibility="{Binding IsRestartMessageVisible}">
+            
+            <TextBlock DockPanel.Dock="Top"
+                   HorizontalAlignment="Center"
+                   FontSize="16" 
+                   TextAlignment="Center"
+                   TextWrapping="Wrap" 
+                   Text="{x:Static res:Resources.restartMessageLabel}"/>
+
+            <!--Restart button-->
+            <controls:Tile 
+                        DockPanel.Dock="Bottom"
+                        Width="94"
+                        Height="26"
+                        Margin="5"
+                        HorizontalAlignment="Right"
+                        VerticalAlignment="Center"
+                        Command="{Binding Restart}">
+                <TextBlock Margin="3"
+                        VerticalAlignment="Center"
+                        Text="{x:Static res:Resources.restartLabel}" />
+            </controls:Tile>
+        </DockPanel>
         
         <!--Buttons-->
         <Grid Grid.Row="3" Grid.ColumnSpan="2">
@@ -183,7 +207,7 @@
                         Margin="5"
                         HorizontalAlignment="Center"
                         VerticalAlignment="Center"
-                        Command="{Binding Cancel}">
+                        Command="{Binding Cancel}" Click="Tile_Click">
                 <TextBlock Margin="3"
                         VerticalAlignment="Center"
                         Text="{x:Static res:Resources.cancelLabel}" />
