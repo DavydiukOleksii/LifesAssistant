@@ -61,7 +61,7 @@ namespace LifesAssistant.Properties.Language {
         }
         
         /// <summary>
-        ///   Looks up a localized string similar to Add HB.
+        ///   Looks up a localized string similar to Birthday.
         /// </summary>
         public static string addHBFloLabelyout {
             get {
@@ -70,7 +70,7 @@ namespace LifesAssistant.Properties.Language {
         }
         
         /// <summary>
-        ///   Looks up a localized string similar to Add new HB.
+        ///   Looks up a localized string similar to Add Birthday.
         /// </summary>
         public static string addHBLabel {
             get {
@@ -304,7 +304,7 @@ namespace LifesAssistant.Properties.Language {
         }
         
         /// <summary>
-        ///   Looks up a localized string similar to HB List: .
+        ///   Looks up a localized string similar to Birthday List: .
         /// </summary>
         public static string hbListLabel {
             get {

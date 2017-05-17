@@ -186,13 +186,9 @@
 
         <!--  Charts Button  -->
         <DockPanel Grid.Row="2" Grid.ColumnSpan="2">
-            <controls:Tile Width="auto"
-                           Height="auto"
-                           Margin="0"
-                           Background="#00171F"
+            <controls:Tile Style="{StaticResource chartsButton}"
                            Command="{Binding ShowCharts}">
-                <TextBlock Margin="3"
-                           VerticalAlignment="Center"
+                <TextBlock Style="{StaticResource buttonText}"
                            Text="{Binding ChartsLabel}" />
             </controls:Tile>
         </DockPanel>
@@ -217,9 +213,7 @@
 
                 <controls:Tile Grid.Column="1"
                                Width="50"
-                               Height="26"
-                               HorizontalAlignment="Center"
-                               VerticalAlignment="Center"
+                               Style="{StaticResource tileButton}"
                                Command="{Binding ChartGroupChange}"
                                CommandParameter="day">
 
@@ -230,9 +224,7 @@
 
                 <controls:Tile Grid.Column="2"
                                Width="50"
-                               Height="26"
-                               HorizontalAlignment="Center"
-                               VerticalAlignment="Center"
+                               Style="{StaticResource tileButton}"
                                Command="{Binding ChartGroupChange}"
                                CommandParameter="month">
 
@@ -243,9 +235,7 @@
 
                 <controls:Tile Grid.Column="3"
                                Width="50"
-                               Height="26"
-                               HorizontalAlignment="Center"
-                               VerticalAlignment="Center"
+                               Style="{StaticResource tileButton}"
                                Command="{Binding ChartGroupChange}"
                                CommandParameter="year">
 

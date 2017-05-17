@@ -156,8 +156,7 @@
                         HorizontalAlignment="Right"
                         VerticalAlignment="Center"
                         Command="{Binding Restart}">
-                <TextBlock Margin="3"
-                        VerticalAlignment="Center"
+                <TextBlock Style="{StaticResource buttonText}"
                         Text="{x:Static res:Resources.restartLabel}" />
             </controls:Tile>
         </DockPanel>
@@ -180,8 +179,7 @@
                         HorizontalAlignment="Center"
                         VerticalAlignment="Center"
                         Command="{Binding SetDefaultConfig}">
-                <TextBlock Margin="3"
-                        VerticalAlignment="Center"
+                <TextBlock Style="{StaticResource buttonText}"
                         Text="{x:Static res:Resources.defaultLabel}" />
             </controls:Tile>
 
@@ -194,8 +192,7 @@
                         HorizontalAlignment="Center"
                         VerticalAlignment="Center"
                         Command="{Binding Apply}">
-                <TextBlock Margin="3"
-                        VerticalAlignment="Center"
+                <TextBlock Style="{StaticResource buttonText}"
                         Text="{x:Static res:Resources.applyLabel}" />
             </controls:Tile>
 
@@ -208,8 +205,7 @@
                         HorizontalAlignment="Center"
                         VerticalAlignment="Center"
                         Command="{Binding Cancel}" Click="Tile_Click">
-                <TextBlock Margin="3"
-                        VerticalAlignment="Center"
+                <TextBlock Style="{StaticResource buttonText}"
                         Text="{x:Static res:Resources.cancelLabel}" />
             </controls:Tile>
             

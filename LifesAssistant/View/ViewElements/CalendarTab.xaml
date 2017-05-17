@@ -24,21 +24,11 @@
         </Grid.RowDefinitions>
 
         <!--Tab label-->
-        <TextBlock Height="24"
-                   Margin="0 10 0 0"
-                   HorizontalAlignment="Center"
-                   FontSize="18"
+        <TextBlock Style="{StaticResource tabNameText}"
                    Text="{x:Static res:Resources.calendarTabLabel}" />
 
         <!--Current date-->
-        <TextBlock Name="CurrentDate"
-                   Grid.Row="0"
-                   Grid.Column="1"
-                   Height="20"
-                   Margin="0 10 10 0"
-                   HorizontalAlignment="Right"
-                   VerticalAlignment="Center"
-                   FontSize="14"
+        <TextBlock Style="{StaticResource currentDateText}"
                    Text="{Binding CurrentDate}" />
 
         <!--Calendar-->
@@ -71,27 +61,20 @@
                         SelectedDate="{Binding SearchDate,
                                                StringFormat=dd.MMM.yyyy}" />
             <controls:Tile Grid.Column="1"
-                           Height="26"
                            Margin="10 5 15 5"
-                           HorizontalAlignment="Center"
-                           VerticalAlignment="Center"
+                           Style="{StaticResource tileButton}"
                            Command="{Binding FindSelectedDate}">
 
-                <TextBlock Margin="3"
-                           VerticalAlignment="Center"
+                <TextBlock Style="{StaticResource buttonText}"
                            Text="{x:Static res:Resources.findLabel}" />
             </controls:Tile>
         </Grid>
 
         <!--  Tasks Button  -->
         <DockPanel Grid.Row="3" Grid.ColumnSpan="2">
-            <controls:Tile Width="auto"
-                           Height="auto"
-                           Margin="0"
-                           Background="#00171F"
+            <controls:Tile Style="{StaticResource chartsButton}"
                            Command="{Binding ViewTasks}">
-                <TextBlock Margin="3"
-                           VerticalAlignment="Center"
+                <TextBlock Style="{StaticResource buttonText}"
                            Text="{Binding ShowTasksLabel}" />
             </controls:Tile>
         </DockPanel>
@@ -111,22 +94,22 @@
 
             <!--Task list label-->
             <Label HorizontalContentAlignment="Center"
-                   Content="{x:Static res:Resources.taskListLabel}"
-                   FontSize="14" />
+                   FontSize="14" 
+                   Content="{x:Static res:Resources.taskListLabel}"/>
 
             <!--Task Date Label-->
             <Label Grid.Column="1"
-                   HorizontalContentAlignment="Right"
                    Margin="20 0"
-                   Content="{Binding TaskDate}"
-                   FontSize="14" />
+                   HorizontalContentAlignment="Right"
+                   FontSize="14" 
+                   Content="{Binding TaskDate}"/>
 
             <!-- date label-->
             <Label Grid.Column="1"
-                   HorizontalContentAlignment="Right"
                    Margin="0 0 95 0"
-                   Content="{x:Static res:Resources.dateLabel}"
-                   FontSize="14" />
+                   HorizontalContentAlignment="Right"
+                   FontSize="14"
+                   Content="{x:Static res:Resources.dateLabel}"/>
 
             <!--add new items, panel-->
             <Grid Grid.Column="1" Grid.Row="1">
@@ -139,25 +122,21 @@
 
                 <!--Add task-->
                 <controls:Tile Grid.Row="0"
-                           Height="25"
-                           HorizontalAlignment="Center"
+                           Style="{StaticResource tileButton}"
                            Command="{Binding ViewTaskFlyout}"
                            Margin="20 5"
                            VerticalAlignment="Top">
-                    <TextBlock Margin="3"
-                           VerticalAlignment="Center"
+                    <TextBlock Style="{StaticResource buttonText}"
                            Text="{x:Static res:Resources.newTaskLabel}" />
                 </controls:Tile>
 
                 <!--add HB-->
                 <controls:Tile Grid.Row="1"
-                           Height="25"
-                           HorizontalAlignment="Center"
+                           Style="{StaticResource tileButton}"
                            VerticalAlignment="Top"
                            Margin="20 5"
                            Command="{Binding ViewHBFlyout}">
-                    <TextBlock Margin="3"
-                           VerticalAlignment="Center"
+                    <TextBlock Style="{StaticResource buttonText}"
                            Text="{x:Static res:Resources.addHBLabel}" />
                 </controls:Tile>
 
@@ -211,8 +190,7 @@
             <!-- New task  flyout  -->
             <controls:Flyout Grid.RowSpan="2"
                              Grid.Column="1"
-                             MaxWidth="160"
-                             MinWidth="150"
+                             MaxWidth="150"
                              Header="{x:Static res:Resources.addTaskLabel}"
                              IsOpen="{Binding TaskFlyoutIsOpen}"
                              Position="Right">
@@ -257,12 +235,10 @@
                         </TextBox.Text>
                     </TextBox>
 
-                    <controls:Tile Width="auto"
-                                   Height="25"
+                    <controls:Tile Style="{StaticResource tileButton}"
                                    Margin="10"
                                    Command="{Binding AddTask}">
-                        <TextBlock Margin="3"
-                                   VerticalAlignment="Center"
+                        <TextBlock Style="{StaticResource buttonText}"
                                    Text="{x:Static res:Resources.addLabel}" />
                     </controls:Tile>
                 </StackPanel>
@@ -271,7 +247,7 @@
             <!-- New HB  flyout  -->
             <controls:Flyout Grid.RowSpan="2"
                              Grid.Column="1"
-                             MaxWidth="160"
+                             MaxWidth="150"
                              MinWidth="150"
                              Header="{x:Static res:Resources.addHBFloLabelyout}"
                              IsOpen="{Binding HBFlyoutIsOpen}"
@@ -308,12 +284,10 @@
                         </TextBox.Text>
                     </TextBox>
 
-                    <controls:Tile Width="auto"
-                                   Height="25"
+                    <controls:Tile Style="{StaticResource tileButton}"
                                    Margin="10 15 10 0"
                                    Command="{Binding AddHB}">
-                        <TextBlock Margin="3"
-                                   VerticalAlignment="Center"
+                        <TextBlock Style="{StaticResource buttonText}"
                                    Text="{x:Static res:Resources.addLabel}" />
                     </controls:Tile>
                 </StackPanel>

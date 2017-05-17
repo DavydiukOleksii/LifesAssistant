@@ -118,10 +118,10 @@
     <value>System.Resources.ResXResourceWriter, System.Windows.Forms, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089</value>
   </resheader>
   <data name="addHBFloLabelyout" xml:space="preserve">
-    <value>Add HB</value>
+    <value>Birthday</value>
   </data>
   <data name="addHBLabel" xml:space="preserve">
-    <value>Add new HB</value>
+    <value>Add Birthday</value>
   </data>
   <data name="addLabel" xml:space="preserve">
     <value>Add</value>
@@ -199,7 +199,7 @@
     <value>Finish dream:</value>
   </data>
   <data name="hbListLabel" xml:space="preserve">
-    <value>HB List: </value>
+    <value>Birthday List: </value>
   </data>
   <data name="hideChartsLabel" xml:space="preserve">
     <value>Hide Charts  ▲</value>

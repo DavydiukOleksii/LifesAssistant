@@ -118,10 +118,10 @@
     <value>System.Resources.ResXResourceWriter, System.Windows.Forms, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089</value>
   </resheader>
   <data name="addHBFloLabelyout" xml:space="preserve">
-    <value>Додати ДН</value>
+    <value>Іменинни</value>
   </data>
   <data name="addHBLabel" xml:space="preserve">
-    <value>Новий ДН</value>
+    <value>Додати іменинни</value>
   </data>
   <data name="addLabel" xml:space="preserve">
     <value>Додати</value>
@@ -136,7 +136,7 @@
     <value>Додати операцію з водою</value>
   </data>
   <data name="addTaskLabel" xml:space="preserve">
-    <value>Додати задачу</value>
+    <value>Задача</value>
   </data>
   <data name="applyLabel" xml:space="preserve">
     <value>Застосувати</value>
@@ -160,7 +160,7 @@
     <value>Витрати за день</value>
   </data>
   <data name="dailyWaterNormLabel" xml:space="preserve">
-    <value>Денна норма води:</value>
+    <value>Норма води(л/д):</value>
   </data>
   <data name="dateLabel" xml:space="preserve">
     <value>Дата:</value>
@@ -169,7 +169,7 @@
     <value>день</value>
   </data>
   <data name="defaultLabel" xml:space="preserve">
-    <value>За замовчуванням</value>
+    <value>За замовч.</value>
   </data>
   <data name="deleteLabel" xml:space="preserve">
     <value>Видалити</value>
@@ -199,7 +199,7 @@
     <value>Кінець сна:</value>
   </data>
   <data name="hbListLabel" xml:space="preserve">
-    <value>Список ДН:</value>
+    <value>Список іменин:</value>
   </data>
   <data name="hideChartsLabel" xml:space="preserve">
     <value>Приховати графік  ▲</value>
@@ -232,7 +232,7 @@
     <value>Ім'я:</value>
   </data>
   <data name="newTaskLabel" xml:space="preserve">
-    <value>Додати нове завдання</value>
+    <value>Додати завдання</value>
   </data>
   <data name="optionsTabLabel" xml:space="preserve">
     <value>Налаштування</value>
@@ -244,7 +244,7 @@
     <value>Опис:</value>
   </data>
   <data name="restartLabel" xml:space="preserve">
-    <value>Перезавантажити</value>
+    <value>Перезавант.</value>
   </data>
   <data name="restartMessageLabel" xml:space="preserve">
     <value>Будь ласка, перезапустіть додаток, щоб застосувати зміни.</value>
