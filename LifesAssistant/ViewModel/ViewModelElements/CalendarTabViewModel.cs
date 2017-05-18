@@ -13,24 +13,44 @@ namespace LifesAssistant.ViewModel.ViewModelElements
 {
     class CalendarTabViewModel: ViewModelBase
     {
+        #region Singleton
+        protected static CalendarTabViewModel instance = null;
+        public static CalendarTabViewModel Instance
+        {
+            get
+            {
+                if (instance == null)
+                    instance = new CalendarTabViewModel();
+                return instance;
+            }
+        }
+        #endregion
+
         #region Events
 
-        public delegate void OpenTaskDelegate();
+        public delegate void voidDelegate();
 
-        public event OpenTaskDelegate OpenTaskEvent;
-
+        #region open task
+        public event voidDelegate OpenTaskEvent;
         public void OnOpenTaskEvent()
         {
-            if(null != OpenTaskEvent)
-                OpenTaskEvent();
+            OpenTaskEvent?.Invoke();
         }
+        #endregion
 
+        #region calendar event
+        public voidDelegate SomethingHappendEvent;
+        public void OnSomethingHappendEvent()
+        {
+            SomethingHappendEvent?.Invoke();
+        }
+        #endregion 
 
         #endregion
 
         #region Constructor
 
-        public CalendarTabViewModel()
+        protected CalendarTabViewModel()
         {
             CurrentDate = Resources.todayLabel + DateTime.Today.ToString("d");
             ShowTasksLabel = Resources.showTasksLabel;
@@ -413,6 +433,7 @@ namespace LifesAssistant.ViewModel.ViewModelElements
 
                 TaskDate = SearchDate.ToShortDateString();
             }
+            SomethingHappendEvent();
         }
         #endregion
 

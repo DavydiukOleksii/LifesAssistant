@@ -12,8 +12,21 @@ namespace LifesAssistant.ViewModel.ViewModelElements
 {
     class DreamTabViewModel: ViewModelBase
     {
+        #region Singleton
+        protected static DreamTabViewModel m_instance = null;
+        public static DreamTabViewModel Instance
+        {
+            get
+            {
+                if (m_instance == null)
+                    m_instance = new DreamTabViewModel();
+                return m_instance;
+            }
+        }
+        #endregion  
+
         #region Constructor
-        public DreamTabViewModel()
+        protected DreamTabViewModel()
         {
             CurrentDate = Resources.todayLabel + DateTime.Today.ToString("d");
 
@@ -29,6 +42,8 @@ namespace LifesAssistant.ViewModel.ViewModelElements
         #endregion
 
         #region Data
+        protected string m_TabName = "Dreams";
+
         protected double _daySleepNorm = 8;
         protected string _appFolderPath;
 
@@ -73,6 +88,7 @@ namespace LifesAssistant.ViewModel.ViewModelElements
             {
                 _totalSleepTime = value;
                 OnPropertyChanged("TotalSleepTime");
+                //CheckTotalSleepTime();
             }
         }
 
@@ -141,7 +157,7 @@ namespace LifesAssistant.ViewModel.ViewModelElements
         public void ExecuteDellCurrentSleepTimeCommand(object parametr)
         {
             NewSleep.Time = DateTime.Now;
-            TotalSleepTime = TotalSleepTime.Subtract(TimeSpan.FromSeconds(NewSleep.GetDurationInSecond()));
+            TotalSleepTime = TotalSleepTime.Subtract(TimeSpan.FromSeconds(CurrentSleep.GetDurationInSecond()));
             SleepRepository.Instance.DeleteOperation(CurrentSleep);
 
             DaySleepTime.Remove(CurrentSleep);
@@ -151,6 +167,8 @@ namespace LifesAssistant.ViewModel.ViewModelElements
 
             if (DaySleepTime.Count > 0)
                 CurrentSleep = DaySleepTime.First();
+
+            CheckTotalSleepTime();
         }
         #endregion
 
@@ -192,8 +210,40 @@ namespace LifesAssistant.ViewModel.ViewModelElements
             CommandManager.InvalidateRequerySuggested();
             
             NewSleep = new OneSleep();
+
+            CheckTotalSleepTime();
         }
         #endregion
+
+        #endregion
+
+        #region Event
+        public delegate void NotificationDelegate(string tabName, bool isNotification);
+
+        public event NotificationDelegate DreamTabNotification;
+
+        public void OnDreamTabNotification(string tabName, bool isNotification)
+        {
+            if (DreamTabNotification != null)
+                DreamTabNotification(tabName, isNotification);
+        }
+
+        protected void CheckTotalSleepTime()
+        {
+            if ((TotalSleepTime.Hour * 3600 + TotalSleepTime.Minute*60  + TotalSleepTime.Second) > 0)
+            {
+                OnDreamTabNotification(m_TabName, false);
+            }
+            else
+            {
+                OnDreamTabNotification(m_TabName, true);
+            }
+        }
+
+        public void RefreshNotification()
+        {
+            CheckTotalSleepTime();
+        }
 
         #endregion
 

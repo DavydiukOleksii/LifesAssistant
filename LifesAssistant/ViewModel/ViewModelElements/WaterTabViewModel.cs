@@ -10,10 +10,10 @@ using LifesAssistant.Properties.Language;
 
 namespace LifesAssistant.ViewModel.ViewModelElements
 {
-    public class data
+    public class Data
     {
-        public double capacity { get; set; }
-        public string name { get; set; }
+        public double Capacity { get; set; }
+        public string Name { get; set; }
     }
 
     class WaterTabViewModel: ViewModelBase
@@ -51,14 +51,14 @@ namespace LifesAssistant.ViewModel.ViewModelElements
 
         protected void updateWaterPercent()
         {
-            DayWaterCapacityPercent = new ObservableCollection<data>();
+            DayWaterCapacityPercent = new ObservableCollection<Data>();
             if (DailyTotalWaterCapacity < _dayWaterNorm)
             {
-                DayWaterCapacityPercent.Add(new data() { capacity = DailyTotalWaterCapacity, name = "nevoda" });
-                DayWaterCapacityPercent.Add(new data()
+                DayWaterCapacityPercent.Add(new Data() { Capacity = DailyTotalWaterCapacity, Name = "nevoda" });
+                DayWaterCapacityPercent.Add(new Data()
                 {
-                    capacity = _dayWaterNorm - DailyTotalWaterCapacity,
-                    name = "voda"
+                    Capacity = _dayWaterNorm - DailyTotalWaterCapacity,
+                    Name = "voda"
                 });
 
                 if (DailyTotalWaterCapacity != 0)
@@ -72,11 +72,11 @@ namespace LifesAssistant.ViewModel.ViewModelElements
             }
             else
             {
-                DayWaterCapacityPercent.Add(new data() { capacity = _dayWaterNorm, name = "nevoda" });
-                DayWaterCapacityPercent.Add(new data()
+                DayWaterCapacityPercent.Add(new Data() { Capacity = _dayWaterNorm, Name = "nevoda" });
+                DayWaterCapacityPercent.Add(new Data()
                 {
-                    capacity = 0,
-                    name = "voda"
+                    Capacity = 0,
+                    Name = "voda"
                 });
                 WaterPercent = 100;
             }
@@ -144,8 +144,8 @@ namespace LifesAssistant.ViewModel.ViewModelElements
             }
         }
 
-        protected ObservableCollection<data> _dayWaterCapacityPercent;
-        public ObservableCollection<data> DayWaterCapacityPercent
+        protected ObservableCollection<Data> _dayWaterCapacityPercent;
+        public ObservableCollection<Data> DayWaterCapacityPercent
         {
             get { return _dayWaterCapacityPercent; }
             set

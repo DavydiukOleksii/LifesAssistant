@@ -80,6 +80,7 @@
                 </controls:Tile>
 
                 <controls:Tile Grid.Row="1"
+                               Background="{Binding CostsTabBackgroundColor}"
                                Command="{Binding TabChanged}"
                                CommandParameter="Credit"
                                Style="{StaticResource side-tile}">
@@ -99,6 +100,7 @@
                 </controls:Tile>
 
                 <controls:Tile Grid.Row="3"
+                               Background="{Binding DreamsTabBackgroundColor}"
                                Command="{Binding TabChanged}"
                                CommandParameter="Dream"
                                Style="{StaticResource side-tile}">
@@ -282,6 +284,7 @@
                 </controls:Tile>
 
                 <controls:Tile Grid.Column="1"
+                               Background="{Binding CostsTabBackgroundColor}"
                                Command="{Binding TabChanged}"
                                CommandParameter="Credit"
                                Style="{StaticResource bot-tile}">
@@ -301,6 +304,7 @@
 
                 <controls:Tile Grid.Column="3"
                                Command="{Binding TabChanged}"
+                               Background="{Binding DreamsTabBackgroundColor}"
                                CommandParameter="Dream"
                                Style="{StaticResource bot-tile}">
                     <iconPacks:PackIconModern Width="40"

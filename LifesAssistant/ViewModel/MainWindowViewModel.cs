@@ -8,6 +8,7 @@ using LifesAssistant.Infrastructure;
 using LifesAssistant.Properties.Language;
 using LifesAssistant.View.ViewElements;
 using LifesAssistant.ViewModel.ViewModelElements;
+using System.Windows.Media;
 
 namespace LifesAssistant.ViewModel
 {
@@ -28,10 +29,21 @@ namespace LifesAssistant.ViewModel
             Charts = new ObservableCollection<ChartsElement>();
 
             ExecuteTabChangedCommand("Calendar");
+
+            CalendarTabViewModel.Instance.SomethingHappendEvent += CalendarEventsHandler;
+            CalendarTabViewModel.Instance.OpenTaskEvent += ChangeWindowSizeEventsHandler;
+
+            CostsTabViewModel.Instance.TabNotification += ChangeTabColorHandler;
+            CostsTabViewModel.Instance.RefreshNotification();
+
+            DreamTabViewModel.Instance.DreamTabNotification += ChangeTabColorHandler;
+            DreamTabViewModel.Instance.RefreshNotification();
         }
         #endregion
 
         #region Data
+
+        protected static Hardcodet.Wpf.TaskbarNotification.TaskbarIcon tb = new Hardcodet.Wpf.TaskbarNotification.TaskbarIcon();
 
         #region Data for controle Windows size, position and state
         //default windows width in diferent states
@@ -224,6 +236,28 @@ namespace LifesAssistant.ViewModel
             {
                 _mainPanel = value;
                 OnPropertyChanged("MainPanel");
+            }
+        }
+
+        protected Brush m_CostsTabBackgroundColor;
+        public Brush CostsTabBackgroundColor
+        {
+            get { return m_CostsTabBackgroundColor; }
+            set
+            {
+                m_CostsTabBackgroundColor = value;
+                OnPropertyChanged("CostsTabBackgroundColor");
+            }
+        }
+
+        protected Brush m_DreamsTabBackgroundColor;
+        public Brush DreamsTabBackgroundColor
+        {
+            get { return m_DreamsTabBackgroundColor; }
+            set
+            {
+                m_DreamsTabBackgroundColor = value;
+                OnPropertyChanged("DreamsTabBackgroundColor");
             }
         }
 
@@ -441,8 +475,7 @@ namespace LifesAssistant.ViewModel
                 case "Calendar":
                 {
                     MainPanel = new CalendarTab();
-                    MainPanel.DataContext = new CalendarTabViewModel();
-                    (MainPanel.DataContext as CalendarTabViewModel).OpenTaskEvent += ChangeWindowSizeEventsHandler;
+                    MainPanel.DataContext = CalendarTabViewModel.Instance;
                     ChartsButtonHeight = 0;
                     
                     break;
@@ -450,7 +483,7 @@ namespace LifesAssistant.ViewModel
                 case "Credit":
                 {
                     MainPanel = new CostsTab();
-                    MainPanel.DataContext = new CostsTabViewModel();
+                    MainPanel.DataContext = CostsTabViewModel.Instance;
                     break;
                 }
                 case "Water":
@@ -462,7 +495,7 @@ namespace LifesAssistant.ViewModel
                 case "Dream":
                 {
                     MainPanel = new DreamTab();
-                    MainPanel.DataContext = new DreamTabViewModel();
+                    MainPanel.DataContext = DreamTabViewModel.Instance;
                     break;
                 }
                 case "Options":
@@ -588,7 +621,7 @@ namespace LifesAssistant.ViewModel
         #endregion
 
         //todo: rewrite
-        #region Events
+        #region Events Handler
 
         public void ChangeWindowSizeEventsHandler()
         {
@@ -599,8 +632,44 @@ namespace LifesAssistant.ViewModel
             else
             {
                 WindowHeight = _defaultWindowsHeight;
-            }
+            }           
+        }
+
+        public void CalendarEventsHandler()
+        {
             
+            tb.ShowBalloonTip("calendar", "something happend", Hardcodet.Wpf.TaskbarNotification.BalloonIcon.Info);
+        }
+
+        public void ChangeTabColorHandler(string tabName, bool isNotification)
+        {
+            Color newColor = Color.FromRgb(14, 136, 192);
+            if(isNotification)
+            {
+                newColor = Color.FromRgb(112, 16, 53);
+            }
+
+            switch (tabName)
+            {
+                case "Calendar":
+                    {
+                        break;
+                    }
+                case "Costs":
+                    {
+                        CostsTabBackgroundColor = new SolidColorBrush(newColor);
+                        break;
+                    }
+                case "Water":   
+                    {
+                        break;
+                    }
+                case "Dreams":
+                    {
+                        DreamsTabBackgroundColor = new SolidColorBrush(newColor);
+                        break;
+                    }
+            }
         }
 
         #endregion

@@ -11,11 +11,23 @@ namespace LifesAssistant.ViewModel.ViewModelElements
 {
     class CostsTabViewModel: ViewModelBase
     {
+        #region Singleton
+        protected static CostsTabViewModel m_instance = null;
+        public static CostsTabViewModel Instance
+        {
+            get
+            {
+                if (m_instance == null)
+                    m_instance = new CostsTabViewModel();
+                return m_instance;
+            }
+        }
+        #endregion  
+
         #region Constructor
-        public CostsTabViewModel()
+        protected CostsTabViewModel()
         {
             CurrentDate = Resources.todayLabel + DateTime.Today.ToString("d");
-
             DayCosts = CostsRepository.Instance.GetByDay(DateTime.Today).DailyCosts;
             DailyTotalCosts = CostsRepository.Instance.GetByDay(DateTime.Today).TotalCosts;
 
@@ -24,6 +36,7 @@ namespace LifesAssistant.ViewModel.ViewModelElements
         #endregion
 
         #region Data
+        protected string m_TabName = "Costs"; 
 
         protected string _currentDate;
         public string CurrentDate
@@ -66,6 +79,7 @@ namespace LifesAssistant.ViewModel.ViewModelElements
             {
                 _dailyTotalCosts = value;
                 OnPropertyChanged("DailyTotalCosts");
+                CheckTotalCosts();
             }
         }
 
@@ -157,6 +171,35 @@ namespace LifesAssistant.ViewModel.ViewModelElements
         }
         #endregion
 
+        #endregion
+
+        #region Events
+        public delegate void NotificationDelegate(string tabName, bool isNotification); 
+
+        public event NotificationDelegate TabNotification;
+
+        public void OnTabNotification(string tabName, bool isNotification)
+        {
+            if (TabNotification != null)
+                TabNotification(tabName, isNotification);
+        }
+
+        protected void CheckTotalCosts()
+        {
+            if(DailyTotalCosts > 0)
+            {
+                OnTabNotification(m_TabName, false);
+            }
+            else
+            {
+                OnTabNotification(m_TabName, true);
+            }
+        } 
+
+        public void RefreshNotification()
+        {
+            CheckTotalCosts();
+        }
         #endregion
 
         #region FreeData
