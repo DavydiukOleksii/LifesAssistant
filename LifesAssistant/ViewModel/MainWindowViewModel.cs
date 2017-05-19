@@ -9,6 +9,7 @@ using LifesAssistant.Properties.Language;
 using LifesAssistant.View.ViewElements;
 using LifesAssistant.ViewModel.ViewModelElements;
 using System.Windows.Media;
+using System.IO;
 
 namespace LifesAssistant.ViewModel
 {
@@ -28,6 +29,8 @@ namespace LifesAssistant.ViewModel
 
             Charts = new ObservableCollection<ChartsElement>();
 
+            tb = new Hardcodet.Wpf.TaskbarNotification.TaskbarIcon();
+            tb.Icon = new System.Drawing.Icon(Path.GetDirectoryName(Path.GetDirectoryName(System.IO.Directory.GetCurrentDirectory())) + "/Config/Icon/Office_Supplies-512.ico");
 
             ExecuteTabChangedCommand("Calendar");
 
@@ -39,7 +42,7 @@ namespace LifesAssistant.ViewModel
 
         #region Data
 
-        protected static Hardcodet.Wpf.TaskbarNotification.TaskbarIcon tb = new Hardcodet.Wpf.TaskbarNotification.TaskbarIcon();
+        protected static Hardcodet.Wpf.TaskbarNotification.TaskbarIcon tb;
 
         #region Data for controle Windows size, position and state
         //default windows width in diferent states
@@ -666,7 +669,6 @@ namespace LifesAssistant.ViewModel
         }
         #endregion
 
-        //todo: rewrite
         #region Events Handler
 
         public void ChangeWindowSizeEventsHandler()
