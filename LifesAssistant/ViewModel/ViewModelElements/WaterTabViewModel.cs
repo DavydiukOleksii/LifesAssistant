@@ -16,40 +16,53 @@ namespace LifesAssistant.ViewModel.ViewModelElements
         public string Name { get; set; }
     }
 
-    class WaterTabViewModel: ViewModelBase
+    public class WaterTabViewModel: ViewModelBase
     {
+        #region Singleton
+        protected static WaterTabViewModel m_instance = null;
+        public static WaterTabViewModel Instance
+        {
+            get
+            {
+                if (m_instance == null)
+                    m_instance = new WaterTabViewModel();
+                return m_instance;
+            }
+        }
+        #endregion  
+
         #region Constructor
-        public WaterTabViewModel()
+        protected WaterTabViewModel()
         {
             CurrentDate = Resources.todayLabel + DateTime.Today.ToString("d");
             
             DailyTotalWaterCapacity = WaterRepository.Instance.GetByDay(DateTime.Today).TotalCapacity;
-
             DayWaterCapacity = WaterRepository.Instance.GetByDay(DateTime.Today).DailyWaterOperations;
 
             NewWaterOperation = new OnceDrink();
             NewWaterOperation.Capasity = 0.1;
 
-            DispatcherTimer timer = new DispatcherTimer();
-            timer.Interval = TimeSpan.FromSeconds(1);
-            timer.Tick += TimerTick;
-            timer.Start();
+            SetLastDrincOperationTimer();
+            SetNotificationTimer();
 
-            updateWaterPercent();
+            UpdateWaterPercent();
         }
         #endregion
 
+        #region Methods
         protected void TimerTick(object sender, EventArgs e)
         {
             if (DayWaterCapacity.Count > 0)
-                TimeFromLastDrink = DateTime.Now.Subtract(DayWaterCapacity.Last().Time).ToString(@"hh\:mm\:ss");
+            {
+                TimeFromLastDrink = DateTime.Now.Subtract(DayWaterCapacity.Last().Time).ToString(@"hh\:mm\:ss");   
+            }
             else
             {
                 TimeFromLastDrink = DateTime.Now.ToLongTimeString();
             }
         }
 
-        protected void updateWaterPercent()
+        protected void UpdateWaterPercent()
         {
             DayWaterCapacityPercent = new ObservableCollection<Data>();
             if (DailyTotalWaterCapacity < _dayWaterNorm)
@@ -63,7 +76,7 @@ namespace LifesAssistant.ViewModel.ViewModelElements
 
                 if (DailyTotalWaterCapacity != 0)
                 {
-                   WaterPercent = DailyTotalWaterCapacity/_dayWaterNorm*100;
+                    WaterPercent = DailyTotalWaterCapacity / _dayWaterNorm * 100;
                 }
                 else
                 {
@@ -82,9 +95,57 @@ namespace LifesAssistant.ViewModel.ViewModelElements
             }
         }
 
-        #region Data
+        protected void SetNotificationTimer()
+        {
+            DispatcherTimer notifyTimer = new DispatcherTimer();
+            notifyTimer.Interval = TimeSpan.FromSeconds(600);
+            notifyTimer.Tick += NotificationTimerTick;
+            notifyTimer.Start();
+        }
 
-        protected double _dayWaterNorm = 5;
+        protected void SetLastDrincOperationTimer()
+        {
+            DispatcherTimer timer = new DispatcherTimer();
+            timer.Interval = TimeSpan.FromSeconds(1);
+            timer.Tick += TimerTick;
+            timer.Start();
+        }
+
+        protected void NotificationTimerTick(object sender, EventArgs e)
+        {
+            if (DayWaterCapacity.Count > 0)
+            {
+                CheckTime((int)DateTime.Now.Subtract(DayWaterCapacity.Last().Time).TotalSeconds);
+            }
+            else
+            {
+                CheckTime(DateTime.Now.Hour * 3600 + DateTime.Now.Minute * 60 + DateTime.Now.Second);
+            }
+        }
+
+        public void RefreshNotification()
+        {
+            NotificationTimerTick(this, null);
+        }
+
+        #endregion
+
+        #region Data
+        protected string m_TabName = "Water";
+        protected bool isNotification = false;
+        protected string m_NotifiMassage = Resources.waterTabMessage;
+
+        protected double _dayWaterNorm;
+        public double DayWaterNorm
+        {
+            get { return _dayWaterNorm; }
+            set
+            {
+                _dayWaterNorm = value;
+                OnPropertyChanged("DayWaterNorm");
+                UpdateWaterPercent();
+            }
+        }
 
         protected string _currentDate;
         public string CurrentDate
@@ -155,7 +216,6 @@ namespace LifesAssistant.ViewModel.ViewModelElements
             }
         }
 
-
         protected OnceDrink _currentWaterDrink;
         public OnceDrink CurrentWaterDrink
         {
@@ -216,7 +276,8 @@ namespace LifesAssistant.ViewModel.ViewModelElements
             if (DayWaterCapacity.Count > 0)
                 CurrentWaterDrink = DayWaterCapacity.First();
 
-            updateWaterPercent();
+            UpdateWaterPercent();
+            RefreshNotification();
         }
         #endregion
 
@@ -256,9 +317,59 @@ namespace LifesAssistant.ViewModel.ViewModelElements
 
             NewWaterOperation.Capasity = 0.1;
 
-            updateWaterPercent();
+            UpdateWaterPercent();
+            RefreshNotification();
         }
         #endregion
+
+        #endregion
+
+        #region Event
+        public delegate void NotificationDelegate(string tabName, bool isNotification);
+        public delegate void NotificationMessageDelegate(string tabName, string message);
+
+        public event NotificationDelegate WaterTabNotification;
+        public event NotificationMessageDelegate WaterTabMessageNotification;
+
+        public void OnWaterTabNotification(string tabName, bool isNotification)
+        {
+            if (WaterTabNotification != null)
+                WaterTabNotification(tabName, isNotification);
+        }
+        public void OnWaterTabMessageNotification(string tabName, string message)
+        {
+            if (WaterTabMessageNotification != null)
+                WaterTabMessageNotification(tabName, message);
+        }
+
+        protected void CheckTime(int time)
+        {
+            if (time > 7200)
+            {
+                if (isNotification)
+                {
+                    if(time % 600 == 0)
+                    {
+                        OnWaterTabMessageNotification(m_TabName, m_NotifiMassage);
+                    }
+                }
+                else
+                {
+                    OnWaterTabNotification(m_TabName, true);
+                    isNotification = true;
+                }
+            }
+            else
+            {
+                OnWaterTabNotification(m_TabName, false);
+                isNotification = false;
+            }
+        }
+
+        //public void RefreshNotification()
+        //{
+        //    CheckTotalSleepTime();
+        //}
 
         #endregion
 

@@ -142,6 +142,15 @@ namespace LifesAssistant.Properties.Language {
         }
         
         /// <summary>
+        ///   Looks up a localized string similar to Calendar.
+        /// </summary>
+        public static string calendarTooltip {
+            get {
+                return ResourceManager.GetString("calendarTooltip", resourceCulture);
+            }
+        }
+        
+        /// <summary>
         ///   Looks up a localized string similar to Cancel.
         /// </summary>
         public static string cancelLabel {
@@ -169,11 +178,38 @@ namespace LifesAssistant.Properties.Language {
         }
         
         /// <summary>
+        ///   Looks up a localized string similar to Change window size.
+        /// </summary>
+        public static string changeSizeTooltip {
+            get {
+                return ResourceManager.GetString("changeSizeTooltip", resourceCulture);
+            }
+        }
+        
+        /// <summary>
         ///   Looks up a localized string similar to Chart elements group by: .
         /// </summary>
         public static string chartsByLabel {
             get {
                 return ResourceManager.GetString("chartsByLabel", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized string similar to Close.
+        /// </summary>
+        public static string closeTooltip {
+            get {
+                return ResourceManager.GetString("closeTooltip", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized string similar to Costs.
+        /// </summary>
+        public static string CostsTooltip {
+            get {
+                return ResourceManager.GetString("CostsTooltip", resourceCulture);
             }
         }
         
@@ -255,6 +291,15 @@ namespace LifesAssistant.Properties.Language {
         public static string descriptionsLabel {
             get {
                 return ResourceManager.GetString("descriptionsLabel", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized string similar to Dreams.
+        /// </summary>
+        public static string dreamsTooltip {
+            get {
+                return ResourceManager.GetString("dreamsTooltip", resourceCulture);
             }
         }
         
@@ -358,6 +403,15 @@ namespace LifesAssistant.Properties.Language {
         }
         
         /// <summary>
+        ///   Looks up a localized string similar to Minimize.
+        /// </summary>
+        public static string minimizeTooltip {
+            get {
+                return ResourceManager.GetString("minimizeTooltip", resourceCulture);
+            }
+        }
+        
+        /// <summary>
         ///   Looks up a localized string similar to $.
         /// </summary>
         public static string moneyHeader {
@@ -381,6 +435,15 @@ namespace LifesAssistant.Properties.Language {
         public static string monthLabel {
             get {
                 return ResourceManager.GetString("monthLabel", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized string similar to Move window to right-top position.
+        /// </summary>
+        public static string moveTooltip {
+            get {
+                return ResourceManager.GetString("moveTooltip", resourceCulture);
             }
         }
         
@@ -417,6 +480,15 @@ namespace LifesAssistant.Properties.Language {
         public static string optionsTabLabel {
             get {
                 return ResourceManager.GetString("optionsTabLabel", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized string similar to Options.
+        /// </summary>
+        public static string optionsTooltip {
+            get {
+                return ResourceManager.GetString("optionsTooltip", resourceCulture);
             }
         }
         
@@ -511,6 +583,24 @@ namespace LifesAssistant.Properties.Language {
         }
         
         /// <summary>
+        ///   Looks up a localized string similar to Details: .
+        /// </summary>
+        public static string taskNotifDetail {
+            get {
+                return ResourceManager.GetString("taskNotifDetail", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized string similar to You have a task at: .
+        /// </summary>
+        public static string taskNotifMessage {
+            get {
+                return ResourceManager.GetString("taskNotifMessage", resourceCulture);
+            }
+        }
+        
+        /// <summary>
         ///   Looks up a localized string similar to Theme:.
         /// </summary>
         public static string themeLabel {
@@ -574,11 +664,29 @@ namespace LifesAssistant.Properties.Language {
         }
         
         /// <summary>
+        ///   Looks up a localized string similar to You do not drink water more than 2 hours. Please drink a cup of water..
+        /// </summary>
+        public static string waterTabMessage {
+            get {
+                return ResourceManager.GetString("waterTabMessage", resourceCulture);
+            }
+        }
+        
+        /// <summary>
         ///   Looks up a localized string similar to Daily water balance.
         /// </summary>
         public static string waterTabName {
             get {
                 return ResourceManager.GetString("waterTabName", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized string similar to Water.
+        /// </summary>
+        public static string waterTooltip {
+            get {
+                return ResourceManager.GetString("waterTooltip", resourceCulture);
             }
         }
         

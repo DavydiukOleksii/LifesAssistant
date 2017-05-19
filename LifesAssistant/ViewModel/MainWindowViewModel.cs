@@ -28,16 +28,12 @@ namespace LifesAssistant.ViewModel
 
             Charts = new ObservableCollection<ChartsElement>();
 
+
             ExecuteTabChangedCommand("Calendar");
 
-            CalendarTabViewModel.Instance.SomethingHappendEvent += CalendarEventsHandler;
-            CalendarTabViewModel.Instance.OpenTaskEvent += ChangeWindowSizeEventsHandler;
+            SetEventsHandler();
 
-            CostsTabViewModel.Instance.TabNotification += ChangeTabColorHandler;
-            CostsTabViewModel.Instance.RefreshNotification();
-
-            DreamTabViewModel.Instance.DreamTabNotification += ChangeTabColorHandler;
-            DreamTabViewModel.Instance.RefreshNotification();
+            WaterTabViewModel.Instance.DayWaterNorm = ConfigRepository.Instance.GetCurrentConfig().Capasity;
         }
         #endregion
 
@@ -250,6 +246,18 @@ namespace LifesAssistant.ViewModel
             }
         }
 
+        protected Brush m_WaterTabBackgroundColor;
+        public Brush WaterTabBackgroundColor
+        {
+            get { return m_WaterTabBackgroundColor; }
+            set
+            {
+                m_WaterTabBackgroundColor = value;
+                OnPropertyChanged("WaterTabBackgroundColor");
+            }
+        }
+
+
         protected Brush m_DreamsTabBackgroundColor;
         public Brush DreamsTabBackgroundColor
         {
@@ -258,6 +266,17 @@ namespace LifesAssistant.ViewModel
             {
                 m_DreamsTabBackgroundColor = value;
                 OnPropertyChanged("DreamsTabBackgroundColor");
+            }
+        }
+
+        protected Brush m_CalendarTabBackgroundColor;
+        public Brush CalendarTabBackgroundColor
+        {
+            get { return m_CalendarTabBackgroundColor; }
+            set
+            {
+                m_CalendarTabBackgroundColor = value;
+                OnPropertyChanged("CalendarTabBackgroundColor");
             }
         }
 
@@ -477,7 +496,12 @@ namespace LifesAssistant.ViewModel
                     MainPanel = new CalendarTab();
                     MainPanel.DataContext = CalendarTabViewModel.Instance;
                     ChartsButtonHeight = 0;
-                    
+                    if((MainPanel.DataContext as CalendarTabViewModel).TaskHeight > 0)
+                        {
+                            (MainPanel.DataContext as CalendarTabViewModel).TaskHeight = 0;
+                            (MainPanel.DataContext as CalendarTabViewModel).ShowTasksLabel = Resources.showTasksLabel;
+                        }
+                                        
                     break;
                 }
                 case "Credit":
@@ -489,7 +513,7 @@ namespace LifesAssistant.ViewModel
                 case "Water":
                 {
                     MainPanel = new WaterTab();
-                    MainPanel.DataContext = new WaterTabViewModel();
+                    MainPanel.DataContext = WaterTabViewModel.Instance;
                     break;
                 }
                 case "Dream":
@@ -499,12 +523,12 @@ namespace LifesAssistant.ViewModel
                     break;
                 }
                 case "Options":
-                    {
-                        MainPanel = new OptionsTab();
-                        MainPanel.DataContext = new OptionsTabViewModel();
-                        ChartsButtonHeight = 0;
-                        break;
-                    }
+                {
+                    MainPanel = new OptionsTab();
+                    MainPanel.DataContext = new OptionsTabViewModel();
+                    ChartsButtonHeight = 0;
+                    break;
+                }
             }
             if(WindowWidth < _defaultWindowWidth)
                 ChangeWindowSize.Execute(this);
@@ -620,6 +644,28 @@ namespace LifesAssistant.ViewModel
 
         #endregion
 
+        #region Methods
+        protected void SetEventsHandler()
+        {
+            CalendarTabViewModel.Instance.OpenTaskEvent += ChangeWindowSizeEventsHandler;
+
+            CostsTabViewModel.Instance.TabNotification += ChangeTabColorHandler;
+            CostsTabViewModel.Instance.RefreshNotification();
+
+            DreamTabViewModel.Instance.DreamTabNotification += ChangeTabColorHandler;
+            DreamTabViewModel.Instance.RefreshNotification();
+
+            WaterTabViewModel.Instance.WaterTabNotification += ChangeTabColorHandler;
+            WaterTabViewModel.Instance.WaterTabMessageNotification += TabMessageNotificationHandler;
+            WaterTabViewModel.Instance.RefreshNotification();
+
+            CalendarTabViewModel.Instance.CalendarTabNotificationEvent += ChangeTabColorHandler;
+            CalendarTabViewModel.Instance.CalendarTabMessageNotificationEvent += TabMessageNotificationHandler;
+            CalendarTabViewModel.Instance.RefreshNotification();
+
+        }
+        #endregion
+
         //todo: rewrite
         #region Events Handler
 
@@ -635,12 +681,6 @@ namespace LifesAssistant.ViewModel
             }           
         }
 
-        public void CalendarEventsHandler()
-        {
-            
-            tb.ShowBalloonTip("calendar", "something happend", Hardcodet.Wpf.TaskbarNotification.BalloonIcon.Info);
-        }
-
         public void ChangeTabColorHandler(string tabName, bool isNotification)
         {
             Color newColor = Color.FromRgb(14, 136, 192);
@@ -653,6 +693,7 @@ namespace LifesAssistant.ViewModel
             {
                 case "Calendar":
                     {
+                        CalendarTabBackgroundColor = new SolidColorBrush(newColor);
                         break;
                     }
                 case "Costs":
@@ -662,6 +703,7 @@ namespace LifesAssistant.ViewModel
                     }
                 case "Water":   
                     {
+                        WaterTabBackgroundColor = new SolidColorBrush(newColor);
                         break;
                     }
                 case "Dreams":
@@ -670,6 +712,11 @@ namespace LifesAssistant.ViewModel
                         break;
                     }
             }
+        }
+
+        public void TabMessageNotificationHandler(string tabName, string message)
+        {
+            tb.ShowBalloonTip(tabName, message, Hardcodet.Wpf.TaskbarNotification.BalloonIcon.Info);
         }
 
         #endregion

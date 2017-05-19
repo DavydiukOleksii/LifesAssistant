@@ -144,6 +144,9 @@
   <data name="calendarTabLabel" xml:space="preserve">
     <value>Календар</value>
   </data>
+  <data name="calendarTooltip" xml:space="preserve">
+    <value>Календар</value>
+  </data>
   <data name="cancelLabel" xml:space="preserve">
     <value>Відміна</value>
   </data>
@@ -153,8 +156,17 @@
   <data name="capacityLabel" xml:space="preserve">
     <value>Об'єм:</value>
   </data>
+  <data name="changeSizeTooltip" xml:space="preserve">
+    <value>Змінити розмір вікна</value>
+  </data>
   <data name="chartsByLabel" xml:space="preserve">
     <value>Згруповати графік за</value>
+  </data>
+  <data name="closeTooltip" xml:space="preserve">
+    <value>Закрити</value>
+  </data>
+  <data name="CostsTooltip" xml:space="preserve">
+    <value>Витрати</value>
   </data>
   <data name="creditTabName" xml:space="preserve">
     <value>Витрати за день</value>
@@ -182,6 +194,9 @@
   </data>
   <data name="descriptionsLabel" xml:space="preserve">
     <value>Опис:</value>
+  </data>
+  <data name="dreamsTooltip" xml:space="preserve">
+    <value>Сон</value>
   </data>
   <data name="dreamTabName" xml:space="preserve">
     <value>Час сна</value>
@@ -216,6 +231,9 @@
   <data name="lastWaterDrinkingLabel" xml:space="preserve">
     <value>Час від останього прийому води</value>
   </data>
+  <data name="minimizeTooltip" xml:space="preserve">
+    <value>Згорнути</value>
+  </data>
   <data name="moneyHeader" xml:space="preserve">
     <value>₴</value>
   </data>
@@ -224,6 +242,9 @@
   </data>
   <data name="monthLabel" xml:space="preserve">
     <value>місяць</value>
+  </data>
+  <data name="moveTooltip" xml:space="preserve">
+    <value>Перемістити в правий верхній кут</value>
   </data>
   <data name="nameHeader" xml:space="preserve">
     <value>Ім'я</value>
@@ -235,6 +256,9 @@
     <value>Додати завдання</value>
   </data>
   <data name="optionsTabLabel" xml:space="preserve">
+    <value>Налаштування</value>
+  </data>
+  <data name="optionsTooltip" xml:space="preserve">
     <value>Налаштування</value>
   </data>
   <data name="purchaseHeader" xml:space="preserve">
@@ -267,6 +291,12 @@
   <data name="taskListLabel" xml:space="preserve">
     <value>Список задач</value>
   </data>
+  <data name="taskNotifDetail" xml:space="preserve">
+    <value>Деталі: </value>
+  </data>
+  <data name="taskNotifMessage" xml:space="preserve">
+    <value>Ви маєте задачу о </value>
+  </data>
   <data name="themeLabel" xml:space="preserve">
     <value>Тема:</value>
   </data>
@@ -288,7 +318,13 @@
   <data name="viewTaskLabel" xml:space="preserve">
     <value>Показати задачі:</value>
   </data>
+  <data name="waterTabMessage" xml:space="preserve">
+    <value>Ви не пили воду більше 2 годин. Будь ласка випейте склянку води.</value>
+  </data>
   <data name="waterTabName" xml:space="preserve">
+    <value>Водний баланс</value>
+  </data>
+  <data name="waterTooltip" xml:space="preserve">
     <value>Водний баланс</value>
   </data>
   <data name="yearLabel" xml:space="preserve">

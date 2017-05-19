@@ -118,10 +118,10 @@
     <value>System.Resources.ResXResourceWriter, System.Windows.Forms, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089</value>
   </resheader>
   <data name="addHBFloLabelyout" xml:space="preserve">
-    <value>Рождения</value>
+    <value>Именины</value>
   </data>
   <data name="addHBLabel" xml:space="preserve">
-    <value>Добавить День Рожд.</value>
+    <value>Добавить именины</value>
   </data>
   <data name="addLabel" xml:space="preserve">
     <value>Добавить</value>
@@ -136,12 +136,15 @@
     <value>Добавить операцию с водой</value>
   </data>
   <data name="addTaskLabel" xml:space="preserve">
-    <value>Добавить задачу</value>
+    <value>Задача</value>
   </data>
   <data name="applyLabel" xml:space="preserve">
     <value>Применить</value>
   </data>
   <data name="calendarTabLabel" xml:space="preserve">
+    <value>Календарь</value>
+  </data>
+  <data name="calendarTooltip" xml:space="preserve">
     <value>Календарь</value>
   </data>
   <data name="cancelLabel" xml:space="preserve">
@@ -153,14 +156,23 @@
   <data name="capacityLabel" xml:space="preserve">
     <value>Объем:</value>
   </data>
+  <data name="changeSizeTooltip" xml:space="preserve">
+    <value>Изменить розмер</value>
+  </data>
   <data name="chartsByLabel" xml:space="preserve">
     <value>График за </value>
+  </data>
+  <data name="closeTooltip" xml:space="preserve">
+    <value>Закрыть</value>
+  </data>
+  <data name="CostsTooltip" xml:space="preserve">
+    <value>Покупки</value>
   </data>
   <data name="creditTabName" xml:space="preserve">
     <value>Расходы</value>
   </data>
   <data name="dailyWaterNormLabel" xml:space="preserve">
-    <value>Норма воды(л/д):</value>
+    <value>Норма воды (л/д):</value>
   </data>
   <data name="dateLabel" xml:space="preserve">
     <value>Дата:</value>
@@ -183,6 +195,9 @@
   <data name="descriptionsLabel" xml:space="preserve">
     <value>Описание:</value>
   </data>
+  <data name="dreamsTooltip" xml:space="preserve">
+    <value>Сны</value>
+  </data>
   <data name="dreamTabName" xml:space="preserve">
     <value>Время сна</value>
   </data>
@@ -199,7 +214,7 @@
     <value>Окончание сна:</value>
   </data>
   <data name="hbListLabel" xml:space="preserve">
-    <value>Список дней рождений:</value>
+    <value>Список именин:</value>
   </data>
   <data name="hideChartsLabel" xml:space="preserve">
     <value>Скрыть график  ▲</value>
@@ -216,6 +231,9 @@
   <data name="lastWaterDrinkingLabel" xml:space="preserve">
     <value>Время от последнего приема воды</value>
   </data>
+  <data name="minimizeTooltip" xml:space="preserve">
+    <value>Згорнуть</value>
+  </data>
   <data name="moneyHeader" xml:space="preserve">
     <value>Деньги</value>
   </data>
@@ -224,6 +242,9 @@
   </data>
   <data name="monthLabel" xml:space="preserve">
     <value>месяц</value>
+  </data>
+  <data name="moveTooltip" xml:space="preserve">
+    <value>Переместить окно в правый верхний угол</value>
   </data>
   <data name="nameHeader" xml:space="preserve">
     <value>Имя</value>
@@ -236,6 +257,9 @@
   </data>
   <data name="optionsTabLabel" xml:space="preserve">
     <value>Настройки</value>
+  </data>
+  <data name="optionsTooltip" xml:space="preserve">
+    <value>Настрайки</value>
   </data>
   <data name="purchaseHeader" xml:space="preserve">
     <value>Покупка</value>
@@ -267,6 +291,12 @@
   <data name="taskListLabel" xml:space="preserve">
     <value>Список задач</value>
   </data>
+  <data name="taskNotifDetail" xml:space="preserve">
+    <value>Детали: </value>
+  </data>
+  <data name="taskNotifMessage" xml:space="preserve">
+    <value>У Вас задание на </value>
+  </data>
   <data name="themeLabel" xml:space="preserve">
     <value>Тема:</value>
   </data>
@@ -288,7 +318,13 @@
   <data name="viewTaskLabel" xml:space="preserve">
     <value>Показать задачи</value>
   </data>
+  <data name="waterTabMessage" xml:space="preserve">
+    <value>Вы не пили воду больше 2 часов. Выпейте стакан воды пожалуйста.</value>
+  </data>
   <data name="waterTabName" xml:space="preserve">
+    <value>Баланс воды</value>
+  </data>
+  <data name="waterTooltip" xml:space="preserve">
     <value>Баланс воды</value>
   </data>
   <data name="yearLabel" xml:space="preserve">

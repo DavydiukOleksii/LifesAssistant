@@ -71,6 +71,8 @@
                 </Grid.RowDefinitions>
 
                 <controls:Tile Grid.Row="0"
+                               ToolTip="{x:Static res:Resources.calendarTooltip}"
+                               Background="{Binding CalendarTabBackgroundColor}"
                                Command="{Binding TabChanged}"
                                CommandParameter="Calendar"
                                Style="{StaticResource side-tile}">
@@ -80,6 +82,7 @@
                 </controls:Tile>
 
                 <controls:Tile Grid.Row="1"
+                               ToolTip="{x:Static res:Resources.CostsTooltip}"
                                Background="{Binding CostsTabBackgroundColor}"
                                Command="{Binding TabChanged}"
                                CommandParameter="Credit"
@@ -91,6 +94,8 @@
                 </controls:Tile>
 
                 <controls:Tile Grid.Row="2"
+                               Background="{Binding WaterTabBackgroundColor}"
+                               ToolTip="{x:Static res:Resources.waterTooltip}"
                                Command="{Binding TabChanged}"
                                CommandParameter="Water"
                                Style="{StaticResource side-tile}">
@@ -101,6 +106,7 @@
 
                 <controls:Tile Grid.Row="3"
                                Background="{Binding DreamsTabBackgroundColor}"
+                               ToolTip="{x:Static res:Resources.dreamsTooltip}"
                                Command="{Binding TabChanged}"
                                CommandParameter="Dream"
                                Style="{StaticResource side-tile}">
@@ -139,6 +145,7 @@
                 </Grid.RowDefinitions>
 
                 <controls:Tile Grid.Row="0"
+                               ToolTip="{x:Static res:Resources.closeTooltip}"
                                Command="{Binding CloseWindow}"
                                Style="{StaticResource contr-tile}">
                     <iconPacks:PackIconMaterial Width="12"
@@ -148,6 +155,7 @@
                 </controls:Tile>
 
                 <controls:Tile Grid.Row="1"
+                               ToolTip="{x:Static res:Resources.minimizeTooltip}"
                                Command="{Binding MinimizeWindow}"
                                Style="{StaticResource contr-tile}">
                     <iconPacks:PackIconMaterial Width="12"
@@ -157,6 +165,7 @@
                 </controls:Tile>
 
                 <controls:Tile Grid.Row="2"
+                               ToolTip="{x:Static res:Resources.changeSizeTooltip}"                               
                                Command="{Binding ChangeWindowSize}"
                                Style="{StaticResource contr-tile}">
                     <iconPacks:PackIconMaterial Width="12"
@@ -166,6 +175,7 @@
                 </controls:Tile>
 
                 <controls:Tile Grid.Row="3"
+                               ToolTip="{x:Static res:Resources.moveTooltip}"
                                Command="{Binding MoveRightWindow}"
                                Style="{StaticResource contr-tile}">
                     <iconPacks:PackIconMaterial Width="12"
@@ -175,6 +185,7 @@
                 </controls:Tile>
 
                 <controls:Tile Grid.Row="5"
+                               ToolTip="{x:Static res:Resources.optionsTooltip}"
                                Command="{Binding TabChanged}"
                                CommandParameter="Options"
                                Style="{StaticResource contr-tile}">
@@ -275,6 +286,8 @@
                 </Grid.ColumnDefinitions>
 
                 <controls:Tile Grid.Column="0"
+                               Background="{Binding CalendarTabBackgroundColor}"
+                               ToolTip="{x:Static res:Resources.calendarTooltip}"
                                Command="{Binding TabChanged}"
                                CommandParameter="Calendar"
                                Style="{StaticResource bot-tile}">
@@ -284,6 +297,7 @@
                 </controls:Tile>
 
                 <controls:Tile Grid.Column="1"
+                               ToolTip="{x:Static res:Resources.CostsTooltip}"
                                Background="{Binding CostsTabBackgroundColor}"
                                Command="{Binding TabChanged}"
                                CommandParameter="Credit"
@@ -294,6 +308,8 @@
                 </controls:Tile>
 
                 <controls:Tile Grid.Column="2"
+                               ToolTip="{x:Static res:Resources.waterTooltip}"
+                               Background="{Binding WaterTabBackgroundColor}"
                                Command="{Binding TabChanged}"
                                CommandParameter="Water"
                                Style="{StaticResource bot-tile}">
@@ -304,6 +320,7 @@
 
                 <controls:Tile Grid.Column="3"
                                Command="{Binding TabChanged}"
+                               ToolTip="{x:Static res:Resources.dreamsTooltip}"
                                Background="{Binding DreamsTabBackgroundColor}"
                                CommandParameter="Dream"
                                Style="{StaticResource bot-tile}">
@@ -312,15 +329,6 @@
                                               Kind="MoonSleep" />
                 </controls:Tile>
 
-                <controls:Tile Grid.Column="4"
-                               Command="{Binding TabChanged}"
-                               CommandParameter="Process"
-                               Style="{StaticResource bot-tile}"
-                               Visibility="Hidden">
-                    <iconPacks:PackIconFontAwesome Width="40"
-                                                   Height="40"
-                                                   Kind="Tasks" />
-                </controls:Tile>
             </Grid>
         </DockPanel>
 

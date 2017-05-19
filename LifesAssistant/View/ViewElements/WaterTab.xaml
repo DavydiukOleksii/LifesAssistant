@@ -184,11 +184,11 @@
                                       Padding="0">
 
                 <MetroChart:DoughnutChart.Series>
-                    <MetroChart:ChartSeries DisplayMember="name"
+                    <MetroChart:ChartSeries DisplayMember="Name"
                                             ItemsSource="{Binding DayWaterCapacityPercent,
                                                                   Mode=TwoWay}"
-                                            SeriesTitle="day"
-                                            ValueMember="capacity" />
+                                            SeriesTitle="Day"
+                                            ValueMember="Capacity" />
                 </MetroChart:DoughnutChart.Series>
             </MetroChart:DoughnutChart>
 

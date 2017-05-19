@@ -144,6 +144,9 @@
   <data name="calendarTabLabel" xml:space="preserve">
     <value>Calendar</value>
   </data>
+  <data name="calendarTooltip" xml:space="preserve">
+    <value>Calendar</value>
+  </data>
   <data name="cancelLabel" xml:space="preserve">
     <value>Cancel</value>
   </data>
@@ -153,8 +156,17 @@
   <data name="capacityLabel" xml:space="preserve">
     <value>Capacity: </value>
   </data>
+  <data name="changeSizeTooltip" xml:space="preserve">
+    <value>Change window size</value>
+  </data>
   <data name="chartsByLabel" xml:space="preserve">
     <value>Chart elements group by: </value>
+  </data>
+  <data name="closeTooltip" xml:space="preserve">
+    <value>Close</value>
+  </data>
+  <data name="CostsTooltip" xml:space="preserve">
+    <value>Costs</value>
   </data>
   <data name="creditTabName" xml:space="preserve">
     <value>Daily costs</value>
@@ -182,6 +194,9 @@
   </data>
   <data name="descriptionsLabel" xml:space="preserve">
     <value>Descriptions:</value>
+  </data>
+  <data name="dreamsTooltip" xml:space="preserve">
+    <value>Dreams</value>
   </data>
   <data name="dreamTabName" xml:space="preserve">
     <value>Sleeping time</value>
@@ -216,6 +231,9 @@
   <data name="lastWaterDrinkingLabel" xml:space="preserve">
     <value>Time from the latest water drink</value>
   </data>
+  <data name="minimizeTooltip" xml:space="preserve">
+    <value>Minimize</value>
+  </data>
   <data name="moneyHeader" xml:space="preserve">
     <value>$</value>
   </data>
@@ -224,6 +242,9 @@
   </data>
   <data name="monthLabel" xml:space="preserve">
     <value>month</value>
+  </data>
+  <data name="moveTooltip" xml:space="preserve">
+    <value>Move window to right-top position</value>
   </data>
   <data name="nameHeader" xml:space="preserve">
     <value>Name</value>
@@ -235,6 +256,9 @@
     <value>Add new task</value>
   </data>
   <data name="optionsTabLabel" xml:space="preserve">
+    <value>Options</value>
+  </data>
+  <data name="optionsTooltip" xml:space="preserve">
     <value>Options</value>
   </data>
   <data name="purchaseHeader" xml:space="preserve">
@@ -267,6 +291,12 @@
   <data name="taskListLabel" xml:space="preserve">
     <value>Task list</value>
   </data>
+  <data name="taskNotifDetail" xml:space="preserve">
+    <value>Details: </value>
+  </data>
+  <data name="taskNotifMessage" xml:space="preserve">
+    <value>You have a task at: </value>
+  </data>
   <data name="themeLabel" xml:space="preserve">
     <value>Theme:</value>
   </data>
@@ -288,8 +318,14 @@
   <data name="viewTaskLabel" xml:space="preserve">
     <value>View tasks</value>
   </data>
+  <data name="waterTabMessage" xml:space="preserve">
+    <value>You do not drink water more than 2 hours. Please drink a cup of water.</value>
+  </data>
   <data name="waterTabName" xml:space="preserve">
     <value>Daily water balance</value>
+  </data>
+  <data name="waterTooltip" xml:space="preserve">
+    <value>Water</value>
   </data>
   <data name="yearLabel" xml:space="preserve">
     <value>year</value>

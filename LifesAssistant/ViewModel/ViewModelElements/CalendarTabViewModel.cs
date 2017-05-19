@@ -8,6 +8,7 @@ using DataRepository;
 using LifesAssistant.Infrastructure;
 using LifesAssistant.Properties.Language;
 using System.IO;
+using System.Windows.Threading;
 
 namespace LifesAssistant.ViewModel.ViewModelElements
 {
@@ -26,28 +27,6 @@ namespace LifesAssistant.ViewModel.ViewModelElements
         }
         #endregion
 
-        #region Events
-
-        public delegate void voidDelegate();
-
-        #region open task
-        public event voidDelegate OpenTaskEvent;
-        public void OnOpenTaskEvent()
-        {
-            OpenTaskEvent?.Invoke();
-        }
-        #endregion
-
-        #region calendar event
-        public voidDelegate SomethingHappendEvent;
-        public void OnSomethingHappendEvent()
-        {
-            SomethingHappendEvent?.Invoke();
-        }
-        #endregion 
-
-        #endregion
-
         #region Constructor
 
         protected CalendarTabViewModel()
@@ -63,17 +42,17 @@ namespace LifesAssistant.ViewModel.ViewModelElements
             SearchDate = DateTime.Today;
             DayTasks = CalendarRepository.Instance.GetByDay(DateTime.Today).DailyTasks;
 
-            var filesPath = Directory.GetFiles(Path.GetDirectoryName(Path.GetDirectoryName(System.IO.Directory.GetCurrentDirectory()))+ "/Config/Image/Calendar", "*.jpg", SearchOption.AllDirectories);
-
-            Random rnd = new Random();
-            ImagePath = filesPath[rnd.Next(0, filesPath.Length - 1)];
+            SetRandomImage();
 
             NewHB = new OneHB { Date = DateTime.Today, FullName = "" };
+
+            SetNotificationTimer();
         }
         #endregion
 
         #region Data
         protected int _defaultTaskHeight = 275;
+        protected string m_TabName = "Calendar";
 
         #region Window
 
@@ -338,6 +317,26 @@ namespace LifesAssistant.ViewModel.ViewModelElements
         }
         #endregion
 
+        #region ChangeImage
+        private ICommand _changeImageCommand;
+        public ICommand ChangeImage
+        {
+            get
+            {
+                if (_changeImageCommand == null)
+                {
+                    _changeImageCommand = new RelayCommand(ExecuteChangeImageCommand);
+                }
+                return _changeImageCommand;
+            }
+        }
+
+        public void ExecuteChangeImageCommand(object parametr)
+        {
+            SetRandomImage();
+        }
+        #endregion
+
         #region TaskFlyoutOpen
         private ICommand _viewTaskFlyoutCommand;
         public ICommand ViewTaskFlyout
@@ -433,7 +432,6 @@ namespace LifesAssistant.ViewModel.ViewModelElements
 
                 TaskDate = SearchDate.ToShortDateString();
             }
-            SomethingHappendEvent();
         }
         #endregion
 
@@ -470,6 +468,7 @@ namespace LifesAssistant.ViewModel.ViewModelElements
             NewTask = new OneTask();
             DayTasks = CalendarRepository.Instance.GetByDay(SearchDate).DailyTasks;
             TaskFlyoutIsOpen = false;
+            RefreshNotification();
         }
         #endregion
 
@@ -505,6 +504,7 @@ namespace LifesAssistant.ViewModel.ViewModelElements
             CalendarRepository.Instance.DeleteOperation(SelectedTask);
             SelectedTask = new OneTask();
             DayTasks = CalendarRepository.Instance.GetByDay(SearchDate).DailyTasks;
+            RefreshNotification();
         }
         #endregion
 
@@ -576,6 +576,84 @@ namespace LifesAssistant.ViewModel.ViewModelElements
             SelectedHB = new OneHB();
             DaysHB = CalendarRepository.Instance.GetHBByDay(SearchDate);
         }
+        #endregion
+
+        #endregion
+
+        #region Methods
+        protected void SetRandomImage()
+        {
+            var filesPath = Directory.GetFiles(Path.GetDirectoryName(Path.GetDirectoryName(System.IO.Directory.GetCurrentDirectory())) + "/Config/Image/Calendar", "*.jpg", SearchOption.AllDirectories);
+
+            Random rnd = new Random();
+            ImagePath = filesPath[rnd.Next(0, filesPath.Length - 1)];
+        }
+
+        protected void SetNotificationTimer()
+        {
+            DispatcherTimer timer = new DispatcherTimer();
+            timer.Interval = TimeSpan.FromSeconds(900);
+            timer.Tick += TimerTick;
+            timer.Start();
+        }
+
+        protected void TimerTick(object sender, EventArgs e)
+        {
+            string message = "";
+            
+            foreach (OneTask task in DayTasks)
+            {
+                TimeSpan tempTime = DateTime.Now.Subtract(task.Time);
+                if(tempTime.TotalSeconds *-1 < 3600)
+                {
+                    message += Resources.taskNotifMessage + task.Time.ToString(@"HH\:mm\:ss") + ".\n" + Resources.taskNotifDetail + task.Descriptions + ".";
+                }
+            }
+            
+            if(message != "")
+            {
+                OnCalendarTabMessageNotificationEvent(m_TabName, message);
+                OnCalendarTabNotificationEvent(m_TabName, true);
+            }
+            else
+            {
+                OnCalendarTabNotificationEvent(m_TabName, false);
+            }
+        }
+
+        public void RefreshNotification()
+        {
+            TimerTick(this, null);
+        }
+
+        #endregion
+
+        #region Events
+        public delegate void voidDelegate();
+        public delegate void TabMessageNotificationDelegate(string tabName, string message);
+        public delegate void TabNotificationDelegate(string tabName, bool isNotify);
+
+        #region open task
+        public event voidDelegate OpenTaskEvent;
+        public void OnOpenTaskEvent()
+        {
+            OpenTaskEvent?.Invoke();
+        }
+        #endregion
+
+        #region Task event
+        public TabMessageNotificationDelegate CalendarTabMessageNotificationEvent;
+        public void OnCalendarTabMessageNotificationEvent(string tabName, string message)
+        {
+            CalendarTabMessageNotificationEvent?.Invoke(tabName, message);
+        }
+
+        public TabNotificationDelegate CalendarTabNotificationEvent;
+        public void OnCalendarTabNotificationEvent(string tabName, bool isNotify)
+        {
+            CalendarTabNotificationEvent?.Invoke(tabName, isNotify);
+        }
+
         #endregion
 
         #endregion

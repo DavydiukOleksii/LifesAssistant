@@ -41,11 +41,19 @@
                       SelectedDate="{Binding CurrentSelectedDate}" />
         </Viewbox>
 
-        <Image Grid.Column="1" 
-               Grid.Row="1" 
-               Grid.RowSpan="2" 
-               Source="{Binding ImagePath}" 
-               Stretch="Fill"/>
+        <controls:Tile Grid.Column="1"
+                        Grid.Row="1" 
+                        Margin="0"
+                        Grid.RowSpan="2" 
+                        Width="Auto" 
+                        Height="auto"
+                       Background="White"
+                       Command="{Binding ChangeImage}">
+            <Image Source="{Binding ImagePath}" 
+                    Stretch="UniformToFill"
+                   />
+        </controls:Tile>
+
 
         <!--Find date-->
         <Grid Grid.Row="2">
@@ -146,7 +154,7 @@
                        Margin="5 0"
                        Content="{x:Static res:Resources.hbListLabel}"
                        FontSize="14" />
-                
+
                 <!--HB List-->
                 <DataGrid Name="HBList"
                       Grid.Row="3"
@@ -247,7 +255,8 @@
             <!-- New HB  flyout  -->
             <controls:Flyout Grid.RowSpan="2"
                              Grid.Column="1"
-                             MaxWidth="150"
+                             Width="160"
+                             MaxWidth="170"
                              MinWidth="150"
                              Header="{x:Static res:Resources.addHBFloLabelyout}"
                              IsOpen="{Binding HBFlyoutIsOpen}"
@@ -312,7 +321,7 @@
                                         Binding="{Binding Path=Time,
                                                           StringFormat={}{0:HH:mm}}"
                                         Header="{x:Static res:Resources.timeHeader}"
-                                        SortDirection="Ascending" />
+                                        SortDirection="Descending" />
 
                     <DataGridTextColumn Width="auto"
                                         MinWidth="150"

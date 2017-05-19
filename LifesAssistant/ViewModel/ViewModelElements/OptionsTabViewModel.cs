@@ -145,6 +145,7 @@ namespace LifesAssistant.ViewModel.ViewModelElements
         {
             SelectedConfig = ConfigRepository.Instance.GetCurrentConfig();
             SelectedLanguage = LanguageList.FirstOrDefault(x => x.Equals(SelectedConfig.Language));
+            IsRestartMessageVisible = Visibility.Hidden;
         }
         #endregion
 
