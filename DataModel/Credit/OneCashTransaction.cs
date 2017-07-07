@@ -23,5 +23,10 @@
             // Return true if the fields match:
             return (Money == t.Money) && (Article == t.Article);
         }
+
+        //public override int GetHashCode()
+        //{
+        //    return Money.GetHashCode() ^ Article.GetHashCode();
+        //}
     }
 }

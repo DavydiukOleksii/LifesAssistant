@@ -9,7 +9,7 @@ using Newtonsoft.Json;
 
 namespace DataRepository
 {
-    public class CalendarRepository: IRepository<DayTaskReport, OneTask>
+    public class CalendarRepository: ARepository, IRepository<DayTaskReport, OneTask>
     {
         #region Singleton
         protected static CalendarRepository instance = null;
@@ -32,7 +32,7 @@ namespace DataRepository
 
         protected string fileName = "calendar.json";
         protected string HBFileName = "HB.json";
-        protected string filePath = Path.GetDirectoryName(Path.GetDirectoryName(System.IO.Directory.GetCurrentDirectory())) + "\\Config\\Resource\\";
+        //protected string filePath = Path.GetDirectoryName(Path.GetDirectoryName(System.IO.Directory.GetCurrentDirectory())) + "\\Config\\Resource\\";
 
         #endregion
 
@@ -43,12 +43,9 @@ namespace DataRepository
             {
                 DayTaskReport result;
 
-                if (!File.Exists(filePath + fileName))
-                {
-                    File.Create(filePath + fileName);
-                }
+                CheckFileExists(resourceFolderPath + fileName);
 
-                using (StreamReader r = new StreamReader(filePath + fileName))
+                using (StreamReader r = new StreamReader(resourceFolderPath + fileName))
                 {
                     string json = r.ReadToEnd();
                     List<DayTaskReport> today = JsonConvert.DeserializeObject<List<DayTaskReport>>(json);
@@ -60,12 +57,14 @@ namespace DataRepository
                     }
                     else
                     {
-                        today = new List<DayTaskReport>();
-                        today.Add(new DayTaskReport()
+                        today = new List<DayTaskReport>
                         {
-                            Date = DateTime.Today,
-                            DailyTasks = new ObservableCollection<OneTask>()
-                        });
+                            new DayTaskReport()
+                            {
+                                Date = DateTime.Today,
+                                DailyTasks = new ObservableCollection<OneTask>()
+                            }
+                        };
                         result = today.First();
                     }
 
@@ -90,12 +89,9 @@ namespace DataRepository
                 string newJson = "";
                 DateTime date = DateTime.Parse(newTask.Time.ToLongDateString());
 
-                if (!File.Exists(filePath + fileName))
-                {
-                    File.Create(filePath + fileName);
-                }
+                CheckFileExists(resourceFolderPath + fileName);
 
-                using (StreamReader r = new StreamReader(filePath + fileName))
+                using (StreamReader r = new StreamReader(resourceFolderPath + fileName))
                 {
                     string json = r.ReadToEnd();
                     List<DayTaskReport> today = JsonConvert.DeserializeObject<List<DayTaskReport>>(json);
@@ -120,7 +116,7 @@ namespace DataRepository
                     newJson = JsonConvert.SerializeObject(today);
                 }
 
-                File.WriteAllText(filePath + fileName, newJson);
+                File.WriteAllText(resourceFolderPath + fileName, newJson);
             }
             catch
             {
@@ -135,12 +131,9 @@ namespace DataRepository
                 string newJson = "";
                 DateTime date = DateTime.Parse(dellTask.Time.ToLongDateString());
 
-                if (!File.Exists(filePath + fileName))
-                {
-                    File.Create(filePath + fileName);
-                }
+                CheckFileExists(resourceFolderPath + fileName);
 
-                using (StreamReader r = new StreamReader(filePath + fileName))
+                using (StreamReader r = new StreamReader(resourceFolderPath + fileName))
                 {
                     string json = r.ReadToEnd();
                     List<DayTaskReport> today = JsonConvert.DeserializeObject<List<DayTaskReport>>(json);
@@ -154,7 +147,7 @@ namespace DataRepository
                     }
                     newJson = JsonConvert.SerializeObject(today);
                 }
-                File.WriteAllText(filePath + fileName, newJson);
+                File.WriteAllText(resourceFolderPath + fileName, newJson);
             }
             catch{}
         }
@@ -165,12 +158,9 @@ namespace DataRepository
             {
                 List<DateTime> result = new List<DateTime>();
 
-                if (!File.Exists(filePath + fileName))
-                {
-                    File.Create(filePath + fileName);
-                }
+                CheckFileExists(resourceFolderPath + fileName);
 
-                using (StreamReader r = new StreamReader(filePath + fileName))
+                using (StreamReader r = new StreamReader(resourceFolderPath + fileName))
                 {
                     string json = r.ReadToEnd();
                     List<DayTaskReport> today = JsonConvert.DeserializeObject<List<DayTaskReport>>(json);
@@ -202,12 +192,9 @@ namespace DataRepository
             {
                 List<OneHB> result = new List<OneHB>();
 
-                if (!File.Exists(filePath + HBFileName))
-                {
-                    File.Create(filePath + HBFileName);
-                }
+                CheckFileExists(resourceFolderPath + HBFileName);
 
-                using (StreamReader r = new StreamReader(filePath + HBFileName))
+                using (StreamReader r = new StreamReader(resourceFolderPath + HBFileName))
                 {
                     string json = r.ReadToEnd();
                     List<OneHB> today = JsonConvert.DeserializeObject<List<OneHB>>(json);
@@ -230,12 +217,9 @@ namespace DataRepository
             {
                 string newJson = "";
 
-                if (!File.Exists(filePath + HBFileName))
-                {
-                    File.Create(filePath + HBFileName);
-                }
+                CheckFileExists(resourceFolderPath + HBFileName);
 
-                using (StreamReader r = new StreamReader(filePath + HBFileName))
+                using (StreamReader r = new StreamReader(resourceFolderPath + HBFileName))
                 {
                     string json = r.ReadToEnd();
                     List<OneHB> today = JsonConvert.DeserializeObject<List<OneHB>>(json);
@@ -258,7 +242,7 @@ namespace DataRepository
                     newJson = JsonConvert.SerializeObject(today);
                 }
 
-                File.WriteAllText(filePath + HBFileName, newJson);
+                File.WriteAllText(resourceFolderPath + HBFileName, newJson);
             }
             catch {}
         }
@@ -269,12 +253,9 @@ namespace DataRepository
             {
                 string newJson = "";
 
-                if (!File.Exists(filePath + HBFileName))
-                {
-                    File.Create(filePath + HBFileName);
-                }
+                CheckFileExists(resourceFolderPath + HBFileName);
 
-                using (StreamReader r = new StreamReader(filePath + HBFileName))
+                using (StreamReader r = new StreamReader(resourceFolderPath + HBFileName))
                 {
                     string json = r.ReadToEnd();
                     List<OneHB> today = JsonConvert.DeserializeObject<List<OneHB>>(json);
@@ -289,7 +270,7 @@ namespace DataRepository
                     newJson = JsonConvert.SerializeObject(today);
                 }
 
-                File.WriteAllText(filePath + HBFileName, newJson);
+                File.WriteAllText(resourceFolderPath + HBFileName, newJson);
             }
             catch { }
         }

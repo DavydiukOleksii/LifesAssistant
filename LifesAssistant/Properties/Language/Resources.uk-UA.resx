@@ -307,7 +307,7 @@
     <value>Час:</value>
   </data>
   <data name="todayLabel" xml:space="preserve">
-    <value>Сьогодні:</value>
+    <value>Сьогодні: </value>
   </data>
   <data name="totalCostsLable" xml:space="preserve">
     <value>Витрати за сьогодні: </value>

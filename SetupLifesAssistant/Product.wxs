@@ -1,0 +1,218 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<Wix xmlns="http://schemas.microsoft.com/wix/2006/wi"><?define DataModel_TargetDir=$(var.DataModel.TargetDir)?><?define DataRepository_TargetDir=$(var.DataRepository.TargetDir)?><?define LifesAssistant_TargetDir=$(var.LifesAssistant.TargetDir)?>
+	<Product Id="88584473-1182-43e9-9209-41abfe3fefc6" Name="SetupLifesAssistant" Language="1033" Version="1.0.0.0" Manufacturer="Nice Systems" UpgradeCode="861d40bd-5f85-44fe-8a4e-76fd0e6ef743">
+		<Package InstallerVersion="200" Compressed="yes" InstallScope="perMachine" />
+
+    <!-- add icon-->
+    <!--<Icon Id="Icon.ico" SourceFile="$(var.ProjectDir)icon.ico" />
+    <Property Id="ARPPRODUCTION" Value="Icon.ico" />-->
+
+    <!--add install bg-->
+    <WixVariable Id="WixUIBannerBmp" Value="Images\installer_top-banner.bmp" />
+    <WixVariable Id="WixUIDialogBmp" Value="Images\installer_background.bmp" />
+    <WixVariable Id="WixUILicenseRtf" Value="$(var.ProjectDir)license.rtf" />
+
+    <!--temp folder for install-->
+    <Property Id="WIXUI_INSTALLDIR" Value="INSTALLFOLDER" />
+    <!--add ui dialog in install-->
+    <UIRef Id="WixUI_InstallDir" />
+
+    <!--error message if program install-->
+    <MajorUpgrade DowngradeErrorMessage="A newer version of [ProductName] is already installed." />
+		<MediaTemplate />
+
+		<Feature Id="ProductFeature" Title="SetupLifesAssistant" Level="1">
+			<ComponentGroupRef Id="ProductComponents" />
+			<ComponentGroupRef Id="uk_UA_files" />
+			<ComponentGroupRef Id="ru_Ru_files" />
+      <ComponentRef Id="ApplicationShortcut" />
+      <ComponentRef Id="ApplicationShortcutDesktop" />
+			<ComponentGroupRef Id="Config_files" />
+			<ComponentGroupRef Id="Config_Resource_files" />
+			<ComponentGroupRef Id="Config_Images_files" />
+			<ComponentGroupRef Id="Config_Icon_files" />
+		</Feature>
+	</Product>
+
+	<Fragment>
+		<Directory Id="TARGETDIR" Name="SourceDir">
+			<Directory Id="ProgramFilesFolder">
+				<Directory Id="INSTALLFOLDER" Name="SetupLifesAssistant">
+				  <Directory Id="uk_UA" Name="uk-UA" />
+				  <Directory Id="ru_Ru" Name="ru-Ru" />
+				  <Directory Id="Config" Name="Config">
+				    <Directory Id="Config_Resource" Name="Resource" />
+				    <Directory Id="Config_Icon" Name="Icon" />
+				    <Directory Id="Config_Images" Name="Images" />
+				  </Directory>
+				</Directory>
+			</Directory>
+      <Directory Id="ProgramMenuFolder">
+        <Directory Id="ApplicationProgramsFolder" Name="LifesAssistant" />
+      </Directory>
+      <Directory Id="DesktopFolder" Name="Desktop" />
+		</Directory>
+	</Fragment>
+
+  <!-- Step 2: Add the shortcut to your installer package -->
+  <Fragment>
+    <DirectoryRef Id="ApplicationProgramsFolder">
+      <Component Id="ApplicationShortcut" Guid="a29a0612-169e-4596-bce7-184c829da7f8">
+        <Shortcut Id="ApplicationStartMenuShortcut" Name="LifesAssistant" Description="Notification" Target="[INSTALLFOLDER]LifesAssistant.exe" WorkingDirectory="INSTALLFOLDER" />
+        <RemoveFolder Id="RemoveApplicationProgramsFolder" Directory="ApplicationProgramsFolder" On="uninstall" />
+        <RegistryValue Root="HKCU" Key="Software\LifesAssistant" Name="installed" Type="integer" Value="1" KeyPath="yes" />
+      </Component>
+    </DirectoryRef>
+
+    <DirectoryRef Id="DesktopFolder">
+      <Component Id="ApplicationShortcutDesktop" Guid="7956532c-8381-4f59-a2a6-53247a16cc9f">
+        <Shortcut Id="ApplicationDesktop" Name="LifesAssistant" Description="LifesAssistant" Target="[INSTALLFOLDER]LifesAssistant.exe" WorkingDirectory="INSTALLFOLDER" />
+        <RemoveFolder Id="RemoveDesktopFolder" Directory="ApplicationProgramsFolder" On="uninstall" />
+        <RegistryValue Root="HKCU" Key="Software\LifesAssistant" Name="installed" Type="integer" Value="1" KeyPath="yes" />
+      </Component>
+    </DirectoryRef>
+  </Fragment>
+
+	<Fragment>
+		<ComponentGroup Id="ProductComponents" Directory="INSTALLFOLDER">
+			<Component Id="DataModel.dll" Guid="2ccb87b0-c5ef-4501-8c82-4a65aa2f00ac">
+			  <File Id="DataModel.dll" Name="DataModel.dll" Source="$(var.DataModel_TargetDir)DataModel.dll" />
+			</Component>
+			<Component Id="DataRepository.dll" Guid="addae99d-c130-4b77-a477-1f08db2ad198">
+			  <File Id="DataRepository.dll" Name="DataRepository.dll" Source="$(var.DataRepository_TargetDir)DataRepository.dll" />
+			</Component>
+			<Component Id="LifesAssistant.exe" Guid="eb97aafd-56f0-406f-a5c5-6594b65c0d3b">
+			  <File Id="LifesAssistant.exe" Name="LifesAssistant.exe" Source="$(var.LifesAssistant_TargetDir)LifesAssistant.exe" />
+			</Component>
+			<Component Id="LifesAssistant.exe.config" Guid="ad26540f-92c9-48a3-ab33-a4c52421208d">
+			  <File Id="LifesAssistant.exe.config" Name="LifesAssistant.exe.config" Source="$(var.LifesAssistant_TargetDir)LifesAssistant.exe.config" />
+			</Component>
+			<Component Id="Newtonsoft.Json.dll" Guid="9a48ea79-620a-4957-8b3d-1c130c7afee6">
+			  <File Id="Newtonsoft.Json.dll" Name="Newtonsoft.Json.dll" Source="$(var.DataRepository_TargetDir)Newtonsoft.Json.dll" />
+			</Component>
+			<Component Id="De.TorstenMandelkow.MetroChart.dll" Guid="e4ef69a5-022a-481c-a63a-bb46c9b82900">
+			  <File Id="De.TorstenMandelkow.MetroChart.dll" Name="De.TorstenMandelkow.MetroChart.dll" Source="$(var.LifesAssistant_TargetDir)De.TorstenMandelkow.MetroChart.dll" />
+			</Component>
+			<Component Id="Hardcodet.Wpf.TaskbarNotification.dll" Guid="ac7786ab-591e-43de-b9d0-042b3f043132">
+			  <File Id="Hardcodet.Wpf.TaskbarNotification.dll" Name="Hardcodet.Wpf.TaskbarNotification.dll" Source="$(var.LifesAssistant_TargetDir)Hardcodet.Wpf.TaskbarNotification.dll" />
+			</Component>
+			<Component Id="MahApps.Metro.dll" Guid="de927a53-8e6f-4949-a4b7-4306194990fc">
+			  <File Id="MahApps.Metro.dll" Name="MahApps.Metro.dll" Source="$(var.LifesAssistant_TargetDir)MahApps.Metro.dll" />
+			</Component>
+			<Component Id="MahApps.Metro.IconPacks.dll" Guid="7036276b-ad97-453e-b4a6-6fac1988fb76">
+			  <File Id="MahApps.Metro.IconPacks.dll" Name="MahApps.Metro.IconPacks.dll" Source="$(var.LifesAssistant_TargetDir)MahApps.Metro.IconPacks.dll" />
+			</Component>
+			<Component Id="System.Windows.Interactivity.dll" Guid="9bcbec09-cfd8-452b-a3bc-03a21d4450f1">
+			  <File Id="System.Windows.Interactivity.dll" Name="System.Windows.Interactivity.dll" Source="$(var.LifesAssistant_TargetDir)System.Windows.Interactivity.dll" />
+			</Component>
+			<Component Id="Xceed.Wpf.AvalonDock.dll" Guid="83a4f8ab-c0eb-4772-8965-1942b6e503b7">
+			  <File Id="Xceed.Wpf.AvalonDock.dll" Name="Xceed.Wpf.AvalonDock.dll" Source="$(var.LifesAssistant_TargetDir)Xceed.Wpf.AvalonDock.dll" />
+			</Component>
+			<Component Id="Xceed.Wpf.AvalonDock.Themes.Aero.dll" Guid="139b2db7-ba96-4c22-afbd-260b9e04648c">
+			  <File Id="Xceed.Wpf.AvalonDock.Themes.Aero.dll" Name="Xceed.Wpf.AvalonDock.Themes.Aero.dll" Source="$(var.LifesAssistant_TargetDir)Xceed.Wpf.AvalonDock.Themes.Aero.dll" />
+			</Component>
+			<Component Id="Xceed.Wpf.AvalonDock.Themes.Metro.dll" Guid="84ed151b-0740-4034-836e-3ab93cd7c0d2">
+			  <File Id="Xceed.Wpf.AvalonDock.Themes.Metro.dll" Name="Xceed.Wpf.AvalonDock.Themes.Metro.dll" Source="$(var.LifesAssistant_TargetDir)Xceed.Wpf.AvalonDock.Themes.Metro.dll" />
+			</Component>
+			<Component Id="Xceed.Wpf.AvalonDock.Themes.VS2010.dll" Guid="8590d84c-3071-45a5-8d40-0460290fd6a8">
+			  <File Id="Xceed.Wpf.AvalonDock.Themes.VS2010.dll" Name="Xceed.Wpf.AvalonDock.Themes.VS2010.dll" Source="$(var.LifesAssistant_TargetDir)Xceed.Wpf.AvalonDock.Themes.VS2010.dll" />
+			</Component>
+			<Component Id="Xceed.Wpf.DataGrid.dll" Guid="3870baed-8586-415d-bd54-e792c8fe4de0">
+			  <File Id="Xceed.Wpf.DataGrid.dll" Name="Xceed.Wpf.DataGrid.dll" Source="$(var.LifesAssistant_TargetDir)Xceed.Wpf.DataGrid.dll" />
+			</Component>
+			<Component Id="Xceed.Wpf.Toolkit.dll" Guid="4fba5c14-1f2f-4cc3-8b67-cc4fb077697f">
+			  <File Id="Xceed.Wpf.Toolkit.dll" Name="Xceed.Wpf.Toolkit.dll" Source="$(var.LifesAssistant_TargetDir)Xceed.Wpf.Toolkit.dll" />
+			</Component>
+		</ComponentGroup>
+	</Fragment>
+
+  <Fragment>
+    <ComponentGroup Id="uk_UA_files" Directory="uk_UA">
+      <Component Id="uk_UA_LifesAssistant.resources.dll" Guid="4ed359c9-f256-45e5-a720-64c9345e4349">
+        <File Id="uk_UA_LifesAssistant.resources.dll" Name="LifesAssistant.resources.dll" Source="$(var.LifesAssistant_TargetDir)uk-UA\LifesAssistant.resources.dll" />
+      </Component>
+    </ComponentGroup>
+  </Fragment>
+
+  <Fragment>
+    <ComponentGroup Id="ru_Ru_files" Directory="ru_Ru">
+      <Component Id="ru_Ru_LifesAssistant.resources.dll" Guid="00dbc7e7-2d27-4fb6-b34f-29e6038ac070">
+        <File Id="ru_Ru_LifesAssistant.resources.dll" Name="LifesAssistant.resources.dll" Source="$(var.LifesAssistant_TargetDir)ru-Ru\LifesAssistant.resources.dll" />
+      </Component>
+    </ComponentGroup>
+  </Fragment>
+
+  <Fragment>
+    <ComponentGroup Id="Config_files" Directory="Config">
+      <Component Id="Config_config.json" Guid="f3814690-092c-4e0d-ac4b-7e9b8d21aada">
+        <File Id="Config_config.json" Name="config.json" Source="$(var.LifesAssistant_TargetDir)Config\config.json" />
+      </Component>
+    </ComponentGroup>
+  </Fragment>
+
+  <Fragment>
+    <ComponentGroup Id="Config_Resource_files" Directory="Config_Resource">
+      <Component Id="Config_Resource_calendar.json" Guid="98d73e8d-34aa-4b71-b6cb-84d097311704">
+        <File Id="Config_Resource_calendar.json" Name="calendar.json" Source="$(var.LifesAssistant_TargetDir)Config\Resource\calendar.json" />
+      </Component>
+      <Component Id="Config_Resource_costs.json" Guid="780a49c4-bd42-4868-a45b-48354f517f26">
+        <File Id="Config_Resource_costs.json" Name="costs.json" Source="$(var.LifesAssistant_TargetDir)Config\Resource\costs.json" />
+      </Component>
+      <Component Id="Config_Resource_HB.json" Guid="0bb176ff-f58e-4374-9e7e-39889dc20acf">
+        <File Id="Config_Resource_HB.json" Name="HB.json" Source="$(var.LifesAssistant_TargetDir)Config\Resource\HB.json" />
+      </Component>
+      <Component Id="Config_Resource_sleep.json" Guid="2540dbbf-90a0-4c48-9f23-98ab0c31d039">
+        <File Id="Config_Resource_sleep.json" Name="sleep.json" Source="$(var.LifesAssistant_TargetDir)Config\Resource\sleep.json" />
+      </Component>
+      <Component Id="Config_Resource_water.json" Guid="decee749-f0ab-423b-9b33-d9459dbc4661">
+        <File Id="Config_Resource_water.json" Name="water.json" Source="$(var.LifesAssistant_TargetDir)Config\Resource\water.json" />
+      </Component>
+    </ComponentGroup>
+  </Fragment>
+
+  <Fragment>
+    <ComponentGroup Id="Config_Images_files" Directory="Config_Images">
+      <Component Id="Config_Images_plane2.jpg" Guid="700b74f9-3b66-4869-87e0-43a98aa88e32">
+        <File Id="Config_Images_plane2.jpg" Name="plane2.jpg" Source="$(var.LifesAssistant_TargetDir)Config\Images\plane2.jpg" />
+      </Component>
+      <Component Id="Config_Images_friend.jpg" Guid="599f3897-42fe-4977-9be1-04b25d413e6f">
+        <File Id="Config_Images_friend.jpg" Name="friend.jpg" Source="$(var.LifesAssistant_TargetDir)Config\Images\friend.jpg" />
+      </Component>
+      <Component Id="Config_Images_I.png" Guid="02839b4d-b321-412d-9518-c8931d4c8b31">
+        <File Id="Config_Images_I.png" Name="I.png" Source="$(var.LifesAssistant_TargetDir)Config\Images\I.png" />
+      </Component>
+      <Component Id="Config_Images_panda.jpg" Guid="b4d02f15-791d-4c1f-a3c8-7e9d73ad6b95">
+        <File Id="Config_Images_panda.jpg" Name="panda.jpg" Source="$(var.LifesAssistant_TargetDir)Config\Images\panda.jpg" />
+      </Component>
+      <Component Id="Config_Images_life.jpg" Guid="c8badca0-8df4-4b08-bfad-09a5fc712c45">
+        <File Id="Config_Images_life.jpg" Name="life.jpg" Source="$(var.LifesAssistant_TargetDir)Config\Images\life.jpg" />
+      </Component>
+      <Component Id="Config_Images_piano.jpg" Guid="38f3f98a-d7eb-4ab8-ac0a-cb94f16f1691">
+        <File Id="Config_Images_piano.jpg" Name="piano.jpg" Source="$(var.LifesAssistant_TargetDir)Config\Images\piano.jpg" />
+      </Component>
+      <Component Id="Config_Images_plane.jpg" Guid="d7e5096e-2ce9-49c3-9486-3b69a6271952">
+        <File Id="Config_Images_plane.jpg" Name="plane.jpg" Source="$(var.LifesAssistant_TargetDir)Config\Images\plane.jpg" />
+      </Component>
+      <Component Id="Config_Images_sun.jpg" Guid="61685454-199f-4cab-b8c4-c32538b47cbd">
+        <File Id="Config_Images_sun.jpg" Name="sun.jpg" Source="$(var.LifesAssistant_TargetDir)Config\Images\sun.jpg" />
+      </Component>
+      <Component Id="Config_Images_unicorn.jpg" Guid="5ee1d0d7-05fd-4d29-8659-879e2f7a2e70">
+        <File Id="Config_Images_unicorn.jpg" Name="unicorn.jpg" Source="$(var.LifesAssistant_TargetDir)Config\Images\unicorn.jpg" />
+      </Component>
+      <Component Id="Config_Images_tree.jpg" Guid="672038fc-b21b-4fdf-9084-3d5f1bcc6e35">
+        <File Id="Config_Images_tree.jpg" Name="tree.jpg" Source="$(var.LifesAssistant_TargetDir)Config\Images\tree.jpg" />
+      </Component>
+      <Component Id="Config_Images_windows.jpg" Guid="deb9b472-0b34-41f5-80e2-3c4031ab41d2">
+        <File Id="Config_Images_windows.jpg" Name="windows.jpg" Source="$(var.LifesAssistant_TargetDir)Config\Images\windows.jpg" />
+      </Component>
+    </ComponentGroup>
+  </Fragment>
+
+  <Fragment>
+    <ComponentGroup Id="Config_Icon_files" Directory="Config_Icon">
+      <Component Id="Config_Icon_Office_Supplies_512.ico" Guid="df6a5307-898f-4c52-979d-0db1c7d7610a">
+        <File Id="Config_Icon_Office_Supplies_512.ico" Name="Office_Supplies-512.ico" Source="$(var.LifesAssistant_TargetDir)Config\Icon\Office_Supplies-512.ico" />
+      </Component>
+    </ComponentGroup>
+  </Fragment>
+</Wix>

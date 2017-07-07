@@ -25,5 +25,10 @@ namespace DataModel.Water
             // Return true if the fields match:
             return (Capasity == t.Capasity) && (Time == t.Time);
         }
+
+        //public override int GetHashCode()
+        //{
+        //    return Time.GetHashCode() ^ Capasity.GetHashCode();
+        //}
     }
 }

@@ -4,15 +4,13 @@ using System.Collections.ObjectModel;
 using System.Data;
 using System.IO;
 using System.Linq;
-using System.Text;
-using System.Threading.Tasks;
 using DataModel.Charts;
 using DataModel.Credit;
 using Newtonsoft.Json;
 
 namespace DataRepository
 {
-    public class CostsRepository: IRepository<CostsDayReport, OneCashTransaction>
+    public class CostsRepository: ARepository, IRepository<CostsDayReport, OneCashTransaction>
     {
         #region Singleton
         protected static CostsRepository instance = null;
@@ -34,7 +32,7 @@ namespace DataRepository
         #region Data
 
         protected string fileName = "costs.json";
-        protected string filePath = Path.GetDirectoryName(Path.GetDirectoryName(System.IO.Directory.GetCurrentDirectory())) + "\\Config\\Resource\\";
+        //protected string filePath = Path.GetDirectoryName(Path.GetDirectoryName(System.IO.Directory.GetCurrentDirectory())) + "\\Config\\Resource\\";
 
         #endregion
 
@@ -44,12 +42,9 @@ namespace DataRepository
             {
                 CostsDayReport result;
 
-                if (!File.Exists(filePath + fileName))
-                {
-                    File.Create(filePath + fileName);
-                }
+                CheckFileExists(resourceFolderPath + fileName);
 
-                using (StreamReader r = new StreamReader(filePath + fileName))
+                using (StreamReader r = new StreamReader(resourceFolderPath + fileName))
                 {
                     string json = r.ReadToEnd();
                     List<CostsDayReport> today = JsonConvert.DeserializeObject<List<CostsDayReport>>(json);
@@ -61,12 +56,15 @@ namespace DataRepository
                     }
                     else
                     {
-                        today = new List<CostsDayReport>();
-                        today.Add(new CostsDayReport()
+                        today = new List<CostsDayReport>
                         {
-                            Date = DateTime.Today,
-                            TotalCosts = 0,
-                            DailyCosts = new ObservableCollection<OneCashTransaction>()});
+                            new CostsDayReport()
+                            {
+                                Date = DateTime.Today,
+                                TotalCosts = 0,
+                                DailyCosts = new ObservableCollection<OneCashTransaction>()
+                            }
+                        };
                         result = today.First();
                     }
                     
@@ -90,12 +88,9 @@ namespace DataRepository
             {
                 string newJson = "";
 
-                if (!File.Exists(filePath + fileName))
-                {
-                    File.Create(filePath + fileName);
-                }
+                CheckFileExists(resourceFolderPath + fileName);
 
-                using (StreamReader r = new StreamReader(filePath + fileName))
+                using (StreamReader r = new StreamReader(resourceFolderPath + fileName))
                 {
                     string json = r.ReadToEnd();
                     List<CostsDayReport> today = JsonConvert.DeserializeObject<List<CostsDayReport>>(json);
@@ -123,7 +118,7 @@ namespace DataRepository
                     newJson = JsonConvert.SerializeObject(today);
                 }
 
-                File.WriteAllText(filePath + fileName, newJson);
+                File.WriteAllText(resourceFolderPath + fileName, newJson);
             }
             catch
             {
@@ -137,12 +132,9 @@ namespace DataRepository
             {
                 string newJson = "";
 
-                if (!File.Exists(filePath + fileName))
-                {
-                    File.Create(filePath + fileName);
-                }
+                CheckFileExists(resourceFolderPath + fileName);
 
-                using (StreamReader r = new StreamReader(filePath + fileName))
+                using (StreamReader r = new StreamReader(resourceFolderPath + fileName))
                 {
                     string json = r.ReadToEnd();
                     List<CostsDayReport> today = JsonConvert.DeserializeObject<List<CostsDayReport>>(json);
@@ -160,7 +152,7 @@ namespace DataRepository
                     newJson = JsonConvert.SerializeObject(today);
                 }
 
-                File.WriteAllText(filePath + fileName, newJson);
+                File.WriteAllText(resourceFolderPath + fileName, newJson);
             }
             catch
             {
@@ -174,7 +166,7 @@ namespace DataRepository
             {
                 List<ChartsElement> result;
 
-                using (StreamReader r = new StreamReader(filePath + fileName))
+                using (StreamReader r = new StreamReader(resourceFolderPath + fileName))
                 {
                     string json = r.ReadToEnd();
                     List<CostsDayReport> today = JsonConvert.DeserializeObject<List<CostsDayReport>>(json);
@@ -206,7 +198,7 @@ namespace DataRepository
             {
                 List<ChartsElement> result;
 
-                using (StreamReader r = new StreamReader(filePath + fileName))
+                using (StreamReader r = new StreamReader(resourceFolderPath + fileName))
                 {
                     string json = r.ReadToEnd();
                     List<CostsDayReport> today = JsonConvert.DeserializeObject<List<CostsDayReport>>(json);
@@ -239,7 +231,7 @@ namespace DataRepository
             {
                 List<ChartsElement> result;
 
-                using (StreamReader r = new StreamReader(filePath + fileName))
+                using (StreamReader r = new StreamReader(resourceFolderPath + fileName))
                 {
                     string json = r.ReadToEnd();
                     List<CostsDayReport> today = JsonConvert.DeserializeObject<List<CostsDayReport>>(json);

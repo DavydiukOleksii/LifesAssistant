@@ -9,7 +9,7 @@ using Newtonsoft.Json;
 
 namespace DataRepository
 {
-    public class WaterRepository: IRepository<WaterDayReport, OnceDrink>
+    public class WaterRepository: ARepository, IRepository<WaterDayReport, OnceDrink>
     {
         #region Singleton
         protected static WaterRepository instance = null;
@@ -31,7 +31,7 @@ namespace DataRepository
         #region Data
 
         protected string fileName = "water.json";
-        protected string filePath = Path.GetDirectoryName(Path.GetDirectoryName(System.IO.Directory.GetCurrentDirectory())) + "\\Config\\Resource\\";
+        //protected string filePath = Path.GetDirectoryName(Path.GetDirectoryName(System.IO.Directory.GetCurrentDirectory())) + "\\Config\\Resource\\";
 
         #endregion
         
@@ -41,12 +41,9 @@ namespace DataRepository
             {
                 WaterDayReport resoult;
 
-                if (!File.Exists(filePath + fileName))
-                {
-                    File.Create(filePath + fileName);
-                }
+                CheckFileExists(resourceFolderPath + fileName);
 
-                using (StreamReader r = new StreamReader(filePath + fileName))
+                using (StreamReader r = new StreamReader(resourceFolderPath + fileName))
                 {
                     string json = r.ReadToEnd();
                     List<WaterDayReport> today = JsonConvert.DeserializeObject<List<WaterDayReport>>(json);
@@ -58,12 +55,15 @@ namespace DataRepository
                     }
                     else
                     {
-                        today = new List<WaterDayReport>();
-                        today.Add(new WaterDayReport()
+                        today = new List<WaterDayReport>
                         {
-                            Date = DateTime.Today,
-                            TotalCapacity = 0,
-                            DailyWaterOperations = new ObservableCollection<OnceDrink>()});
+                            new WaterDayReport()
+                            {
+                                Date = DateTime.Today,
+                                TotalCapacity = 0,
+                                DailyWaterOperations = new ObservableCollection<OnceDrink>()
+                            }
+                        };
                         resoult = today.First();
                     }
                     
@@ -88,13 +88,9 @@ namespace DataRepository
             {
                 string newJson = "";
 
-                if (!File.Exists(filePath + fileName))
-                {
-                    File.Create(filePath + fileName);
+                CheckFileExists(resourceFolderPath + fileName);
 
-                }
-
-                using (StreamReader r = new StreamReader(filePath + fileName))
+                using (StreamReader r = new StreamReader(resourceFolderPath + fileName))
                 {
                     string json = r.ReadToEnd();
                     List<WaterDayReport> today = JsonConvert.DeserializeObject<List<WaterDayReport>>(json);
@@ -122,7 +118,7 @@ namespace DataRepository
                     newJson = JsonConvert.SerializeObject(today);
                 }
 
-                File.WriteAllText(filePath + fileName, newJson);
+                File.WriteAllText(resourceFolderPath + fileName, newJson);
             }
             catch
             {
@@ -136,12 +132,9 @@ namespace DataRepository
             {
                 string newJson = "";
 
-                if (!File.Exists(filePath + fileName))
-                {
-                    File.Create(filePath + fileName);
-                }
+                CheckFileExists(resourceFolderPath + fileName);
 
-                using (StreamReader r = new StreamReader(filePath + fileName))
+                using (StreamReader r = new StreamReader(resourceFolderPath + fileName))
                 {
                     string json = r.ReadToEnd();
                     List<WaterDayReport> today = JsonConvert.DeserializeObject<List<WaterDayReport>>(json);
@@ -159,7 +152,7 @@ namespace DataRepository
                     newJson = JsonConvert.SerializeObject(today);
                 }
 
-                File.WriteAllText(filePath + fileName, newJson);
+                File.WriteAllText(resourceFolderPath + fileName, newJson);
             }
             catch
             {
@@ -173,7 +166,7 @@ namespace DataRepository
             {
                 List<ChartsElement> result;
 
-                using (StreamReader r = new StreamReader(filePath + fileName))
+                using (StreamReader r = new StreamReader(resourceFolderPath + fileName))
                 {
                     string json = r.ReadToEnd();
                     List<WaterDayReport> today = JsonConvert.DeserializeObject<List<WaterDayReport>>(json);
@@ -205,7 +198,7 @@ namespace DataRepository
             {
                 List<ChartsElement> result;
 
-                using (StreamReader r = new StreamReader(filePath + fileName))
+                using (StreamReader r = new StreamReader(resourceFolderPath + fileName))
                 {
                     string json = r.ReadToEnd();
                     List<WaterDayReport> today = JsonConvert.DeserializeObject<List<WaterDayReport>>(json);
@@ -238,7 +231,7 @@ namespace DataRepository
             {
                 List<ChartsElement> result;
 
-                using (StreamReader r = new StreamReader(filePath + fileName))
+                using (StreamReader r = new StreamReader(resourceFolderPath + fileName))
                 {
                     string json = r.ReadToEnd();
                     List<WaterDayReport> today = JsonConvert.DeserializeObject<List<WaterDayReport>>(json);

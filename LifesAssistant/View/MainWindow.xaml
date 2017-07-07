@@ -32,7 +32,7 @@
             <ColumnDefinition Name="Conprol" Width="30" />
         </Grid.ColumnDefinitions>
         <Grid.RowDefinitions>
-            <RowDefinition Name="Top" Height="0" />
+            <RowDefinition Name="TopHeader" Height="0" />
             <RowDefinition Name="MainRow" />
             <RowDefinition Name="ShowChartsTile" Height="{Binding ChartsButtonHeight}" />
             <RowDefinition Name="Charts" Height="{Binding ChartsHeight}" />

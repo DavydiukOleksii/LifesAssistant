@@ -25,5 +25,15 @@ namespace DataModel.Calendar
             // Return true if the fields match:
             return (Time == t.Time) && (Descriptions == t.Descriptions);
         }
+
+        public OneTask()
+        {
+            
+        }
+
+        //public override int GetHashCode()
+        //{
+        //    return Time?.GetHashCode() ^ Descriptions?.GetHashCode();
+        //}
     }
 }

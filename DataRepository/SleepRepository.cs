@@ -9,7 +9,7 @@ using Newtonsoft.Json;
 
 namespace DataRepository
 {
-    public class SleepRepository: IRepository<DaySleepReport, OneSleep>
+    public class SleepRepository: ARepository, IRepository<DaySleepReport, OneSleep>
     {
         #region Singleton
         protected static SleepRepository instance = null;
@@ -31,7 +31,7 @@ namespace DataRepository
         #region Data
 
         protected string fileName = "sleep.json";
-        protected string filePath = Path.GetDirectoryName(Path.GetDirectoryName(System.IO.Directory.GetCurrentDirectory())) + "\\Config\\Resource\\";
+        //protected string filePath = Path.GetDirectoryName(Path.GetDirectoryName(System.IO.Directory.GetCurrentDirectory())) + "\\Config\\Resource\\";
 
         #endregion
 
@@ -41,12 +41,9 @@ namespace DataRepository
             {
                 DaySleepReport resoult;
 
-                if (!File.Exists(filePath + fileName))
-                {
-                    File.Create(filePath + fileName);
-                }
+                CheckFileExists(resourceFolderPath + fileName);
 
-                using (StreamReader r = new StreamReader(filePath + fileName))
+                using (StreamReader r = new StreamReader(resourceFolderPath + fileName))
                 {
                     string json = r.ReadToEnd();
                     List<DaySleepReport> today = JsonConvert.DeserializeObject<List<DaySleepReport>>(json);
@@ -58,13 +55,15 @@ namespace DataRepository
                     }
                     else
                     {
-                        today = new List<DaySleepReport>();
-                        today.Add(new DaySleepReport()
+                        today = new List<DaySleepReport>
                         {
-                            Date = DateTime.Today,
-                            TotalSleepTimeInSecond = 0,
-                            DailySleepTimes = new ObservableCollection<OneSleep>()
-                        });
+                            new DaySleepReport()
+                            {
+                                Date = DateTime.Today,
+                                TotalSleepTimeInSecond = 0,
+                                DailySleepTimes = new ObservableCollection<OneSleep>()
+                            }
+                        };
                         resoult = today.First();
                     }
 
@@ -89,13 +88,9 @@ namespace DataRepository
             {
                 string newJson = "";
 
-                if (!File.Exists(filePath + fileName))
-                {
-                    File.Create(filePath + fileName);
+                CheckFileExists(resourceFolderPath + fileName);
 
-                }
-
-                using (StreamReader r = new StreamReader(filePath + fileName))
+                using (StreamReader r = new StreamReader(resourceFolderPath + fileName))
                 {
                     string json = r.ReadToEnd();
                     List<DaySleepReport> today = JsonConvert.DeserializeObject<List<DaySleepReport>>(json);
@@ -123,7 +118,7 @@ namespace DataRepository
                     newJson = JsonConvert.SerializeObject(today);
                 }
 
-                File.WriteAllText(filePath + fileName, newJson);
+                File.WriteAllText(resourceFolderPath + fileName, newJson);
             }
             catch
             {
@@ -137,12 +132,9 @@ namespace DataRepository
             {
                 string newJson = "";
 
-                if (!File.Exists(filePath + fileName))
-                {
-                    File.Create(filePath + fileName);
-                }
+                CheckFileExists(resourceFolderPath + fileName);
 
-                using (StreamReader r = new StreamReader(filePath + fileName))
+                using (StreamReader r = new StreamReader(resourceFolderPath + fileName))
                 {
                     string json = r.ReadToEnd();
                     List<DaySleepReport> today = JsonConvert.DeserializeObject<List<DaySleepReport>>(json);
@@ -160,7 +152,7 @@ namespace DataRepository
                     newJson = JsonConvert.SerializeObject(today);
                 }
 
-                File.WriteAllText(filePath + fileName, newJson);
+                File.WriteAllText(resourceFolderPath + fileName, newJson);
             }
             catch
             {
@@ -174,7 +166,7 @@ namespace DataRepository
             {
                 List<ChartsElement> result;
 
-                using (StreamReader r = new StreamReader(filePath + fileName))
+                using (StreamReader r = new StreamReader(resourceFolderPath + fileName))
                 {
                     string json = r.ReadToEnd();
                     List<DaySleepReport> today = JsonConvert.DeserializeObject<List<DaySleepReport>>(json);
@@ -206,7 +198,7 @@ namespace DataRepository
             {
                 List<ChartsElement> result;
 
-                using (StreamReader r = new StreamReader(filePath + fileName))
+                using (StreamReader r = new StreamReader(resourceFolderPath + fileName))
                 {
                     string json = r.ReadToEnd();
                     List<DaySleepReport> today = JsonConvert.DeserializeObject<List<DaySleepReport>>(json);
@@ -239,7 +231,7 @@ namespace DataRepository
             {
                 List<ChartsElement> result;
 
-                using (StreamReader r = new StreamReader(filePath + fileName))
+                using (StreamReader r = new StreamReader(resourceFolderPath + fileName))
                 {
                     string json = r.ReadToEnd();
                     List<DaySleepReport> today = JsonConvert.DeserializeObject<List<DaySleepReport>>(json);

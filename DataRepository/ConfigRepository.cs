@@ -5,7 +5,7 @@ using System.IO;
 
 namespace DataRepository
 {
-    public class ConfigRepository
+    public class ConfigRepository: ARepository
     {
         #region Singleton
         protected static ConfigRepository instance = null;
@@ -21,13 +21,16 @@ namespace DataRepository
         #endregion
 
         #region Constructor
-        protected ConfigRepository() { }
+        protected ConfigRepository()
+        {
+            CheckFolderExists(configFolderPath);
+           // CheckFolderExists(resourceFolderPath);
+        }
         #endregion
 
         #region Data
 
         protected string fileName = "config.json";
-        protected string filePath = Path.GetDirectoryName(Path.GetDirectoryName(System.IO.Directory.GetCurrentDirectory())) + "\\Config\\";
 
         #endregion
 
@@ -39,12 +42,9 @@ namespace DataRepository
 
             try
             {
-                if (!File.Exists(filePath + fileName))
-                {
-                    File.Create(filePath + fileName);
-                }
+                CheckFileExists(configFolderPath + fileName);
 
-                using (StreamReader r = new StreamReader(filePath + fileName))
+                using (StreamReader r = new StreamReader(configFolderPath + fileName))
                 {
                     string json = r.ReadToEnd();
 
@@ -70,12 +70,9 @@ namespace DataRepository
             try
             {
 
-                if (!File.Exists(filePath + fileName))
-                {
-                    File.Create(filePath + fileName);
-                }
+                CheckFileExists(configFolderPath + fileName);
 
-                using (StreamReader r = new StreamReader(filePath + fileName))
+                using (StreamReader r = new StreamReader(configFolderPath + fileName))
                 {
                     string json = r.ReadToEnd();
 
@@ -111,12 +108,9 @@ namespace DataRepository
 
             try
             {
-                if (!File.Exists(filePath + fileName))
-                {
-                    File.Create(filePath + fileName);
-                }
+                CheckFileExists(configFolderPath + fileName);
 
-                using (StreamReader r = new StreamReader(filePath + fileName))
+                using (StreamReader r = new StreamReader(configFolderPath + fileName))
                 {
                     string json = r.ReadToEnd();
 
@@ -163,12 +157,9 @@ namespace DataRepository
 
             try
             {
-                if (!File.Exists(filePath + fileName))
-                {
-                    File.Create(filePath + fileName);
-                }
+                CheckFileExists(configFolderPath + fileName);
 
-                using (StreamReader r = new StreamReader(filePath + fileName))
+                using (StreamReader r = new StreamReader(configFolderPath + fileName))
                 {
                     string json = r.ReadToEnd();
 
@@ -197,12 +188,9 @@ namespace DataRepository
             {
                 string newJson = "";
 
-                if (!File.Exists(filePath + fileName))
-                {
-                    File.Create(filePath + fileName);
-                }
+                CheckFileExists(configFolderPath + fileName);
 
-                using (StreamReader r = new StreamReader(filePath + fileName))
+                using (StreamReader r = new StreamReader(configFolderPath + fileName))
                 {
                     string json = r.ReadToEnd();
 
@@ -224,7 +212,7 @@ namespace DataRepository
                     newJson = JsonConvert.SerializeObject(allConfig);
                 }
 
-                File.WriteAllText(filePath + fileName, newJson);
+                File.WriteAllText(configFolderPath + fileName, newJson);
             }
             catch{}
         }
@@ -235,12 +223,9 @@ namespace DataRepository
             {
                 string newJson = "";
 
-                if (!File.Exists(filePath + fileName))
-                {
-                    File.Create(filePath + fileName);
-                }
+                CheckFileExists(configFolderPath + fileName);
 
-                using (StreamReader r = new StreamReader(filePath + fileName))
+                using (StreamReader r = new StreamReader(configFolderPath + fileName))
                 {
                     AllConfigData allConfig =  new AllConfigData() 
                     {
@@ -274,7 +259,7 @@ namespace DataRepository
 
                     newJson = JsonConvert.SerializeObject(allConfig);
                 }
-                File.WriteAllText(filePath + fileName, newJson);
+                File.WriteAllText(configFolderPath + fileName, newJson);
             }
             catch { }
         }

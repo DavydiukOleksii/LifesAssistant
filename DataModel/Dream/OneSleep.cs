@@ -26,6 +26,11 @@ namespace DataModel.Dream
             return (Time == t.Time) && (Duration == t.Duration);
         }
 
+        //public override int GetHashCode()
+        //{
+        //    return Time.GetHashCode() ^ Duration.GetHashCode();
+        //}
+
         public int GetDurationInSecond()
         {
             return Duration.Hour*3600 + Duration.Minute*60 + Duration.Second;

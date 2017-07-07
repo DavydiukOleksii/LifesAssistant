@@ -20,5 +20,10 @@ namespace DataModel.Config
             if (other == null) return false;
             return this.Title == other.Title && this.Value == other.Value;
         }
+
+        //public override int GetHashCode()
+        //{
+        //    return Title.GetHashCode() ^ Value.GetHashCode();
+        //}
     }
 }

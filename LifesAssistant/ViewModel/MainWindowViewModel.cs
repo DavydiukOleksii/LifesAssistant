@@ -30,7 +30,9 @@ namespace LifesAssistant.ViewModel
             Charts = new ObservableCollection<ChartsElement>();
 
             tb = new Hardcodet.Wpf.TaskbarNotification.TaskbarIcon();
-            tb.Icon = new System.Drawing.Icon(Path.GetDirectoryName(Path.GetDirectoryName(System.IO.Directory.GetCurrentDirectory())) + "/Config/Icon/Office_Supplies-512.ico");
+            //tb.Icon = new System.Drawing.Icon(Path.GetDirectoryName(Path.GetDirectoryName(System.IO.Directory.GetCurrentDirectory())) + "/Config/Icon/Office_Supplies-512.ico");
+
+            tb.Icon = new System.Drawing.Icon(Path.GetDirectoryName(Path.GetDirectoryName(System.AppDomain.CurrentDomain.BaseDirectory)) + "/SetupLifesAssistant/Config/Icon/Office_Supplies-512.ico");
 
             ExecuteTabChangedCommand("Calendar");
 

@@ -42,7 +42,14 @@ namespace LifesAssistant.ViewModel.ViewModelElements
             SearchDate = DateTime.Today;
             DayTasks = CalendarRepository.Instance.GetByDay(DateTime.Today).DailyTasks;
 
-            SetRandomImage();
+            try
+            {
+                SetRandomImage();
+            }
+            catch (Exception exc)
+            {
+                throw exc;
+            }
 
             NewHB = new OneHB { Date = DateTime.Today, FullName = "" };
 
@@ -583,10 +590,17 @@ namespace LifesAssistant.ViewModel.ViewModelElements
         #region Methods
         protected void SetRandomImage()
         {
-            var filesPath = Directory.GetFiles(Path.GetDirectoryName(Path.GetDirectoryName(System.IO.Directory.GetCurrentDirectory())) + "/Config/Image/Calendar", "*.jpg", SearchOption.AllDirectories);
+            //var filesPath = Directory.GetFiles(Path.GetDirectoryName(Path.GetDirectoryName(System.IO.Directory.GetCurrentDirectory())) + "/Config/Images", "*.jpg", SearchOption.AllDirectories);
+            try { 
+                var filesPath = Directory.GetFiles(Path.GetDirectoryName(Path.GetDirectoryName(System.AppDomain.CurrentDomain.BaseDirectory)) + "/SetupLifesAssistant/Config/Images", "*.jpg", SearchOption.AllDirectories);
 
-            Random rnd = new Random();
-            ImagePath = filesPath[rnd.Next(0, filesPath.Length - 1)];
+                Random rnd = new Random();
+                ImagePath = filesPath[rnd.Next(0, filesPath.Length - 1)];
+            }
+            catch (Exception exc)
+            {
+                throw exc;
+            }
         }
 
         protected void SetNotificationTimer()
