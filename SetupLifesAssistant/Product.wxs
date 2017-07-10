@@ -4,8 +4,8 @@
 		<Package InstallerVersion="200" Compressed="yes" InstallScope="perMachine" />
 
     <!-- add icon-->
-    <!--<Icon Id="Icon.ico" SourceFile="$(var.ProjectDir)icon.ico" />
-    <Property Id="ARPPRODUCTION" Value="Icon.ico" />-->
+    <Icon Id="icon.ico" SourceFile="icon.ico" />
+    <Property Id="ARPPRODUCTION" Value="icon.ico" />
 
     <!--add install bg-->
     <WixVariable Id="WixUIBannerBmp" Value="Images\installer_top-banner.bmp" />

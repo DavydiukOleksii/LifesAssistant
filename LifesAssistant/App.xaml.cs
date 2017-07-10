@@ -3,7 +3,6 @@ using LifesAssistant.ViewModel;
 using DataRepository;
 using System.Threading;
 using System.Globalization;
-using DataModel.Config;
 using System;
 
 namespace LifesAssistant
@@ -15,21 +14,8 @@ namespace LifesAssistant
     {
         App()
         {
-            try { 
-                string cultureLanguage = "ua-Uk";
-                //if (ConfigRepository.Instance.GetCurrentConfig().Language.Value != null)
-                //{
-                    cultureLanguage = ConfigRepository.Instance.GetCurrentConfig().Language.Value;
-                //}
-                Thread.CurrentThread.CurrentUICulture = new CultureInfo(cultureLanguage);
-                //Thread.CurrentThread.CurrentUICulture = new CultureInfo("en-US");
-                //Thread.CurrentThread.CurrentUICulture = new CultureInfo("ru-RU");
-            }
-            catch (Exception exc)
-            {
-                MessageBox.Show(exc.Message);
-            }
-}
+           Thread.CurrentThread.CurrentUICulture = new CultureInfo(ConfigRepository.Instance?.GetCurrentConfig()?.Language.Value ?? "ua-Uk");
+        }
 
         protected override void OnStartup(StartupEventArgs e)
         {
@@ -41,12 +27,28 @@ namespace LifesAssistant
 
                 //binding context to window
                 window.DataContext = viewModel;
+
+                if (!InstanceCheck())
+                {
+                    // нажаловаться пользователю и завершить процесс
+                    MessageBox.Show("The application is already running!");
+                    Application.Current.Shutdown(0);
+                }
+
                 window.Show();
             }
             catch (Exception exc)
             {
                 MessageBox.Show(exc.Message);
             }
+        }
+
+        protected static Mutex InstanceCheckMutex;
+        protected static bool InstanceCheck()
+        {
+            bool isNew;
+            InstanceCheckMutex = new Mutex(true, "4dfa58e9-79aa-46aa-8272-91f678f99885", out isNew);
+            return isNew;
         }
     }
 }
