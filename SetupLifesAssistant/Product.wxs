@@ -1,7 +1,7 @@
 <?xml version="1.0" encoding="UTF-8"?>
 <Wix xmlns="http://schemas.microsoft.com/wix/2006/wi"><?define DataModel_TargetDir=$(var.DataModel.TargetDir)?><?define DataRepository_TargetDir=$(var.DataRepository.TargetDir)?><?define LifesAssistant_TargetDir=$(var.LifesAssistant.TargetDir)?>
 	<Product Id="88584473-1182-43e9-9209-41abfe3fefc6" Name="SetupLifesAssistant" Language="1033" Version="1.0.0.0" Manufacturer="Nice Systems" UpgradeCode="861d40bd-5f85-44fe-8a4e-76fd0e6ef743">
-		<Package InstallerVersion="200" Compressed="yes" InstallScope="perMachine" />
+		<Package InstallerVersion="200" Compressed="yes" InstallScope="perMachine" InstallPrivileges="elevated"/>
 
     <!-- add icon-->
     <Icon Id="icon.ico" SourceFile="icon.ico" />
@@ -21,7 +21,7 @@
     <MajorUpgrade DowngradeErrorMessage="A newer version of [ProductName] is already installed." />
 		<MediaTemplate />
 
-		<Feature Id="ProductFeature" Title="SetupLifesAssistant" Level="1">
+		<Feature Id="ProductFeature" Title="LifesAssistant" Level="1">
 			<ComponentGroupRef Id="ProductComponents" />
 			<ComponentGroupRef Id="uk_UA_files" />
 			<ComponentGroupRef Id="ru_Ru_files" />
@@ -37,7 +37,7 @@
 	<Fragment>
 		<Directory Id="TARGETDIR" Name="SourceDir">
 			<Directory Id="ProgramFilesFolder">
-				<Directory Id="INSTALLFOLDER" Name="SetupLifesAssistant">
+				<Directory Id="INSTALLFOLDER" Name="LifesAssistant">
 				  <Directory Id="uk_UA" Name="uk-UA" />
 				  <Directory Id="ru_Ru" Name="ru-Ru" />
 				  <Directory Id="Config" Name="Config">

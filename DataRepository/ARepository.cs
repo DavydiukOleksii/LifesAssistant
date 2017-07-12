@@ -6,9 +6,9 @@ namespace DataRepository
     {
         //protected static string filePath = Path.GetDirectoryName(Path.GetDirectoryName(System.IO.Directory.GetCurrentDirectory())) + "\\Config\\Resource\\";
 
-        protected static string resourceFolderPath = Path.GetDirectoryName(Path.GetDirectoryName(System.AppDomain.CurrentDomain.BaseDirectory)) + "\\SetupLifesAssistant\\Config\\Resource\\";
+        protected static string resourceFolderPath = Path.GetDirectoryName(Path.GetDirectoryName(System.AppDomain.CurrentDomain.BaseDirectory)) + "\\LifesAssistant\\Config\\Resource\\";
 
-        protected static string configFolderPath = Path.GetDirectoryName(Path.GetDirectoryName(System.AppDomain.CurrentDomain.BaseDirectory)) + "\\SetupLifesAssistant\\Config\\";
+        protected static string configFolderPath = Path.GetDirectoryName(Path.GetDirectoryName(System.AppDomain.CurrentDomain.BaseDirectory)) + "\\LifesAssistant\\Config\\";
 
         public void CheckFileExists(string path)
         {

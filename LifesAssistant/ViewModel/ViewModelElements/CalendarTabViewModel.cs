@@ -592,7 +592,7 @@ namespace LifesAssistant.ViewModel.ViewModelElements
         {
             //var filesPath = Directory.GetFiles(Path.GetDirectoryName(Path.GetDirectoryName(System.IO.Directory.GetCurrentDirectory())) + "/Config/Images", "*.jpg", SearchOption.AllDirectories);
             try { 
-                var filesPath = Directory.GetFiles(Path.GetDirectoryName(Path.GetDirectoryName(System.AppDomain.CurrentDomain.BaseDirectory)) + "/SetupLifesAssistant/Config/Images", "*.jpg", SearchOption.AllDirectories);
+                var filesPath = Directory.GetFiles(Path.GetDirectoryName(Path.GetDirectoryName(System.AppDomain.CurrentDomain.BaseDirectory)) + "/LifesAssistant/Config/Images", "*.jpg", SearchOption.AllDirectories);
 
                 Random rnd = new Random();
                 ImagePath = filesPath[rnd.Next(0, filesPath.Length - 1)];
